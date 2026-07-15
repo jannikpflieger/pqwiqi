@@ -1,0 +1,87 @@
+---
+title: "Entanglement"
+subtitle: "Entanglement: from EPR to Bell's inequality (middle)"
+author: "Paula García-Mochales, Helena Iréne Köhler, Laura Rojo Guerrero"
+date: "2025-01-08"
+---
+
+## Introduction: The Quantum Embrace
+
+Have you ever thought about flipping coins? In our everyday world, two coins are separate; one toss doesn't affect the other. Even if they always land on the same side, you'd suspect a trick, some pre-arranged mechanism. But in the quantum world, things are different. Two quantum "coins," like electrons, can become profoundly linked. Their very essence intertwines into a shared existence. This is entanglement, a phenomenon so intimate that a measurement on one particle instantly affects the other, no matter the distance. It's the universe's most mind-bending connection, and it puzzled Einstein for decades.
+![Coin Entanglement](/posts/assets/entries/entanglement/coin_entanglement.png)
+
+## What Does Entanglement Mean?
+
+In quantum mechanics, a particle's state is described by a wavefunction, like $|\psi\rangle$. For two independent particles, their combined state is a simple product:
+
+$$
+|\Psi\rangle_{AB} = |\psi\rangle_A \otimes |\phi\rangle_B
+$$
+
+Entanglement happens when their combined state cannot be separated in this way. They exist as one unified system. A classic example is the Bell state:
+
+$$
+|\Psi^-\rangle = \frac{1}{\sqrt{2}} (|\uparrow\downarrow\rangle - |\downarrow\uparrow\rangle)
+$$
+
+This equation means that before you measure anything, neither particle has a definite spin. But they are perfectly anti-correlated. If you measure particle A and find it spin-up ($|\uparrow\rangle$), you instantly know particle B is spin-down ($|\downarrow\rangle$). This isn't about secret instructions. The particles don't have individual properties until a measurement is made, and that measurement instantaneously defines the other, regardless of distance. They are two halves of a single quantum entity.
+
+## Einstein's "Spooky Action" and the EPR Paradox
+
+In 1935, Einstein, Podolsky, and Rosen (EPR) used entanglement as a thought experiment to argue that quantum mechanics must be incomplete [@Einstein1935]. They imagined two entangled particles separated by a vast distance. If Alice measures her particle, Bob's distant particle instantly changes its state. This instantaneous influence, which Einstein called "spooky action at a distance," seemed to violate the speed of light limit from relativity.
+
+EPR concluded that particles must carry "hidden variables," secret instructions that predetermine the measurement outcomes. There would be no spooky action, just a revealed pre-existing reality. In response, Erwin Schrödinger coined the term entanglement (Verschränkung) to describe this mysterious linkage, recognizing it as the defining feature of quantum mechanics [@Schrodinger1935].
+
+## Bell’s Inequality: The Final Verdict
+
+For decades, the EPR paradox was a philosophical debate. Then, in 1964, John Bell turned it into a testable problem [@Bell1964]. He proved that any theory based on local hidden variables must obey certain mathematical rules, known as Bell inequalities. One common version, the CHSH inequality, states that a value $S$, which measures the correlation between measurements, must be limited.
+
+To understand $S$, let's imagine Alice and Bob each have a device that can be set to one of two measurement angles. Alice can choose setting $a$ or $a'$, and Bob can choose setting $b$ or $b'$. When they measure their respective particles, the outcome is either +1 or −1. The correlation function, $E(a,b)$, is the average product of their outcomes over many trials. Bell proved that for any local hidden variable theory, the following inequality must hold:
+
+$$
+S = |E(a,b) + E(a,b') + E(a',b) - E(a',b')| \leq 2
+$$
+
+Quantum mechanics, however, predicts a different outcome for maximally entangled particles. For the singlet state, we can choose the measurement angles to get a value as high as:
+
+$$
+S_{QM} = 2\sqrt{2}
+$$
+
+This value, approximately 2.828, is larger than 2, thus violating the CHSH inequality. This violation is the key prediction of quantum mechanics that experiments have now repeatedly confirmed. It provides a direct empirical test that rules out local hidden variable theories.
+
+## Experiments Prove Einstein Wrong
+
+Starting in the 1970s, experiments began testing Bell’s predictions. Alain Aspect's landmark experiments in the 1980s showed violations of Bell's inequality, strongly supporting quantum mechanics [@Aspect1982]. But these early tests had "loopholes" due to technical limitations, like not detecting all particles.
+
+In 2015, three independent teams finally performed loophole-free Bell tests [@Hensen2015; @Shalm2015; @Giustina2015]. Their results were conclusive: Bell's inequalities were consistently and unequivocally violated. Einstein's local hidden variables theory is incompatible with how nature operates. The "spooky action at a distance" is not a flaw; it's a verified feature of our universe.
+
+## Why Entanglement Matters
+
+What was once a perplexing puzzle is now the foundation of new technology. Entanglement is a fundamental resource in quantum information science, powering:
+
+- **Quantum Cryptography:** Entangled particles can create unbreakable secret keys, as any eavesdropping attempt would instantly be detected.
+
+- **Quantum Teleportation:** This allows for the instantaneous transfer of a particle's quantum information from one location to another.
+
+- **Quantum Computing:** Entangled qubits allow quantum computers to perform certain calculations exponentially faster than classical computers, opening doors for fields like drug discovery and materials science.
+
+Beyond technology, entanglement continues to inspire fundamental research. While Bell's test rejects local realism, it doesn't allow for a "practical faster-than-light communication" (at least not now). The "spooky action" itself doesn't transmit information. Intriguingly, some theories in quantum gravity even propose that entanglement might be what creates the fabric of spacetime itself.
+
+From a philosophical debate to a cornerstone of technology, entanglement remains one of the most profound and fascinating aspects of our universe, proving that reality is much stranger than we ever imagined.
+
+## References
+
+@Einstein1935: Einstein, A., Podolsky, B., & Rosen, N. (1935). Can quantum-mechanical description of physical reality be considered complete? *Physical Review, 47*(10), 777–780.
+
+@Schrödinger1935: Schrödinger, E. (1935). Discussion of probability relations between separated systems. *Proceedings of the Cambridge Philosophical Society, 31*, 555–563.
+
+@Bell1964: Bell, J. S. (1964). On the Einstein-Podolsky-Rosen paradox. *Physics, 1*(3), 195–200.
+
+@Aspect1982: Aspect, A., Dalibard, J., & Roger, G. (1982). Experimental test of Bell’s inequalities using time‐varying analyzers. *Physical Review Letters, 49*(25), 1804–1807.
+
+@Hensen2015: Hensen, B. et al. (2015). Loophole-free Bell inequality violation using electron spins separated by 1.3 kilometres. *Nature, 526*, 682–686.
+
+@Shalm2015: Shalm, L. K. et al. (2015). Strong loophole-free test of local realism. *Physical Review Letters, 115*(25), 250402.
+
+@Giustina2015: Giustina, M. et al. (2015). Significant-Loophole-Free Test of Bell’s Theorem with Entangled Photons. *Physical Review Letters, 115*(25), 250401.
