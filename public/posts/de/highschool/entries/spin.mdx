@@ -1,0 +1,93 @@
+---
+title: "Spin"
+subtitle: "Quantendrehimpuls und Spin"
+author: "Martín Zapata Ferguson, Zeynep Kilic"
+date: "2026-04-02"
+---
+
+## Was ist Spin?
+
+In der Physik untersuchen wir die Rotation starrer Körper, wie zum Beispiel von Kreiseln, die *Drehimpuls* besitzen. Diese Bewegung lässt sich in Bahnbewegung und Eigenrotation unterteilen — ein Objekt rotiert, wenn es sich um seine eigene zentrale Achse dreht.
+
+![Patch](images/angular_momentum.png)
+
+Der Drehimpuls $\mathbf{L}$ eines Objekts beschreibt seinen Widerstand gegen Rotationsänderungen. Er gibt an, wie viel Drehmoment $\boldsymbol{\tau}$ (Rotationskraft) aufgebracht werden muss, um seinen Rotationszustand über einen bestimmten Zeitraum zu ändern:
+
+$$
+\frac{\Delta\mathbf{L}}{\Delta t}=\boldsymbol{\tau}
+$$
+
+Ein Kreisel dreht sich beispielsweise weiter, obwohl die Schwerkraft ihn auf eine Seite zieht.
+
+![Patch](images/gravity.png)
+
+Die Komponente des Drehimpulses, die mit der Eigenrotation verbunden ist, nennen wir *Spin*, $\mathbf{S}$, und er ist proportional zur Rotationsfrequenz $\omega$:
+
+$$
+S=I\omega
+$$
+
+wobei $I$ das Trägheitsmoment genannt wird.
+
+## Was hat der Spin mit Quantenphysik zu tun?
+
+Bisher sieht der Spin wie ein rein klassisches Konzept aus. Warum taucht er also in der Quantenphysik ständig auf?
+
+Stell dir ein Elektron vor, das ein Proton umkreist. Dies ist das klassische Bild eines rotierenden Wasserstoffatoms:
+
+![Patch](images/classical_atom.png)
+
+Dieses stark vereinfachte Modell erzeugt ein magnetisches Moment $\boldsymbol{\mu}\propto\mathbf{S}$ (was bedeutet, dass das Atom einem winzigen Stabmagneten ähnelt!) und widersetzt sich Orientierungsänderungen, genau wie echte Atome.
+
+Auf extrem kleinen Skalen verhält sich der Spin jedoch aus zwei Hauptgründen völlig unerwartet:
+
+### 1. Der Spin ist quantisiert
+
+Im Jahr 1922 zeigten Walther Gerlach und Otto Stern, dass der Spin diskrete Werte annimmt.
+
+Sie schickten einen Strahl aus Silberatomen durch einen Elektromagneten mit einem variierenden (inhomogenen) Magnetfeld. Die Wechselwirkung zwischen einem Atom und dem angelegten Magnetfeld $\mathbf{B}$ hat eine Energie
+
+$$
+E=-\boldsymbol{\mu}\cdot\mathbf{B}
+$$
+
+Durch die Variation des äußeren Feldes entlang der vertikalen Achse (der z-Achse) des Experiments konnten sie eine Kraft erzeugen
+
+$$
+F_z=\mu_z\frac{\Delta B_z}{\Delta z}
+$$
+
+die die Flugbahnen der Silberatome nur in Abhängigkeit von ihrem magnetischen Moment (und letztendlich von ihrem Spin) aufspaltete.
+
+![Patch](images/stern-gerlach.png)
+
+Das Ergebnis? Die Silberatome hatten nur zwei mögliche Spin-Ausrichtungen (Spin-up / Spin-down), im Gegensatz zu einer beliebigen, zufälligen Orientierung. Tatsächlich nimmt ihr Spin exakt die Werte $\pm\hbar/2$ an, wobei $\hbar\approx 1.05 \times 10^{-34}\,\mathrm{J\cdot s}$ die reduzierte Planck-Konstante ist.
+
+### 2. Elementarteilchen besitzen einen Spin
+
+In der klassischen Physik sind Teilchen lediglich Punkte im Raum und können daher *nicht* von sich aus rotieren. Allerdings wurden durch Stern und Gerlach motivierte Experimente auch an Elektronen durchgeführt — sie besitzen einen Spin und dieser ist quantisiert!
+
+Das klassische Bild bricht sogar noch weiter zusammen: Wenn der Spin eine tatsächliche physische Rotation wäre und Elektronen geladene Kugeln wären, müssten sie sich schneller als das Licht drehen, um mit den bekannten experimentellen Daten übereinzustimmen!
+
+Betrachten wir den "klassischen Elektronenradius" $r=2.8\times 10^{-15}\,\mathrm{m}$, die Elektronenmasse $m=9.1\times 10^{-31}\,\mathrm{kg}$ und das Trägheitsmoment $I=\frac{2}{5}mr^2$ einer Vollkugel. Wenn der Spin des Elektrons $S=\hbar/2$ beträgt, lässt sich daraus ableiten, dass seine Rotationsfrequenz wie folgt lautet:
+
+$$
+\omega=\frac{5\hbar}{4mr^2}
+$$
+
+Das bedeutet, dass der Äquator des Elektrons mit einer Geschwindigkeit rotieren würde von:
+
+$$
+v=r\omega=\frac{5\hbar}{4mr}\approx 170c
+$$
+
+Warum sprechen wir dann überhaupt noch von Spin? Genau wie ein rotierendes geladenes Objekt besitzt das Elektron ein Magnetfeld, *das sich Orientierungsänderungen widersetzt*. Es rotiert jedoch nicht physisch — sein Drehimpuls ist einfach eine weitere grundlegende Eigenschaft, genau wie Masse oder Ladung.
+
+## Quellen
+Feynman, R. P., Leighton, R. B., & Sands, M. (1965). *The Feynman Lectures on Physics, Vol. III: Quantum Mechanics*. Addison-Wesley. – Eine großartige Einführung in die Quantenmechanik und den Quantenspin für alle Interessierten.
+
+Gerlach, W., & Stern, O. (1922). *Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld*. Zeitschrift für Physik, 9, 349–352. – Der Originalartikel, in dem die Spin-Quantisierung erstmals berichtet wurde.
+
+*Mott scattering*. (o. D.). Wikipedia. Abgerufen am 2. April 2026 von https://en.wikipedia.org/wiki/Mott_scattering – Eine Alternative zu den Stern-Gerlach-Experimenten.
+
+NIST (2024). *The NIST Reference on Constants, Units, and Uncertainty*. Abgerufen am 2. April 2026 von https://physics.nist.gov/cgi-bin/cuu/Value?re und https://physics.nist.gov/cgi-bin/cuu/Value?me

@@ -1,0 +1,117 @@
+---
+title: "Spin"
+subtitle: "Quantendrehimpuls und Spin"
+author: "Martín Zapata Ferguson, Zeynep Kilic"
+date: "2026-04-02"
+---
+
+## Was ist Spin?
+
+In der Physik untersuchen wir die Rotation starrer Körper, wie zum Beispiel von Kreiseln, die *Drehimpuls* besitzen. Diese Bewegung lässt sich in Bahnbewegung und Eigenrotation unterteilen — ein Objekt rotiert, wenn es sich um seine eigene zentrale Achse dreht.
+
+![Patch](images/angular_momentum.png)
+
+Der Drehimpuls $\mathbf{L}$ eines starren Körpers beschreibt seinen Widerstand gegen Rotationsänderungen. Er gibt an, wie viel Drehmoment $\boldsymbol{\tau}$ (Rotationskraft) aufgebracht werden muss, um seinen Rotationszustand zu ändern:
+
+$$
+\frac{\mathrm{d}\mathbf{L}}{\mathrm{d}t}=\boldsymbol{\tau}
+$$
+
+Ein Kreisel dreht sich beispielsweise weiter, obwohl die Schwerkraft ihn auf eine Seite zieht.
+
+![Patch](images/gravity.png)
+
+Die Komponente des Drehimpulses, die mit der Eigenrotation verbunden ist, nennen wir *Spin*, $\mathbf{S}$, und er ist proportional zur Winkelgeschwindigkeit $\boldsymbol{\omega}$:
+
+$$
+\mathbf{S}=I\boldsymbol{\omega}
+$$
+
+wobei $I$ das Trägheitsmoment genannt wird.
+
+## Was hat der Spin mit Quantenphysik zu tun?
+
+Bisher sieht der Spin wie ein rein klassisches Konzept aus. Warum taucht er also in der Quantenphysik ständig auf?
+
+Stell dir ein Elektron vor, das ein Proton umkreist. Dies ist das klassische Bild eines rotierenden Wasserstoffatoms:
+
+![Patch](images/classical_atom.png)
+
+Dieses stark vereinfachte Modell erzeugt ein magnetisches Moment $\boldsymbol{\mu}\propto\mathbf{S}$ (das Atom ähnelt einem winzigen Stabmagneten!) und widersetzt sich Orientierungsänderungen, genau wie echte Atome.
+
+Auf extrem kleinen Skalen verhält sich der Spin jedoch aus zwei Hauptgründen völlig unerwartet:
+
+### 1. Der Spin ist quantisiert
+
+Im Jahr 1922 zeigten Walther Gerlach und Otto Stern, dass der Spin diskrete Werte annimmt.
+
+Sie schickten einen Strahl aus Silberatomen durch ein inhomogenes Magnetfeld. Die Wechselwirkung zwischen einem Atom und dem angelegten Magnetfeld $\mathbf{B}$ hat eine Energie
+
+$$
+E=-\boldsymbol{\mu}\cdot\mathbf{B}
+$$
+
+Durch die Variation des äußeren Feldes entlang der Achse des Experiments konnten sie eine Kraft erzeugen
+
+$$
+\mathbf{F}=\nabla(\boldsymbol{\mu}\cdot\mathbf{B})
+$$
+
+die die Flugbahnen der Silberatome nur in Abhängigkeit von $\boldsymbol{\mu}$ (und letztendlich vom Spin) aufspaltete.
+
+![Patch](images/stern-gerlach.png)
+
+Das Ergebnis? Die Silberatome hatten nur zwei mögliche Spin-Ausrichtungen (Spin-up / Spin-down), im Gegensatz zu einer beliebigen, zufälligen Orientierung. Tatsächlich nimmt ihr Spin exakt die Werte $\pm\hbar/2$ an, wobei $\hbar\approx 1.05 \times 10^{-34}\,\mathrm{J\cdot s}$ die reduzierte Planck-Konstante ist.
+
+In der modernen Quantenmechanik beschreiben wir observable Größen wie den Spin mit Operatoren (Matrizen). Deren Matrix-Eigenwerte entsprechen den möglichen Ausgängen eines Experiments, z. B. $\pm\hbar/2$. Explizit hat der Quantenspin-$\hbar/2$-Vektor die Komponenten:
+
+$$
+S_x=\frac{\hbar}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+S_y=\frac{\hbar}{2}\begin{pmatrix}0&-i\\ i&0\end{pmatrix},\quad
+S_z=\frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+$$
+
+Diese Operatoren wirken auf einen zweidimensionalen komplexen Vektorraum, den sogenannten Hilbertraum, der die möglichen Spinzustände (Up/Down) repräsentiert. Der quadrierte Gesamtspin-Operator liefert ein skalares Vielfaches der Einheitsmatrix, $\mathbf{I}$:
+
+$$
+S^2 = S_x^2 + S_y^2 + S_z^2 = \frac{3\hbar^2}{4}\mathbf{I}
+$$
+
+Darüber hinaus erfüllen die Spin-Komponenten die folgende fundamentale Vertauschungsrelation (Kommutator):
+
+$$
+[S_x, S_y] = S_xS_y - S_yS_x = i\hbar S_z
+$$
+
+und ähnliche Relationen gelten für zyklisch vertauschte Koordinaten: $(x\rightarrow y\rightarrow z\rightarrow x)$. Zusätzlich wirken die Komponenten $S_x, S_y, S_z$ als Erzeuger von Rotationen (Generatoren) für das Quantensystem entlang der x-, y- und z-Achsen!
+
+### 2. Elementarteilchen besitzen einen Spin
+
+In der klassischen Physik sind Teilchen lediglich Punkte im Raum und können daher *nicht* von sich aus rotieren. Allerdings wurden durch Stern und Gerlach motivierte Experimente an Elektronen durchgeführt — sie besitzen einen Spin und dieser ist quantisiert!
+
+Das klassische Bild bricht sogar noch weiter zusammen: Wenn der Spin eine tatsächliche physische Rotation wäre und Elektronen tatsächlich geladene Kugeln wären, müssten sie sich schneller als das Licht drehen, um mit den bekannten experimentellen Daten übereinzustimmen! 
+
+Betrachten wir den "klassischen Elektronenradius" $r=2.8\times 10^{-15}\,\mathrm{m}$, die Elektronenmasse $m=9.1\times 10^{-31}\,\mathrm{kg}$ und das Trägheitsmoment $I=\frac{2}{5}mr^2$ einer Vollkugel. Wenn der Betrag des Elektronenspins $\hbar/2$ ist, lässt sich daraus ableiten, dass seine Kreisfrequenz wie folgt lautet:
+
+$$
+\omega=\frac{5\hbar}{4mr^2}
+$$
+
+Das bedeutet, dass der Äquator mit einer Geschwindigkeit rotieren würde von:
+
+$$
+v=r\omega=\frac{5\hbar}{4mr}\approx 170c
+$$
+
+Warum sprechen wir dann überhaupt noch von Spin? Genau wie ein rotierendes geladenes Objekt besitzt das Elektron ein Magnetfeld, *das sich Orientierungsänderungen widersetzt*. Es rotiert jedoch nicht physisch — sein Drehimpuls ist einfach eine weitere grundlegende Eigenschaft, genau wie Masse oder Ladung.
+
+Eine tiefere mathematische Erkenntnis ist, dass die Spinquantenzahl $s$ nur in ganzzahligen und halbzahligen Werten auftritt, d. h. $s=0, \frac{1}{2}, 1, \frac{3}{2}, 2, \dots$ Teilchen mit halbzahligem Spin, wie das Elektron, nennen wir *Fermionen* — fundamentale Fermionen bilden die Materie. Teilchen mit ganzzahligem Spin, wie das Photon, nennen wir *Bosonen* — fundamentale Kräfte werden durch Bosonen vermittelt. Eine überraschende Konsequenz des Spins ist das Pauli-Prinzip (Pauli-Ausschlussprinzip): Zwei Fermionen können nicht gleichzeitig denselben Quantenzustand besetzen, während Bosonen sich ungehindert überlagern können.
+
+## Quellen
+Sakurai, J. J., & Napolitano, J. (2017). *Modern quantum mechanics (2nd ed.)*. Cambridge University Press.
+
+Gerlach, W., & Stern, O. (1922). *Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld*. Zeitschrift für Physik, 9, 349–352. 
+
+Mott, N. F. (1929). *The Scattering of Fast Electrons by Atomic Nuclei*. Proceedings of the Royal Society of London. Series A, Containing Papers of a Mathematical and Physical Character, 124(794), 425–442. 
+
+NIST (2024). *The NIST Reference on Constants, Units, and Uncertainty*. Abgerufen am 2. April 2026, von https://physics.nist.gov/cgi-bin/cuu/Value?re und https://physics.nist.gov/cgi-bin/cuu/Value?me

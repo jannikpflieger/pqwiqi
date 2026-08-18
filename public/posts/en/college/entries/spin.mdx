@@ -1,0 +1,117 @@
+---
+title: "Spin"
+subtitle: "Quantum Angular Momentum and Spin"
+author: "Martín Zapata Ferguson, Zeynep Kilic"
+date: "2026-04-02"
+---
+
+## What is spin?
+
+In physics, we study the rotation of rigid bodies, such as spinning tops, which possess *angular momentum*. This motion can be broken down into orbital motion and spinning motion — an object is spinning if it rotates about its own central axis.
+
+![Patch](images/angular_momentum.png)
+
+The angular momentum $\mathbf{L}$ of a rigid body encodes its resistance to changes in rotation. It tells us how much torque $\boldsymbol{\tau}$ (rotational force) must be applied to change its state of rotation:
+
+$$
+\frac{\mathrm{d}\mathbf{L}}{\mathrm{d}t}=\boldsymbol{\tau}
+$$
+
+For instance, a spinning top keeps spinning even though gravity weighs it down to one side.
+
+![Patch](images/gravity.png)
+
+The component of angular momentum associated with spinning motion is what we call *spin*, $\mathbf{S}$, and it is proportional to the angular velocity $\boldsymbol{\omega}$:
+
+$$
+\mathbf{S}=I\boldsymbol{\omega}
+$$
+
+where we call $I$ the moment of inertia.
+
+## What does spin have to do with quantum physics?
+
+So far, spin looks like a classical concept, so why does it appear all the time in quantum physics?
+
+Imagine an electron orbiting a proton. This is the classical picture of a spinning hydrogen atom:
+
+![Patch](images/classical_atom.png)
+
+This toy model produces a magnetic moment $\boldsymbol{\mu}\propto\mathbf{S}$ (the atom is similar to a tiny bar magnet!) and resists changes in orientation, just like real atoms.
+
+At extremely small scales, however, spin behaves unexpectedly for two main reasons:
+
+### 1. Spin is quantised
+
+In 1922, Walther Gerlach and Otto Stern showed that spin takes discrete values.
+
+They shone a beam of silver atoms through an inhomogeneous magnetic field. The interaction between an atom and the imposed magnetic field $\mathbf{B}$ has an energy
+
+$$
+E=-\boldsymbol{\mu}\cdot\mathbf{B}
+$$
+
+By varying the external field along the axis of the experiment, they could produce a force
+
+$$
+\mathbf{F}=\nabla(\boldsymbol{\mu}\cdot\mathbf{B})
+$$
+
+which split the trajectories of Ag atoms depending only on $\boldsymbol{\mu}$ (and ultimately, spin).
+
+![Patch](images/stern-gerlach.png)
+
+The result? Silver atoms had only two possible spin orientations (up/down), as opposed to any possible random orientation. In fact, their spin takes on the precise values $\pm\hbar/2$, with $\hbar\approx 1.05 \times 10^{-34}\,\mathrm{J\cdot s}$ being the reduced Planck constant.
+
+In modern-day quantum mechanics, we describe observable quantities such as spin with operators (matrices). Their matrix eigenvalues correspond to the possible outcomes of an experiment, e.g., $\pm\hbar/2$. Explicitly, the quantum spin-$\hbar/2$ vector has components
+
+$$
+S_x=\frac{\hbar}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+S_y=\frac{\hbar}{2}\begin{pmatrix}0&-i\\ i&0\end{pmatrix},\quad
+S_z=\frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+$$
+
+These operators act on a two-dimensional complex vector space termed a Hilbert space, representing the possible spin states (up/down). The total spin operator squared yields a scalar multiple of the identity matrix, $\mathbf{I}$:
+
+$$
+S^2 = S_x^2 + S_y^2 + S_z^2 = \frac{3\hbar^2}{4}\mathbf{I}
+$$
+
+Moreover, the components of spin satisfy the following fundamental commutation relation:
+
+$$
+[S_x, S_y] = S_xS_y - S_yS_x = i\hbar S_z
+$$
+
+and similar relations hold with coordinates rotated cyclically: $(x\rightarrow y\rightarrow z\rightarrow x)$. Additionally, the components $S_x, S_y, S_z$ act like generators of rotations for the quantum system along the x, y, and z axes!
+
+### 2. Fundamental particles have spin
+
+In classical physics, particles are just points in space and therefore *cannot* spin by themselves. However, experiments motivated by Stern and Gerlach have been done on electrons — they have spin and it is quantised!
+
+The classical picture breaks down even further: if spin were literal rotation and electrons were actually charged spheres, they would need to spin faster than light in order to match known experimental data! 
+
+Consider the "classical electron radius" $r=2.8\times 10^{-15}\,\mathrm{m}$, electron mass $m=9.1\times 10^{-31}\,\mathrm{kg}$, and the moment of inertia $I=\frac{2}{5}mr^2$ of a solid sphere. If the electron's spin magnitude is $\hbar/2$, this allows us to deduce that its angular frequency is
+
+$$
+\omega=\frac{5\hbar}{4mr^2}
+$$
+
+This means that the equator would be rotating at speeds of
+
+$$
+v=r\omega=\frac{5\hbar}{4mr}\approx 170c
+$$
+
+Why do we still talk about spin then? Just like a rotating charged object, the electron has a magnetic field *which resists changes in orientation*. However, it is not physically spinning — its angular momentum is another fundamental property, like mass or charge.
+
+A deeper mathematical insight is that the spin quantum number $s$ only comes in integers and half-integers, i.e., $s=0, \frac{1}{2}, 1, \frac{3}{2}, 2, \dots$ We call half-integer spin particles, such as the electron, *fermions* — fundamental fermions make up matter. We call integer spin particles, such as the photon, *bosons* — fundamental forces are mediated by bosons. A surprising consequence of spin is the Pauli Exclusion Principle: two fermions cannot simultaneously occupy the same quantum state, whereas bosons can freely overlap.
+
+## Sources
+Sakurai, J. J., & Napolitano, J. (2017). *Modern quantum mechanics (2nd ed.)*. Cambridge University Press.
+
+Gerlach, W., & Stern, O. (1922). *Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld*. Zeitschrift für Physik, 9, 349–352. 
+
+Mott, N. F. (1929). *The Scattering of Fast Electrons by Atomic Nuclei*. Proceedings of the Royal Society of London. Series A, Containing Papers of a Mathematical and Physical Character, 124(794), 425–442. 
+
+NIST (2024). *The NIST Reference on Constants, Units, and Uncertainty*. Retrieved April 2, 2026, from https://physics.nist.gov/cgi-bin/cuu/Value?re and https://physics.nist.gov/cgi-bin/cuu/Value?me
