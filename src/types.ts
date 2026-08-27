@@ -6,7 +6,9 @@ export type File = {
     subtitle: string;
     author: string;
     date: string;
+    letter?: string;
   };
   locale: string;
   folder: string;
+  content: string;
 };

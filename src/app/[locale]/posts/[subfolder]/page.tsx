@@ -5,6 +5,10 @@ import { useCookies } from "next-client-cookies";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
 import { File } from "@/types";
 import PostPreview from "@/app/components/PostPreview";
 import DifficultySelector from "@/app/components/DifficultySelector";
@@ -29,6 +33,12 @@ export default function Page({
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [shouldRedirectToNotFound, setShouldRedirectToNotFound] = useState(false);
+  const [expandedAlphabetSlug, setExpandedAlphabetSlug] = useState<string | null>(
+    null,
+  );
+  const canonicalSubfolder =
+    params.subfolder === "qalphabet" ? "alphabet" : params.subfolder;
+  const isAlphabet = canonicalSubfolder === "alphabet";
 
   // Check if subfolder is valid
   // This prevents users from accessing arbitrary subfolders that don't exist
@@ -36,7 +46,7 @@ export default function Page({
   // Without this validation, users could access URLs like /posts/invalid-folder
   // which would cause errors or show empty pages instead of properly redirecting to 404.
   const isValidSubfolder = (subfolder: string) => {
-    const validSubfolders = ["entries", "quantum_tuesdays"];
+    const validSubfolders = ["entries", "quantum_tuesdays", "alphabet", "qalphabet"];
     return validSubfolders.includes(subfolder);
   };
 
@@ -56,19 +66,19 @@ export default function Page({
         body: JSON.stringify({
           language: locale,
           difficulty: difficulty,
-          folder: [params.subfolder],
+          folder: [canonicalSubfolder],
         }),
       });
       const data = await response.json();
       
-      // If valid subfolder but no files found, still redirect to 404
-      if (!data.files || data.files.length === 0) {
+      // Empty alphabet folders are valid; empty article folders should 404.
+      if (!data.files || (data.files.length === 0 && !isAlphabet)) {
         setShouldRedirectToNotFound(true);
         return;
       }
-      
-      setFiles(data.files);
-      setFilteredFiles(data.files);
+
+      setFiles(data.files ?? []);
+      setFilteredFiles(data.files ?? []);
     } catch (err) {
       setShouldRedirectToNotFound(true);
     } finally {
@@ -78,7 +88,7 @@ export default function Page({
 
   useEffect(() => {
     getFiles(difficulty, params.locale);
-  }, [difficulty, params.locale]);
+  }, [difficulty, params.locale, params.subfolder]);
 
   // Handle 404 redirect
   useEffect(() => {
@@ -89,18 +99,22 @@ export default function Page({
 
   // Sort files by date (newest first)
   useEffect(() => {
-    const sorted = files.sort((a, b) => {
+    const sorted = [...files].sort((a, b) => {
+      if (isAlphabet) {
+        return a.metadata.title.localeCompare(b.metadata.title);
+      }
+
       return (
         new Date(b.metadata.date).getTime() -
         new Date(a.metadata.date).getTime()
       );
     });
     setFilteredFiles(sorted);
-  }, [files]);
+  }, [files, isAlphabet]);
 
   // Get category info
   const getCategoryInfo = () => {
-    if (params.subfolder === "quantum_tuesdays") {
+    if (canonicalSubfolder === "quantum_tuesdays") {
       return {
         title: "Quantum Tuesdays",
         description: "Weekly quantum physics explorations and discoveries",
@@ -109,12 +123,21 @@ export default function Page({
         bgGradient:
           "from-slate-50 to-white dark:from-slate-900 dark:to-slate-800",
       };
-    } else if (params.subfolder === "entries") {
+    } else if (canonicalSubfolder === "entries") {
       return {
         title: "Quantum Entries",
         description: "Deep dives into quantum concepts and applications",
         icon: "⚛️",
         gradient: "from-blue-600 to-indigo-600",
+        bgGradient:
+          "from-slate-50 to-white dark:from-slate-900 dark:to-slate-800",
+      };
+    } else if (canonicalSubfolder === "alphabet") {
+      return {
+        title: "Quantum Alphabet",
+        description: "A compact A-to-Z glossary of quantum terms",
+        icon: "ABC",
+        gradient: "from-cyan-500 to-emerald-400",
         bgGradient:
           "from-slate-50 to-white dark:from-slate-900 dark:to-slate-800",
       };
@@ -130,6 +153,13 @@ export default function Page({
   };
 
   const categoryInfo = getCategoryInfo();
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const getAlphabetLetter = (file: File) =>
+    (file.metadata.letter ?? file.metadata.title.charAt(0)).toUpperCase();
+  const alphabetSections = alphabet.map((letter) => ({
+    letter,
+    files: filteredFiles.filter((file) => getAlphabetLetter(file) === letter),
+  }));
 
   // Animation variants
   const containerVariants = {
@@ -278,46 +308,47 @@ export default function Page({
         </div>
       </section>
 
-      {/* Controls Section */}
-      <section className="sticky top-16 z-30 border-b border-gray-200/50 bg-white/90 backdrop-blur-lg dark:border-gray-700/50 dark:bg-slate-900/90">
-        <div className="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* View Mode Toggle */}
-            <div className="flex items-center gap-1 rounded-lg border border-gray-200 bg-white/70 p-1 dark:border-gray-600 dark:bg-slate-800/70">
-              <Button
-                variant={viewMode === "grid" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode("grid")}
-                className={`h-8 w-8 p-0 ${
-                  viewMode === "grid"
-                    ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600"
-                    : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                }`}
-              >
-                <Grid3X3 className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode("list")}
-                className={`h-8 w-8 p-0 ${
-                  viewMode === "list"
-                    ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600"
-                    : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                }`}
-              >
-                <List className="h-4 w-4" />
-              </Button>
-            </div>
+      {!isAlphabet && (
+        <section className="sticky top-16 z-30 border-b border-gray-200/50 bg-white/90 backdrop-blur-lg dark:border-gray-700/50 dark:bg-slate-900/90">
+          <div className="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              {/* View Mode Toggle */}
+              <div className="flex items-center gap-1 rounded-lg border border-gray-200 bg-white/70 p-1 dark:border-gray-600 dark:bg-slate-800/70">
+                <Button
+                  variant={viewMode === "grid" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode("grid")}
+                  className={`h-8 w-8 p-0 ${
+                    viewMode === "grid"
+                      ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600"
+                      : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  <Grid3X3 className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === "list" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode("list")}
+                  className={`h-8 w-8 p-0 ${
+                    viewMode === "list"
+                      ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600"
+                      : "text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                  }`}
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+              </div>
 
-            {/* Difficulty Selector */}
-            <DifficultySelector
-              initialDifficulty={difficulty}
-              setDifficulty={setDifficulty}
-            />
+              {/* Difficulty Selector */}
+              <DifficultySelector
+                initialDifficulty={difficulty}
+                setDifficulty={setDifficulty}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Results Info */}
       <section className="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
@@ -327,7 +358,7 @@ export default function Page({
           className="flex items-center gap-2"
         >
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            {t("all articles")}
+            {isAlphabet ? categoryInfo.title : t("all articles")}
           </h2>
           <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800">
             {filteredFiles.length}{" "}
@@ -357,6 +388,86 @@ export default function Page({
                   {t("loading articles")}
                 </span>
               </div>
+            </motion.div>
+          ) : isAlphabet ? (
+            <motion.div
+              key="alphabet-content"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="space-y-10"
+            >
+              {alphabetSections.map(({ letter, files }) => (
+                <motion.div
+                  key={letter}
+                  variants={itemVariants}
+                  className="space-y-4"
+                >
+                  <div className="flex items-center gap-4">
+                    <h3 className="text-3xl font-bold text-slate-900 dark:text-white">
+                      {letter}
+                    </h3>
+                    <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
+                  </div>
+                  <div className="space-y-3 pl-0 md:pl-16">
+                    {files.map((file) => (
+                        <motion.article
+                          key={file.slug}
+                          layout
+                          className="overflow-hidden rounded-lg border border-slate-200 bg-white/80 shadow-sm transition-colors hover:border-cyan-300 dark:border-slate-700 dark:bg-slate-800/80 dark:hover:border-cyan-700"
+                        >
+                          <button
+                            type="button"
+                            aria-expanded={expandedAlphabetSlug === file.slug}
+                            onClick={() =>
+                              setExpandedAlphabetSlug((currentSlug) =>
+                                currentSlug === file.slug ? null : file.slug,
+                              )
+                            }
+                            className="block w-full px-5 py-4 text-left text-xl font-semibold text-slate-900 transition-colors hover:text-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:text-white dark:hover:text-cyan-300 dark:focus:ring-offset-slate-900"
+                          >
+                            {file.metadata.title}
+                          </button>
+                          <AnimatePresence initial={false}>
+                            {expandedAlphabetSlug === file.slug && (
+                              <motion.div
+                                key="expanded-content"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{
+                                  duration: 0.25,
+                                  ease: "easeInOut",
+                                }}
+                              >
+                                <div className="border-t border-slate-200 px-5 py-5 dark:border-slate-700">
+                                  <p className="text-sm font-medium text-cyan-700 dark:text-cyan-300">
+                                    {file.metadata.subtitle}
+                                  </p>
+                                  <div className="prose prose-slate mt-4 max-w-none text-sm dark:prose-invert prose-p:leading-7 prose-a:no-underline">
+                                    <ReactMarkdown
+                                      remarkPlugins={[remarkGfm, remarkMath]}
+                                      rehypePlugins={[rehypeKatex]}
+                                      components={{
+                                        a: ({ children }) => (
+                                          <span className="font-medium text-cyan-700 dark:text-cyan-300">
+                                            {children}
+                                          </span>
+                                        ),
+                                      }}
+                                    >
+                                      {file.content}
+                                    </ReactMarkdown>
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.article>
+                      ))}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           ) : filteredFiles.length === 0 ? (
             <motion.div

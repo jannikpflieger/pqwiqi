@@ -9,6 +9,7 @@ interface Response {
     subtitle: string;
     author: string;
     date: string;
+    letter?: string;
   };
   slug: string;
   content: string;
@@ -20,6 +21,7 @@ interface Frontmatter {
   subtitle: string;
   author: string;
   date: string;
+  letter?: string;
 }
 
 interface ParsedMarkdown {
@@ -31,12 +33,18 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
+    const isAlphabetRequest =
+      Array.isArray(body.folder) &&
+      body.folder.every(
+        (folder: string) => folder === "alphabet" || folder === "qalphabet",
+      );
+
     // Validate request body
     if (
       !body.folder ||
       !Array.isArray(body.folder) ||
       !body.language ||
-      !body.difficulty
+      (!body.difficulty && !isAlphabetRequest)
     ) {
       return NextResponse.json(
         { error: "Invalid request parameters" },
@@ -106,9 +114,15 @@ function getMDXData(dir: string) {
 }
 
 function getBlogPosts(folder: string, locale: string, difficulty: string) {
-  const folderPath = path.join(
-    `${process.cwd()}/public/posts/${locale}/${difficulty}/${folder}`,
-  );
+  const alphabetSourceFolder =
+    folder === "alphabet" || folder === "qalphabet"
+      ? locale === "de"
+        ? "qalphabet"
+        : "alphabet"
+      : null;
+  const folderPath = alphabetSourceFolder
+    ? path.join(process.cwd(), "public", "posts", locale, alphabetSourceFolder)
+    : path.join(process.cwd(), "public", "posts", locale, difficulty, folder);
 
   // Check if the directory exists
   // This validation is needed even though we have a catch-all route at [...rest]/page.tsx

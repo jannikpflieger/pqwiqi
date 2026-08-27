@@ -305,6 +305,13 @@ const Header = (props: HeaderProps) => {
               {t("Entries")}
               <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
             </Link>
+            <Link
+              href={`/${props.locale}/posts/alphabet`}
+              className="group relative text-sm font-medium text-slate-700 transition-colors hover:text-purple-600 dark:text-slate-300 dark:hover:text-purple-400"
+            >
+              {t("Quantum Alphabet")}
+              <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
           </nav>
 
           {/* Right Side Actions */}
@@ -465,6 +472,13 @@ const Header = (props: HeaderProps) => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {t("Entries")}
+              </Link>
+              <Link
+                href={`/${props.locale}/posts/alphabet`}
+                className="block rounded-lg px-3 py-2 text-base font-medium text-slate-900 hover:bg-slate-100 dark:text-white dark:hover:bg-slate-800"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {t("Quantum Alphabet")}
               </Link>
             </nav>
           </div>
