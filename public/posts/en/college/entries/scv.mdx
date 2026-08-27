@@ -1,0 +1,70 @@
+---
+title: "Superposition and Position in the Quantum World"
+subtitle: "Superposition in continuous variables (hard)"
+author: "Paula García-Mochales Cano, Marianna Ruggeri"
+date: "2026-08-18"
+---
+
+## What Is Superposition?
+
+Superposition is one of the main features of quantum mechanics that differentiate it from classical mechanics. It is the phenomenon where some variable (like a particle) can be in more than one state at the same time, as explained in our [article about superposition](/posts/en/college/entries/superposition). 
+For example, when we put a cat in a box and we close it, the cat will be either dead or alive, depending on how much time it spends there. However, in the quantum world, since we cannot see it, we assume that it is both death and alive at the same time.
+
+## Discrete and Continuous Variables
+
+This concept, although difficult to assimilate, is clear when we talk about discrete states; that is, when the particle can be one or the other, but not some intermediate state. A discrete variable would be up and down, left or right. The opposite is a continuous value; for example, all the grey colours between black and white.
+
+![Example discrete value: up/down](/posts/assets/entries/scv/updown.png)
+_Example of a discrete variable: up / down_
+
+![Example of a continuous variable: gray scale](/posts/assets/entries/scv/gray.png)
+_Example of a continuous variable: gray scale_
+
+Superposition becomes intuitively more complex when talking about continuous variables than discrete variables. And they cannot be avoided, since a lot of physical quantities are continuous (position and velocity of a particle for starters). Let’s try to understand it by looking at the position of a particle.
+
+## Position States in Quantum Mechanics
+
+In quantum mechanics we always represent states with a superposition of a set of states that completely define the system. With that in mind, we define the basic position states as
+
+$$
+\widehat{x}|x>=x|x>
+$$
+
+This means that when we read the position ( $\widehat{x}$ operator acting on the state $|x>$) we will find it in position $x$.
+
+## From Position States to the Wavefunction
+
+Now, to define a function that describes the position of a particle we write a superposition of all of those. Since they are continuum variables, we define the state of a general state $\alpha$. 
+
+However, we don’t usually work with that state. Rather we define what is called a wavefunction. This wavefunction is the projection of the state $\alpha$ in the position basis:
+
+$$
+\phi(x) = \langle x | \alpha \rangle
+$$
+
+where we have used the completeness relation
+
+$$
+\int dx' \, |x'\rangle\langle x'| = \mathbb{I}.
+$$
+
+## Superposition Over All Positions
+
+What we have done here is say that the particle is in all of the places defined by the $$|x>$$ basis, so it is in superposition in all of them. But we have defined a weight function, which determines how often we can find the particle in each of them. The weight function is integrated over all positions to weigh over all of them.
+
+With this, if the weight function is, for example, a normal distribution, then the particle is more likely to be found in the middle of the function. This does not mean that it isn’t in the corners; it means that when we measure, we will find it more often in the middle than in the corners; but until then it is everywhere.
+
+To make this idea more intuitive, imagine Mike, a person who goes running every day along the same route. If we try to predict where he will be after a certain amount of time, we cannot usually assign him one exact position, but we can describe a region where some positions are more likely than others. And as times goes on, the region becomes more and more spread, with a higher probability in the middle.
+
+Just like in Mike’s example, this information can be represented with a probability function: the most likely positions correspond to the highest part of the function, while less likely positions lie further away.
+
+![From Mike to Probability function](/posts/assets/entries/scv/probfunc.png) 
+_From Mike to Probability Functions of his Positions_
+
+## What Happens After a Measurement?
+
+After a measurement is gone, the wavefunction collapses to the state representing the position. This means it becomes a function weighed by a delta-function on the corresponding position. With time, it will spread and occupy more and more places, going back to a state in superposition.
+
+![Measurement](/posts/assets/entries/scv/measurement.png) 
+_Effect of a Measurement_
+

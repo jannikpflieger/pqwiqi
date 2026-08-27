@@ -1,0 +1,131 @@
+---
+title: "Quantum Key Distribution"
+subtitle: "QKD: a new form of secure communication (medium)"
+author: "Marianna Ruggeri"
+date: "2026-08-16"
+---
+
+## Why do we need secure keys?
+
+Every time we communicate online, cryptography is used to protect sensitive information. When you buy something online, for example, your browser and the shop's server establish secret keys that are used to encrypt the data they exchange.
+
+Many commonly used public-key cryptographic protocols rely on mathematical problems that are extremely difficult for classical computers to solve. A sufficiently powerful quantum computer, however, could solve some of these problems much more efficiently.
+
+This is where **Quantum Key Distribution**, or **QKD**, comes into play.
+
+## Security through quantum physics
+
+QKD takes a fundamentally different approach to cryptography.
+
+Instead of relying only on the computational difficulty of a mathematical problem, it uses the laws of quantum mechanics to detect whether someone has tried to intercept the communication.
+
+One of the best-known QKD protocols is called **BB84**.
+
+## Meet Alice and Bob
+
+Imagine that Alice wants to establish a secret key with Bob.
+
+Alice generates a random sequence of bits, 0s and 1s, and encodes each bit into a single photon.
+
+However, there is an additional ingredient: for every photon, Alice randomly chooses between **two different ways of encoding the bit**, called bases.
+
+For example, one basis could use horizontal and vertical polarization, while another uses diagonal polarizations.
+
+## Bob chooses how to measure
+
+Alice sends the photons to Bob through a quantum channel, such as a fiber-optic cable.
+
+Bob does not know which basis Alice used for each photon. Therefore, he independently and randomly chooses one of the two possible measurement bases.
+
+If Bob chooses the same basis as Alice, he can obtain the correct bit. If he chooses a different basis, his result is random.
+
+(/posts/assets/entries/qkd/basis.png)
+*Principles of BB84 protocol [5]*
+
+## Comparing the bases
+
+Once the photons have been transmitted, Alice and Bob communicate through an **authenticated classical channel**.
+
+They publicly reveal which bases they used, but importantly, they do **not** reveal the actual values of their bits.
+
+They keep only the results for which they happened to choose the same basis and discard the others.
+
+This process is called **key sifting**.
+
+(/posts/assets/entries/qkd/BB84.png)
+*BB84 scheme [3]*
+
+## What happens if Eve listens?
+
+Now imagine Eve, an eavesdropper, tries to intercept the photons.
+
+In the simplest attack, called an **intercept-and-resend attack**, Eve measures each photon sent by Alice and then prepares a new photon to send to Bob.
+
+The problem is that Eve does not know which basis Alice used.
+
+She therefore has to guess.
+
+(/posts/assets/entries/qkd/eve.png)
+*Eve's interception [4]*
+
+## Why does Eve introduce errors?
+
+If Eve chooses the wrong basis, her measurement changes the quantum state.
+
+When she sends the photon on to Bob, the state may therefore be different from the one originally prepared by Alice.
+
+This creates errors in Alice and Bob's results.
+
+The crucial point is that Eve cannot simply look at an unknown quantum state without risking disturbing it.
+
+## Checking for eavesdropping
+
+Alice and Bob publicly compare a small random subset of their shared bits.
+
+This allows them to estimate the **quantum bit error rate**, or **QBER**.
+
+If the error rate is too high, they conclude that the communication may have been intercepted and discard the key.
+
+## Creating the final key
+
+If the error rate is sufficiently low, Alice and Bob can continue processing their data.
+
+First, they perform **error correction**, ensuring that their two keys are identical.
+
+Then, they apply **privacy amplification**, which shortens the key but strongly r
+
+
+
+
+
+es any partial information that Eve might have obtained.
+
+The result is a shorter but much more secure shared key.
+
+## Why is QKD different?
+
+The security of QKD does not rely on assuming that Eve has limited computational power.
+
+Instead, it relies on fundamental properties of quantum mechanics: unknown quantum states cannot in general be measured without disturbance, and they cannot be perfectly copied.
+
+QKD therefore does not directly transmit the secret message. Its purpose is to allow Alice and Bob to securely establish a common secret key.
+
+That key can then be used with conventional encryption to protect their communication.
+
+## A new kind of security
+
+In this way, quantum mechanics provides a new foundation for secure communication.
+
+Instead of simply hoping that an attacker does not have enough computing power, Alice and Bob can use the physical properties of quantum systems to detect whether their communication has been disturbed.
+
+### References
+
+[1] Carrasco-Casado, Alberto & Marmol, Veronica & Denisenko, Natalia. (2016), Free-Space Quantum Key Distribution, 10.1007/978-3-319-30201-0_27
+
+[2] Nielsen, M. A., & Chuang, I. L. (2010), *Quantum Computation and Quantum Information: 10th Anniversary Edition*, Cambridge: Cambridge University Press
+
+[3] QNu Labs, "Guide: Quantum Key Distribution (QKD) and How it Works?", QNu Labs, Dec. 20, 2023. [Online]. Available: https://www.qnulabs.com/guides/quantum-key-distribution-qkd-and-how-it-works
+
+[4] Bennett, C. H., & Brassard, G. (1984), "Quantum cryptography: Public key distribution and coin tossing," *Proceedings of IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, India, pp. 175–179
+
+[5] Toshiba Digital Solutions Corporation, *"Quantum Key Distribution, Protecting the Future of Digital Society (Part 1): The Principles of Quantum Key Distribution Technology and the BB84 Protocol"*, DiGiTAL T-SOUL, 2022. [Online]. Available: https://www.global.toshiba/ww/company/digitalsolution/articles/tsoul/38/004.html

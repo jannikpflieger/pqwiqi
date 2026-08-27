@@ -1,0 +1,55 @@
+---
+title: "Spontane Symmetriebrechung"
+subtitle: "Ein kleiner Leitfaden zur Wahl des physikalischen Zustands (manchmal ist Spontaneität der Schlüssel!) (medium)"
+author: "Vincenzo Di Terlizzi, Marianna Ruggeri"
+date: "2026-03-18"
+---
+
+### ❗Diese Text ist noch nicht übersetzt. Wir arbeiten zurzeit daran, vielen Dank für Ihr Verständnis. PushQuantum e.V ist eine studentische Initative, die hauptsächlich auch Internationalen Studierenden besteht.❗
+
+## Was ist ein Phasenübergang?
+In der Schule habt ihr wahrscheinlich schon von Phasenübergängen gehört: Denkt zum Beispiel daran, wie Wasser zu Eis gefriert oder beim Sieden zu Wasserdampf wird. Diese Übergänge, bei denen Wärme übertragen wird, ermöglichen es ein und demselben Stoff, verschiedene Zustände (oder Phasen) anzunehmen, die sich konzeptionell durch unterschiedliche Bindungsstärken unterscheiden: Wir sagen, dass Festkörper starke Bindungen besitzen, Flüssigkeiten schwächere und Gase nahezu keine Bindungen. Dadurch haben Festkörper beispielsweise eine eigene Form und ein eigenes Volumen, während sich Gase vollständig an ihren Behälter anpassen.
+
+Physikerinnen und Physiker sind allerdings ziemlich pingelig, wenn es um Präzision geht, und können sich mit einer solchen qualitativen Beschreibung nicht zufriedengeben. Die Welt der Phasenübergänge ist sehr viel größer, und um sie wirklich zu verstehen, braucht man eine mathematische Beschreibung. Einen ersten Versuch unternahm Ehrenfest, der Phasenübergänge danach klassifizierte, bei welcher niedrigsten Ableitung der Gibbs’schen freien Energie G eine Unstetigkeit auftritt. Wasser zeigt zum Beispiel einen Phasenübergang erster Ordnung, da die latente Wärme einer Unstetigkeit der Entropie entspricht:
+
+$$S = -\left(\frac{\partial G}{\partial T}\right)_P$$
+
+## Landaus Paradigma
+Ehrenfests Theorie konnte jedoch nicht mit Divergenzen umgehen. Deshalb entwickelte Landau einen neuen Ansatz, bei dem ein Ordnungsparameter eingeführt und verschiedene Phasen anhand ihrer Symmetrien klassifiziert werden: Ein Phasenübergang ist eine Veränderung des Ordnungsparameters, der beim Variieren eines bestimmten Kontrollparameters an einem kritischen Punkt einen von null verschiedenen Wert annehmen kann, um die freie Energie zu minimieren. Der Ordnungsparameter kann sich dabei kontinuierlich verändern (kontinuierliche Phasenübergänge) oder abrupt springen (Phasenübergänge erster Ordnung).
+
+Der oben beschriebene Prozess wird als spontane Symmetriebrechung bezeichnet: Der Hamiltonoperator (beziehungsweise die Energielandschaft), der das System beschreibt, besitzt bestimmte Symmetrien, und auch der Zustand des Systems besitzt diese, solange der Ordnungsparameter 0 ist. Sobald er jedoch einen anderen Wert annimmt, muss sich das System für einen bestimmten Zustand entscheiden, der diese Symmetrie nicht mehr besitzt. Es ist, als würde das physikalische System zunächst eine Karte aus einem gezinkten Kartenspiel ziehen, in dem alle Karten identisch sind, und plötzlich aus einem echten Kartenspiel wählen müssen!
+
+![G. Maciunas, Single Card Flux Deck, Madison Museum of Contemporary Art (MMoCA)](/posts/assets/entries/ssb/deck.png)
+*G. Maciunas, Single Card Flux Deck, Madison Museum of Contemporary Art (MMoCA)*
+
+Um zu verstehen, wie so etwas passieren kann, stellt euch einen vertikalen eindimensionalen elastischen Stab vor: Wenn ihr ihn um seine Achse dreht, könnt ihr den Endzustand nicht vom Anfangszustand unterscheiden – der Stab besitzt Rotationssymmetrie. Übt ihr jedoch eine vertikale Kraft auf ihn aus, wird er sich irgendwann in eine zufällige Richtung biegen und dabei die Symmetrie brechen!
+
+![rod img](/posts/assets/entries/ssb/rod.png)
+
+
+
+## Quantenphasenübergänge
+Normalerweise treten klassische Phasenübergänge auf, wenn die Temperatur verändert wird. Das Erstaunliche ist jedoch, dass Phasenübergänge auch bei 0 K stattfinden können: Genau das nennen wir einen Quantenphasenübergang! In diesem Fall gibt es keine thermischen Fluktuationen mehr, stattdessen spielen Quantenfluktuationen die entscheidende Rolle. Mithilfe des Ordnungsparameters beschreiben wir den Grundzustand und beobachten, dass an einem kritischen Punkt etwas besonders Interessantes passiert: Energieniveaus rücken immer näher zusammen, bis sie sich überlagern, und das System beginnt, Korrelationen zwischen weit voneinander entfernten Bereichen zu entwickeln – ein deutliches Zeichen für einen Phasenübergang!
+
+Betrachten wir ein Beispiel: das schwach wechselwirkende Bose-Gas bei T=0 K. Wir betrachten also Bosonen, Teilchen mit ganzzahligem Spin, und erlauben ihnen, miteinander zu wechselwirken. Da Bosonen – anders als Fermionen – ziemlich gesellig sind (hier gibt es kein Pauli-Ausschlussprinzip!), können viele Teilchen denselben Quantenzustand besetzen. Insbesondere kann eine große Anzahl von Teilchen den Grundzustand besetzen, wodurch sich ein „Kondensat“ bildet. Dieses können wir einfach durch eine komplexe Zahl beschreiben, die unser Ordnungsparameter sein wird. Der Ordnungsparameter hängt von physikalischen Größen wie dem chemischen Potential ab. Solange dieses negativ bleibt, verhält sich das Gas „normal“. Sobald es jedoch positiv wird, passiert etwas Besonderes: Der Ordnungsparameter wird ungleich null, was bedeutet, dass der Grundzustand makroskopisch besetzt wird und wir ein Bose-Einstein-Kondensat erhalten! Darüber hinaus sorgen die von uns zugelassenen Wechselwirkungen dafür, dass das System suprafluid wird, wodurch erstaunliche Eigenschaften wie dissipationsfreie, wirbelfreie Strömung und die Quantisierung der Zirkulation entstehen!
+
+![vortex](/posts/assets/entries/ssb/rod.png)
+*Beobachtung von Wirbelgittern in Bose-Einstein-Kondensaten als Folge der Quantisierung der Zirkulation [1]*
+
+## Welche Symmetrie haben wir eigentlich gebrochen?
+Die Symmetrie, die wir in diesem Fall brechen müssen, ist etwas subtiler: Sie wird globale Eichsymmetrie (U(1)-Symmetrie) genannt. Man kann sie jedoch visualisieren, indem man das Verhalten der Wirkung betrachtet – eines Funktionals, das wir minimieren möchten – und sie in der komplexen Ebene darstellt, wobei die Achsen dem Real- und Imaginärteil des Ordnungsparameters entsprechen. In der „ungeordneten“ Phase, in der die Symmetrie noch erhalten ist, erhalten wir eine paraboloidartige Form: Das System bleibt in seinem eindeutigen Minimum, und eine Rotation in der komplexen Ebene wäre nicht feststellbar.
+
+![paraboloid](/posts/assets/entries/ssb/paraboloid.png)
+
+Sobald das chemische Potential jedoch positiv wird, verändert sich dieselbe Darstellung und nimmt eine Form wie diese an:
+
+![sombrero](/posts/assets/entries/ssb/sombrero.png)
+
+Nun ist das System gezwungen, zufällig einen Punkt auf dem Rand dieses „Sombreros“ auszuwählen – also eine bestimmte Phase. Wenn ich nun die Ebene rotiere, kann man erkennen, dass eine Rotation stattgefunden hat, da der physikalische Zustand des Systems die Rotationssymmetrie nicht mehr besitzt. Die Rotationssymmetrie des Grundzustands wurde daher spontan gebrochen!
+
+## Was passiert in niedrigen Dimensionen?
+Zum Schluss noch eine wichtige Bemerkung: Was wir gesagt haben, gilt in 3 Dimensionen immer, auch bei Temperaturen oberhalb von 0 K. In 2 Dimensionen kann eine kontinuierliche spontane Symmetriebrechung dagegen nur bei 0 K auftreten, während sie in 1 Dimension überhaupt nicht möglich ist. Der Grund dafür sind Quanten- und thermische Fluktuationen, die in diesen Fällen stark genug sein können, um die langreichweitige Ordnung zu zerstören.
+
+### Literatur
+
+[1] J. R. Abo-Shaeer, C. Raman, J. M. Vogels und W. Ketterle, "Observation of vortex lattices in Bose-Einstein condensates" Science, vol. 292, no. 5516, pp. 476–479, Mar. 2001, doi: 10.1126/science.1060182

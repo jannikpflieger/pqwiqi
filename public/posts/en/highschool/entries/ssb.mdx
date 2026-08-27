@@ -1,0 +1,53 @@
+---
+title: "Spontaneous symmetry breaking"
+subtitle: "Little guide on how to choose your physical state (sometimes spontaneity is the key!) (medium)"
+author: "Vincenzo Di Terlizzi, Marianna Ruggeri"
+date: "2026-03-18"
+---
+
+## What is a phase transition?
+At school, you may have heard about phase transitions: think about the water solidifying into ice or boiling and becoming steam. These transitions, involving transfer of heat, allow the same substance to transform into different states (or phases) corresponding (conceptually) to different bonds’ strength: we say solids have strong bonds, liquids weaker ones and gases almost no bonds at all, resulting in having their own volume or shape. 
+
+However, physicists are fussy and precise, and they cannot stick with this qualitative description. The world of phase transitions is much wider than this, and tackling it mathematically is necessary. A first try was made by Ehrenfest, who tried to classify phase transitions looking at the lowest-order derivative of the Gibbs free energy G that exhibits a discontinuity. Water, for example, exhibits a first-order phase transition, since latent heat correspond to a discontinuity of the entropy:
+
+$$S = -\left(\frac{\partial G}{\partial T}\right)_P$$
+
+## Landau’s paradigm
+Ehrenfest’s theory couldn’t deal with divergencies, so Landau proposed a new theory, introducing an order parameter and classifying different phases according to their symmetry: a phase transition is a change in the order parameter which, tuning down a particular variable, can assume a non-zero value at a critical point to minimize the free energy. The order parameter can change continuously (continuous phase transitions) or jump abruptly (first-order ones).
+
+The process described above is what we call spontaneous symmetry breaking: the Hamiltonian (energy landscape) describing the system respects some symmetries and the state in which the system is does the same as long as the order parameter is 0 K but, once it assumes a different value, the system has to pick a different state, which doesn’t have that symmetry anymore. It’s as if, at one point, the physical system passes from picking one card from a rigged deck with cards that are all the same to picking from a real deck!
+
+![G. Maciunas, Single Card Flux Deck, Madison Museum of Contemporary Art (MMoCA)](/posts/assets/entries/ssb/deck.png)
+*G. Maciunas, Single Card Flux Deck, Madison Museum of Contemporary Art (MMoCA)*
+
+To understand how this can happen, think about a vertical one-dimensional elastic rod: if you rotate it on its axis, you won’t be able to distinguish the final state from the initial one: the rod has rotational symmetry. However, if you apply a vertical force, eventually the rod will bend in a random direction, breaking the symmetry!
+
+![rod img](/posts/assets/entries/ssb/rod.png)
+
+
+
+## Quantum phase transitions
+Normally, classical phase transitions occur tuning down the temperature. The amazing thing is that phase transitions can also happen at 0 K: that’s what we call a quantum phase transition! In this case, there isn’t any thermal fluctuation, but it's the quantum fluctuations that matter! We use the order parameter to describe the ground state and we observe that, at a critical point, something really interesting happens: energy levels get closer until they overlap and the system starts to feel the correlations within parts that are really far from each other: a clear manifestation of a phase transition!
+
+Let’s see an example: the weakly interacting Bose gas at T=0K. We are thus considering bosons, particles with integer spin, and we allow them to interact one with each other. Since bosons, unlike fermions, are quite social (no Pauli exclusion principle here), they can occupy the same quantum state. In particular, a lot of particles can occupy the ground state, hence “condensate”, and we would describe them just with a complex number, which will be our order parameter. The order parameter depends on physical factors such as the chemical potential. As long as it remains negative, the gas behaves “normally”. But, as soon as it becomes positive, the magic happens: the order parameter becomes nonzero, which means the ground state becomes macroscopically occupied and we have a Bose-Einstein condensate! Moreover, the interactions we allow make the system a superfluid and amazing properties arise, such as dissipationless, irrotational flow and quantization of circulation!
+
+![vortex](/posts/assets/entries/ssb/rod.png)
+*Observation of Vortex Larrices in Bose-Einstein Condensates, consequent to quantization of circulation [1]
+
+## Which symmetry have we actually broken?
+The symmetry we need to break in this case is more subtle: it’s called the global gauge symmetry (U(1) symmetry). However, it is possible to visualize looking at the behaviour of the action (a functional we want to minimize) in the complex plane where the axes correspond to the real and imaginary part of the order parameter. In the “disordered” phase, where the symmetry is still intact, we have a paraboloid shape: the system will stay in its unique minimum and you wouldn't be able to detect a rotation in the complex plane.
+
+![paraboloid](/posts/assets/entries/ssb/paraboloid.png)
+
+On the other hand, once the chemical potential becomes positive, the same graph morphs into a shape like this:
+
+![sombrero](/posts/assets/entries/ssb/sombrero.png)
+
+Now the system will be forced to choose a random position in the brim of this “sombrero” (a phase) and if I now rotate the plane you will be able to understand a rotation occurred, since the physical state of the system doesn’t respect rotational symmetry anymore. The ground state rotational symmetry is therefore spontaneously broken!
+
+## What happens at low dimensions?
+One final note: what we said is always true in 3 dimensions, even at temperatures different from 0 K. However, in 2 dimensions only at 0 K we can have continuous spontaneous symmetry breaking and in 1 dimension we cannot have it at all: this is because of quantum and thermal fluctuations, which in these cases can be powerful enough to destroy long-range order.
+
+### References
+
+[1] J. R. Abo-Shaeer, C. Raman, J. M. Vogels, and W. Ketterle, "Observation of vortex lattices in Bose-Einstein condensates" Science, vol. 292, no. 5516, pp. 476–479, Mar. 2001, doi: 10.1126/science.1060182

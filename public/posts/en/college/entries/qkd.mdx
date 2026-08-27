@@ -1,0 +1,293 @@
+---
+title: "Quantum Key Distribution"
+subtitle: "QKD: a new form of secure communication (hard)"
+author: "Marianna Ruggeri"
+date: "2026-08-16"
+---
+
+
+## Why do we need quantum cryptography?
+
+Modern secure communication relies heavily on cryptographic keys.
+
+In conventional public-key cryptography, the security of many protocols is based on computational assumptions: certain mathematical problems are believed to be extremely difficult for classical computers to solve.
+
+Quantum computation changes this picture.
+
+Algorithms such as **Shor's algorithm** can efficiently solve integer factorization and discrete logarithm problems on a sufficiently large fault-tolerant quantum computer, threatening several widely used cryptographic schemes.
+
+## A different idea: Quantum Key Distribution
+
+Quantum Key Distribution, or **QKD**, follows a different philosophy.
+
+Instead of basing security exclusively on computational complexity, QKD exploits fundamental properties of quantum mechanics to allow two parties to detect information leakage while establishing a secret key.
+
+![Pic](/posts/assets/entries/qkd/whyqkd.png)
+*Conventional cryptographic communication vs qkd [6]*
+
+One of the fundamental QKD protocols is **BB84**, proposed by Bennett and Brassard in 1984.
+
+## Encoding the key
+
+Suppose Alice wants to establish a secret binary key with Bob.
+
+She randomly generates two classical bit strings:
+
+* one determines the values of the key bits;
+* the other determines the basis used to encode each bit.
+
+For every bit, Alice prepares a photon in one of four possible quantum states belonging to two different bases.
+
+![Pic](/posts/assets/entries/qkd/basis.png)
+*Principles of BB84 protocol [6]*
+
+## Two quantum bases
+
+Using polarization as an example, we can define the computational basis
+
+$$
+|0\rangle, \qquad |1\rangle
+$$
+
+and the diagonal basis
+
+$$
+|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}},
+\qquad
+|-\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}}.
+$$
+
+Alice can therefore encode a classical 0 or 1 either in the $Z$ basis,
+
+$$
+{|0\rangle, |1\rangle},
+$$
+
+or in the $X$ basis,
+
+$$
+{|+\rangle, |-\rangle}.
+$$
+
+She randomly chooses the basis for every photon and sends the resulting states to Bob.
+
+## Bob performs the measurements
+
+Bob does not know which basis Alice used.
+
+For each incoming photon, he therefore randomly chooses either the $Z$ or the $X$ basis and performs a measurement.
+
+If Bob chooses the same basis as Alice, he ideally reconstructs Alice's bit with certainty.
+
+If he chooses the wrong basis, however, the result is random.
+
+For example,
+
+$$
+|\langle + | 0 \rangle|^2
+=
+|\langle - | 0 \rangle|^2
+=
+\frac{1}{2}
+$$
+
+## Sifting the key
+
+After the quantum transmission, Alice and Bob communicate through an **authenticated classical channel**.
+
+They publicly reveal which bases they used, but they do not reveal their bit values.
+
+Whenever they used different bases, the corresponding result is discarded.
+
+They retain only the cases in which their bases matched.
+
+This procedure is known as **sifting**.
+
+![Pic](/posts/assets/entries/qkd/BB84.png)
+*BB84 scheme [3]*
+
+## Eve intercepts the photons
+
+Now consider an eavesdropper, Eve.
+
+The simplest possible strategy is the **intercept-and-resend attack**.
+
+Eve intercepts each photon, randomly chooses a basis, measures the state and prepares a new photon corresponding to her result before sending it to Bob.
+
+The problem is that Eve does not know Alice's preparation basis.
+
+## Measurement causes disturbance
+
+Eve chooses the wrong basis with probability
+
+$$
+P_{\text{wrong basis}} = \frac{1}{2}.
+$$
+
+When she measures in the wrong basis, the original state is projected onto one of the states of her chosen basis.
+
+The information about Alice's original preparation is therefore partially destroyed.
+
+If Bob later measures in Alice's correct basis, he can obtain the wrong result.
+
+![Pic](/posts/assets/entries/qkd/eve.png)
+*Eve's interception [5]*
+
+## The 25% error rate
+
+Suppose Alice and Bob keep only the events in which they used the same basis.
+
+Eve chooses the wrong basis with probability
+
+$$
+\frac{1}{2},
+$$
+
+and in those cases Bob obtains the wrong bit with probability
+
+$$
+\frac{1}{2}.
+$$
+
+Therefore, the total probability of an error caused by an ideal intercept-and-resend attack is
+
+$$
+P_{\mathrm{error}}
+=
+\frac{1}{2} \times \frac{1}{2}
+=
+\frac{1}{4}
+$$
+
+This corresponds to an ideal quantum bit error rate of
+
+$$
+\mathrm{QBER} = 25%.
+$$
+
+The disturbance introduced by Eve can therefore be detected statistically.
+
+## Why can't Eve copy the state?
+
+Eve might try another strategy: instead of measuring the photon, why not simply copy it?
+
+Quantum mechanics prevents this through the **no-cloning theorem**.
+
+There is no universal quantum operation capable of perfectly copying an arbitrary unknown quantum state:
+
+$$
+|\psi\rangle |0\rangle
+\not\longrightarrow
+|\psi\rangle |\psi\rangle
+$$
+
+for every possible $|\psi\rangle$.
+
+Eve therefore cannot simply keep one perfect copy of the state and send another undisturbed copy to Bob.
+
+## Estimating the error rate
+
+After sifting, Alice and Bob still do not immediately possess a secure final key.
+
+Real experiments contain losses, imperfect detectors and environmental noise. Errors can therefore appear even when Eve is absent.
+
+Alice and Bob publicly compare a randomly selected fraction of their sifted bits and estimate the **quantum bit error rate**
+
+$$
+Q =
+\frac{N_{\mathrm{errors}}}{N_{\mathrm{compared}}}.
+$$
+
+If the QBER exceeds the security threshold of the protocol, they abort the communication.
+
+## Error correction
+
+If the error rate is sufficiently low, Alice and Bob continue with classical post-processing.
+
+The first step is **information reconciliation**, or error correction.
+
+This allows them to identify and correct differences between their bit strings until both parties possess identical keys.
+
+## Privacy amplification
+
+Error correction alone is not enough.
+
+Eve may still have obtained partial information about the key without creating enough errors to force Alice and Bob to abort.
+
+Alice and Bob therefore perform **privacy amplification**.
+
+This procedure compresses the partially secure key into a shorter final key, reducing Eve's information to an arbitrarily small level.
+
+## Secret-key rate
+
+In an asymptotic security analysis, the obtainable secret-key rate can be expressed schematically as
+
+$$
+R \sim I(A:B) - \chi(E),
+$$
+
+where $I(A:B)$ represents the correlations shared by Alice and Bob, while $\chi(E)$ represents an upper bound on the information accessible to Eve.
+
+The exact expression depends on the protocol, implementation and assumed noise model.
+
+## Why authentication matters
+
+The classical channel used by Alice and Bob does not need to be secret.
+
+However, it **must be authenticated**.
+
+Without authentication, Eve could perform a man-in-the-middle attack: she could establish one QKD connection with Alice while pretending to be Bob, and another with Bob while pretending to be Alice.
+
+QKD therefore does not remove the need for authentication.
+
+Instead, it can use a small initial authentication secret to establish much larger amounts of new secret key material.
+
+## QKD does not encrypt the message
+
+An important distinction is that QKD does not itself encrypt or transmit the secret message.
+
+Its purpose is **key establishment**.
+
+Once Alice and Bob share a secure secret key, they can use it with conventional symmetric encryption.
+
+In principle, the key can even be combined with a **one-time pad**.
+
+If the key is truly random, used only once and at least as long as the message, the resulting encryption provides information-theoretic security.
+
+## Computational vs physical security
+
+The central difference between conventional public-key cryptography and QKD lies in the origin of their security.
+
+Classical public-key schemes usually rely on assumptions about what an adversary can compute.
+
+QKD instead allows security to be proven from a physical model based on quantum mechanics, even if Eve is assumed to possess extremely powerful computational resources.
+
+## Real devices are not ideal
+
+This does not mean that every practical QKD system is automatically perfectly secure.
+
+Real devices can contain imperfections such as detector side channels, imperfect photon sources, losses and calibration errors.
+
+Modern QKD research therefore distinguishes carefully between the security of an ideal protocol and the security of its physical implementation.
+
+## The central idea
+
+Quantum Key Distribution turns one of the most unusual features of quantum mechanics into a technological resource: measuring an unknown quantum state is not always a passive act.
+
+By monitoring disturbances in the quantum communication channel, Alice and Bob can estimate how much information an eavesdropper could have obtained.
+
+They can then process their data to extract a final key whose secrecy is ultimately based on the laws of quantum physics.
+
+### References
+
+[1] Carrasco-Casado, Alberto & Marmol, Veronica & Denisenko, Natalia. (2016), *Free-Space Quantum Key Distribution*, 10.1007/978-3-319-30201-0_27
+
+[2] Nielsen, M. A., & Chuang, I. L. (2010), *Quantum Computation and Quantum Information: 10th Anniversary Edition*, Cambridge: Cambridge University Press
+
+[3] QNu Labs, "Guide: Quantum Key Distribution (QKD) and How it Works?", QNu Labs, Dec. 20, 2023. [Online]. Available: https://www.qnulabs.com/guides/quantum-key-distribution-qkd-and-how-it-works
+
+[4] Bennett, C. H., & Brassard, G. (1984), "Quantum cryptography: Public key distribution and coin tossing," *Proceedings of IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, India, pp. 175–179
+
+[5] El Hassane, Laaji & Azizi, Abdelmalek. (2022). *A Combination of BB84 Quantum Key Distribution and An Improved Scheme of NTRU Post-Quantum Cryptosystem*. Journal of Cyber Security and Mobility. 10.13052/jcsm2245-1439.1152
+
+[6] Toshiba Digital Solutions Corporation, "Quantum Key Distribution, Protecting the Future of Digital Society (Part 1): The Principles of Quantum Key Distribution Technology and the BB84 Protocol," DiGiTAL T-SOUL, 2022. [Online]. Available: https://www.global.toshiba/ww/company/digitalsolution/articles/tsoul/38/004.html

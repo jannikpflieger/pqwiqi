@@ -1,0 +1,127 @@
+---
+title: "Quantum Key Distribution"
+subtitle: "QKD: eine neue Form sicherer Kommunikation (medium)"
+author: "Marianna Ruggeri"
+date: "2026-08-16"
+---
+
+### ❗Diese Text ist noch nicht übersetzt. Wir arbeiten zurzeit daran, vielen Dank für Ihr Verständnis. PushQuantum e.V ist eine studentische Initative, die hauptsächlich auch Internationalen Studierenden besteht.❗
+
+## Warum brauchen wir sichere Schlüssel?
+
+Jedes Mal, wenn wir online kommunizieren, wird Kryptografie eingesetzt, um sensible Informationen zu schützen. Wenn ihr zum Beispiel etwas online kauft, erzeugen euer Browser und der Server des Shops geheime Schlüssel, die verwendet werden, um die ausgetauschten Daten zu verschlüsseln.
+
+Viele weit verbreitete Public-Key-Kryptografieverfahren beruhen auf mathematischen Problemen, die für klassische Computer extrem schwer zu lösen sind. Ein ausreichend leistungsfähiger Quantencomputer könnte einige dieser Probleme jedoch wesentlich effizienter lösen.
+
+Genau hier kommt **Quantum Key Distribution**, kurz **QKD**, ins Spiel.
+
+## Sicherheit durch Quantenphysik
+
+QKD verfolgt einen grundlegend anderen Ansatz in der Kryptografie.
+
+Anstatt sich nur auf die rechnerische Schwierigkeit eines mathematischen Problems zu verlassen, nutzt QKD die Gesetze der Quantenmechanik, um festzustellen, ob jemand versucht hat, die Kommunikation abzufangen.
+
+Eines der bekanntesten QKD-Protokolle heißt **BB84**.
+
+## Lernt Alice und Bob kennen
+
+Stellt euch vor, Alice möchte mit Bob einen geheimen Schlüssel erzeugen.
+
+Alice generiert eine zufällige Folge von Bits, also 0en und 1en, und kodiert jedes Bit in einem einzelnen Photon.
+
+Es gibt jedoch noch eine weitere wichtige Zutat: Für jedes Photon wählt Alice zufällig zwischen **zwei verschiedenen Möglichkeiten, das Bit zu kodieren**, den sogenannten Basen.
+
+Eine Basis könnte beispielsweise horizontale und vertikale Polarisation verwenden, während die andere diagonale Polarisationen nutzt.
+
+## Bob entscheidet, wie er misst
+
+Alice sendet die Photonen über einen Quantenkanal, beispielsweise ein Glasfaserkabel, an Bob.
+
+Bob weiß nicht, welche Basis Alice für jedes Photon verwendet hat. Deshalb wählt er für jedes Photon unabhängig und zufällig eine der beiden möglichen Messbasen.
+
+Wenn Bob dieselbe Basis wie Alice wählt, kann er das korrekte Bit erhalten. Wählt er dagegen eine andere Basis, ist sein Messergebnis zufällig.
+
+![Pic](/posts/assets/entries/qkd/basis.png)
+*Prinzipien des BB84-Protokolls [5]*
+
+## Vergleich der Basen
+
+Nachdem die Photonen übertragen wurden, kommunizieren Alice und Bob über einen **authentifizierten klassischen Kanal**.
+
+Sie geben öffentlich bekannt, welche Basen sie verwendet haben, verraten dabei jedoch ausdrücklich **nicht** die tatsächlichen Werte ihrer Bits.
+
+Sie behalten nur die Ergebnisse, bei denen sie zufällig dieselbe Basis gewählt haben, und verwerfen alle anderen.
+
+Dieser Prozess wird als **Key Sifting** bezeichnet.
+
+![Pic](/posts/assets/entries/qkd/BB84.png)
+*BB84-Schema [3]*
+
+## Was passiert, wenn Eve mithört?
+
+Stellt euch nun Eve vor, eine Lauscherin, die versucht, die Photonen abzufangen.
+
+Beim einfachsten Angriff, dem sogenannten **Intercept-and-Resend-Angriff**, misst Eve jedes von Alice gesendete Photon und präpariert anschließend ein neues Photon, das sie an Bob weiterleitet.
+
+Das Problem für Eve ist, dass sie nicht weiß, welche Basis Alice verwendet hat.
+
+Sie muss also raten.
+
+![Pic](/posts/assets/entries/qkd/eve.png)
+*Eves Abhörversuch [4]*
+
+## Warum verursacht Eve Fehler?
+
+Wenn Eve die falsche Basis auswählt, verändert ihre Messung den Quantenzustand.
+
+Wenn sie das Photon anschließend an Bob weiterleitet, kann sich dessen Zustand daher von dem ursprünglich von Alice präparierten Zustand unterscheiden.
+
+Dadurch entstehen Fehler in den Ergebnissen von Alice und Bob.
+
+Der entscheidende Punkt ist, dass Eve einen unbekannten Quantenzustand nicht einfach beobachten kann, ohne das Risiko einzugehen, ihn dabei zu stören.
+
+## Überprüfung auf Abhörversuche
+
+Alice und Bob vergleichen öffentlich eine kleine, zufällig ausgewählte Teilmenge ihrer gemeinsamen Bits.
+
+Dadurch können sie die sogenannte **Quantum Bit Error Rate**, kurz **QBER**, bestimmen.
+
+Ist die Fehlerrate zu hoch, schließen sie daraus, dass die Kommunikation möglicherweise abgefangen wurde, und verwerfen den Schlüssel.
+
+## Erzeugung des endgültigen Schlüssels
+
+Wenn die Fehlerrate ausreichend niedrig ist, können Alice und Bob ihre Daten weiterverarbeiten.
+
+Zunächst führen sie eine **Fehlerkorrektur** durch, um sicherzustellen, dass ihre beiden Schlüssel identisch sind.
+
+Anschließend wenden sie **Privacy Amplification** an. Dabei wird der Schlüssel verkürzt, gleichzeitig aber jede mögliche Teilinformation, die Eve erhalten haben könnte, stark reduziert.
+
+Das Ergebnis ist ein kürzerer, aber deutlich sichererer gemeinsamer Schlüssel.
+
+## Warum ist QKD anders?
+
+Die Sicherheit von QKD beruht nicht auf der Annahme, dass Eve nur über begrenzte Rechenleistung verfügt.
+
+Stattdessen basiert sie auf fundamentalen Eigenschaften der Quantenmechanik: Unbekannte Quantenzustände können im Allgemeinen nicht gemessen werden, ohne sie möglicherweise zu stören, und sie können nicht perfekt kopiert werden.
+
+QKD überträgt daher nicht direkt die geheime Nachricht. Ziel ist es vielmehr, Alice und Bob zu ermöglichen, auf sichere Weise einen gemeinsamen geheimen Schlüssel zu erzeugen.
+
+Dieser Schlüssel kann anschließend zusammen mit konventioneller Verschlüsselung verwendet werden, um ihre Kommunikation zu schützen.
+
+## Eine neue Art von Sicherheit
+
+Auf diese Weise liefert die Quantenmechanik eine neue Grundlage für sichere Kommunikation.
+
+Anstatt lediglich darauf zu hoffen, dass ein Angreifer nicht über genügend Rechenleistung verfügt, können Alice und Bob die physikalischen Eigenschaften von Quantensystemen nutzen, um festzustellen, ob ihre Kommunikation gestört wurde.
+
+### Literature
+
+[1] Carrasco-Casado, Alberto & Marmol, Veronica & Denisenko, Natalia. (2016), Free-Space Quantum Key Distribution, 10.1007/978-3-319-30201-0_27
+
+[2] Nielsen, M. A., & Chuang, I. L. (2010), *Quantum Computation and Quantum Information: 10th Anniversary Edition*, Cambridge: Cambridge University Press
+
+[3] QNu Labs, "Guide: Quantum Key Distribution (QKD) and How it Works?", QNu Labs, Dec. 20, 2023. [Online]. Available: https://www.qnulabs.com/guides/quantum-key-distribution-qkd-and-how-it-works
+
+[4] Bennett, C. H., & Brassard, G. (1984), "Quantum cryptography: Public key distribution and coin tossing," *Proceedings of IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, India, pp. 175–179
+
+[5] Toshiba Digital Solutions Corporation, *"Quantum Key Distribution, Protecting the Future of Digital Society (Part 1): The Principles of Quantum Key Distribution Technology and the BB84 Protocol"*, DiGiTAL T-SOUL, 2022. [Online]. Available: https://www.global.toshiba/ww/company/digitalsolution/articles/tsoul/38/004.html
