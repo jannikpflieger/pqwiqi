@@ -1,0 +1,71 @@
+---
+title: "Superposition und Position in der Quantenwelt"
+subtitle: "Superposition bei kontinuierlichen Variablen (hard)"
+author: "Paula García-Mochales Cano, Marianna Ruggeri"
+date: "2026-08-18"
+---
+
+### ❗Diese Text ist noch nicht übersetzt. Wir arbeiten zurzeit daran, vielen Dank für Ihr Verständnis. PushQuantum e.V ist eine studentische Initative, die hauptsächlich auch Internationalen Studierenden besteht.❗
+
+## Was ist Superposition?
+
+Superposition ist eines der wichtigsten Merkmale der Quantenmechanik, das sie von der klassischen Mechanik unterscheidet. Sie beschreibt das Phänomen, dass sich eine bestimmte Größe eines Systems (zum Beispiel der Zustand eines Teilchens) gleichzeitig in mehreren Zuständen befinden kann, wie wir in unserem [Artikel über Superposition](/posts/de/college/entries/superposition) erklären. 
+Wenn wir zum Beispiel eine Katze in eine Kiste setzen und diese schließen, ist die Katze entweder tot oder lebendig, abhängig davon, wie viel Zeit sie dort verbringt. In der Quantenwelt nehmen wir jedoch an, dass sie – solange wir nicht nachsehen – gleichzeitig tot und lebendig ist.
+
+## Diskrete und kontinuierliche Variablen
+
+Dieses Konzept ist zwar nicht ganz einfach zu verstehen, wird aber anschaulicher, wenn wir über diskrete Zustände sprechen. Das bedeutet, dass sich das Teilchen in dem einen oder dem anderen Zustand befinden kann, aber nicht in einem beliebigen Zwischenzustand. Eine diskrete Variable wäre zum Beispiel oben oder unten, links oder rechts. Das Gegenteil davon ist eine kontinuierliche Variable; zum Beispiel all die verschiedenen Grautöne zwischen Schwarz und Weiß.
+
+![Beispiel für eine diskrete Variable: oben/unten](/posts/assets/entries/scv/updown.png)
+_Beispiel für eine diskrete Variable: oben / unten_
+
+![Beispiel für eine kontinuierliche Variable: Graustufen](/posts/assets/entries/scv/gray.png)
+_Beispiel für eine kontinuierliche Variable: Graustufen_
+
+Superposition wird intuitiv komplizierter, wenn wir über kontinuierliche Variablen statt über diskrete Variablen sprechen. Diese lassen sich jedoch nicht vermeiden, da viele physikalische Größen kontinuierlich sind – zum Beispiel die Position und die Geschwindigkeit eines Teilchens. Versuchen wir, dieses Konzept anhand der Position eines Teilchens zu verstehen.
+
+## Positionszustände in der Quantenmechanik
+
+In der Quantenmechanik stellen wir Zustände immer als Superposition einer Menge von Zuständen dar, die das System vollständig beschreiben. Mit diesem Gedanken definieren wir die grundlegenden Positionszustände als
+
+$$
+\widehat{x}|x>=x|x>
+$$
+
+Das bedeutet, dass wir beim Auslesen der Position (der Operator $\widehat{x}$ wirkt auf den Zustand $|x>$) das Teilchen an der Position $x$ finden.
+
+## Von Positionszuständen zur Wellenfunktion
+
+Um nun eine Funktion zu definieren, die die Position eines Teilchens beschreibt, schreiben wir eine Superposition all dieser Zustände. Da es sich um kontinuierliche Variablen handelt, definieren wir den allgemeinen Zustand $\alpha$.
+
+Mit diesem Zustand arbeiten wir jedoch normalerweise nicht direkt. Stattdessen definieren wir die sogenannte Wellenfunktion. Diese Wellenfunktion ist die Projektion des Zustands $\alpha$ auf die Positionsbasis:
+
+$$
+\phi(x) = \langle x | \alpha \rangle
+$$
+
+wobei wir die Vollständigkeitsrelation verwendet haben
+
+$$
+\int dx' \, |x'\rangle\langle x'| = \mathbb{I}.
+$$
+
+## Superposition über alle Positionen
+
+Was wir hier gemacht haben, bedeutet, dass sich das Teilchen an allen Orten befindet, die durch die $$|x>$$-Basis definiert sind, sich also in einer Superposition all dieser Positionen befindet. Gleichzeitig haben wir eine Gewichtsfunktion definiert, die bestimmt, wie häufig wir das Teilchen an jeder dieser Positionen finden können. Die Gewichtsfunktion wird über alle Positionen integriert, um alle möglichen Positionen zu berücksichtigen.
+
+Wenn die Gewichtsfunktion zum Beispiel eine Normalverteilung ist, dann ist es wahrscheinlicher, das Teilchen in der Mitte der Funktion zu finden. Das bedeutet nicht, dass es sich nicht auch an den Rändern befindet; es bedeutet, dass wir es bei einer Messung häufiger in der Mitte als an den Rändern finden werden. Bis zur Messung befindet es sich jedoch überall.
+
+Um diese Idee intuitiver zu machen, stellen wir uns Mike vor, eine Person, die jeden Tag dieselbe Strecke laufen geht. Wenn wir vorhersagen möchten, wo er sich nach einer bestimmten Zeit befindet, können wir ihm normalerweise keine exakte Position zuordnen. Stattdessen können wir einen Bereich beschreiben, in dem manche Positionen wahrscheinlicher sind als andere. Und je mehr Zeit vergeht, desto weiter breitet sich dieser Bereich aus, wobei die Wahrscheinlichkeit in der Mitte am größten ist.
+
+Genau wie in Mikes Beispiel können wir diese Information mit einer Wahrscheinlichkeitsfunktion darstellen: Die wahrscheinlichsten Positionen entsprechen dem höchsten Bereich der Funktion, während weiter entfernte Positionen weniger wahrscheinlich sind.
+
+![Von Mike zur Wahrscheinlichkeitsfunktion](/posts/assets/entries/scv/probfunc.png) 
+_Von Mike zu den Wahrscheinlichkeitsfunktionen seiner Position_
+
+## Was passiert nach einer Messung?
+
+Nach einer Messung kollabiert die Wellenfunktion auf den Zustand, der die gemessene Position beschreibt. Das bedeutet, dass sie zu einer Funktion wird, die durch eine Delta-Funktion an der entsprechenden Position gewichtet ist. Mit der Zeit breitet sie sich wieder aus und nimmt immer mehr Positionen ein, wodurch sie erneut in einen Zustand der Superposition übergeht.
+
+![Messung](/posts/assets/entries/scv/measurement.png) 
+_Auswirkung einer Messung_

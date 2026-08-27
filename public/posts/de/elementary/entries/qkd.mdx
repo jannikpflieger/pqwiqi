@@ -1,0 +1,53 @@
+---
+title: "Quantum Key Distribution"
+subtitle: "QKD: eine neue Form sicherer Kommunikation (easy)"
+author: "Kashish Singh, Marianna Ruggeri"
+date: "2026-03-18"
+---
+
+### ❗Diese Text ist noch nicht übersetzt. Wir arbeiten zurzeit daran, vielen Dank für Ihr Verständnis. PushQuantum e.V ist eine studentische Initative, die hauptsächlich auch Internationalen Studierenden besteht.❗
+
+## Warum brauchen wir geheime Schlüssel?
+
+Jedes Mal, wenn ihr etwas online kauft, tauschen euer Browser und der Server des Shops einen geheimen „Schlüssel“ aus – eine Folge zufälliger Zahlen, die verwendet wird, um beispielsweise eure Kreditkartendaten zu verschlüsseln und wieder zu entschlüsseln. Die Sicherheit dieses Prozesses beruht auf mathematischen Problemen, die für klassische Computer extrem schwer zu lösen sind und deren Berechnung mit heutigen Computern Millionen von Jahren dauern könnte. Ein ausreichend leistungsfähiger Computer, einschließlich der derzeit entwickelten Quantencomputer, könnte jedoch einige dieser kryptografischen Verfahren wesentlich schneller knacken als klassische Computer.
+
+## Eine andere Art von Sicherheit
+
+**Quantum Key Distribution**, kurz **QKD**, bietet eine andere Art von Sicherheitsgarantie.  
+Anstatt das Abhören lediglich rechnerisch schwierig zu machen, macht QKD einen Abhörversuch physikalisch nachweisbar: In der Quantenmechanik kann die Messung eines unbekannten Quantenzustands diesen stören und verändern.
+
+
+## Lernt Alice und Bob kennen
+
+Stellt euch vor, Alice möchte einen geheimen Schlüssel erzeugen, den sie mit Bob teilen kann.
+
+Alice, die Senderin, erzeugt ihren geheimen Schlüssel mithilfe einer Folge einzelner Photonen – also einzelner Lichtteilchen – und wählt zusätzlich zufällig zwischen zwei verschiedenen Möglichkeiten, jedes Bit (1 oder 0) zu kodieren. Anschließend sendet sie die Photonen einzeln über ein Glasfaserkabel an Bob, den Empfänger.
+
+## Bob misst die Photonen
+
+Bob entscheidet unabhängig davon, wie er jedes einzelne Photon misst.
+
+Anschließend vergleichen Alice und Bob öffentlich – über einen authentifizierten klassischen Kommunikationskanal, zum Beispiel eine gewöhnliche Kommunikationsverbindung – welche Kodierungs- und Messmethoden sie verwendet haben. Sie behalten nur die Ergebnisse, bei denen ihre Entscheidungen übereinstimmen. Diese werden anschließend verwendet, um ihren gemeinsamen geheimen Schlüssel zu erzeugen.
+
+![Pic](/posts/assets/entries/qkd/BB84.png)
+*QKD-Schema mit Alice und Bob [3]*
+
+## Was passiert, wenn Eve mithört?
+
+Stellt euch nun Eve vor, eine Lauscherin, die versucht, die Photonen auf ihrem Weg abzufangen. Um ein Photon auszulesen, muss sie es messen – und durch diese Messung riskiert sie, seinen Zustand zu verändern. Wenn sie das Photon anschließend an Bob weiterleitet, kann es daher in einem leicht fehlerhaften Zustand bei ihm ankommen.
+
+## Eve entdecken
+
+Indem Alice und Bob einen kleinen Teil ihrer gemeinsamen Ergebnisse vergleichen, können sie nach solchen Fehlern suchen. Ist die Fehlerrate zu hoch, wissen sie, dass möglicherweise jemand ihre Kommunikation abhört.
+
+In diesem Fall verwerfen sie den Schlüssel einfach und versuchen es erneut. Keine noch so große Rechenleistung kann Eve dabei helfen.
+
+Es gibt keinen cleveren Algorithmus, mit dem man einen unbekannten Quantenzustand auslesen kann, ohne das Risiko einzugehen, ihn zu beeinflussen. Auf diese Weise ermöglicht QKD eine neue Form sicherer Kommunikation, deren Sicherheit auf den physikalischen Gesetzen des Universums basiert.
+
+### Literature
+
+[1] Carrasco-Casado, Alberto & Marmol, Veronica & Denisenko, Natalia. (2016), Free-Space Quantum Key Distribution, 10.1007/978-3-319-30201-0_27
+
+[2] Nielsen, M. A., & Chuang, I. L. (2010), Quantum Computation and Quantum Information: 10th Anniversary Edition, Cambridge: Cambridge University Press
+
+[3] QNu Labs, "Guide: Quantum Key Distribution (QKD) and How it Works?", QNu Labs, Dec. 20, 2023. [Online]. Available: https://www.qnulabs.com/guides/quantum-key-distribution-qkd-and-how-it-works

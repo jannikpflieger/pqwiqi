@@ -1,0 +1,32 @@
+---
+title: "Quantum Sensors"
+subtitle: "What is a quantum sensor? (medium)"
+author: "Marianna Ruggeri"
+date: "2026-03-18"
+---
+
+How can we measure extremely small quantities, such as tiny magnetic fields, very slight changes in gravity, or incredibly short intervals of time? Classical sensors usually detect signals directly, for example by measuring a voltage, a displacement, or an intensity. However, when the signal becomes very weak, these methods begin to fail due to noise and limited resolution.
+
+Quantum sensors follow a fundamentally different strategy. Instead of measuring a quantity directly, they use a quantum system - such as an atom, a photon, or an electron spin - as a probe. These systems obey the laws of quantum mechanics and can exist in a superposition of states, meaning they can be in multiple configurations at the same time.
+
+A typical quantum sensing protocol can be described in three main steps. First, the system is prepared in a well-defined quantum state, often a superposition. Then, it is allowed to interact with the environment. During this interaction, the physical quantity we want to measure—such as a magnetic field, acceleration, or time - affects the system’s evolution. In particular, it causes the system to accumulate a phase, which describes how the quantum state changes over time. The stronger the interaction or the longer the interaction time, the larger this phase becomes. Finally, the system is measured, and this phase difference is converted into a measurable signal.
+
+This phase is not observed directly but revealed through interference, where different quantum states are compared. Because interference is extremely sensitive to small changes, even tiny phase shifts can be detected. The precision of the measurement improves when the system remains coherent, meaning it is not disturbed by its surroundings. However, interactions with the environment can cause decoherence, which limits the performance of quantum sensors.
+
+These principles are used in many modern technologies. Atomic clocks measure time by tracking the phase evolution of atoms with extraordinary accuracy and are essential for GPS systems. Atom interferometers split and recombine matter waves to measure gravity and acceleration, with applications in geophysics and navigation. In solid materials, systems such as nitrogen-vacancy (NV) centers in diamond can detect very weak magnetic fields at the nanoscale, even close to biological systems. Superconducting devices like SQUIDs rely on quantum interference of electrical currents to measure magnetic flux with extreme sensitivity.
+
+(/posts/assets/entries/qsensors/atomicclock.png)
+*Atomic Clock scheme [1]*
+
+(/posts/assets/entries/qsensors/nv.png)
+*NV centre scheme [2]*
+
+(/posts/assets/entries/qsensors/squid.png)
+*Squid scheme [3]*
+
+In this way, quantum sensors transform physical quantities into changes in quantum evolution, allowing us to measure effects that would otherwise remain completely undetectable.
+
+## References
+[1] McCarthy DD, Seidelmann PK. Microwave Atomic Clocks. In: Time: From Earth Rotation to Atomic Physics. Cambridge University Press; 2018:171-202
+[2] Hamamatsu Photonics, "Nitrogen vacancy (NV)," Hamamatsu Photonics Applications, [Online]. https://www.hamamatsu.com/eu/en/applications/quantum-technologies/nitrogen-vacancy-nv.html
+[3] Mpofu, Kelvin & Mthunzi-Kufa, Patience. (2024). Recent Advances in Quantum Biosensing Technologies. 10.5772/intechopen.1007858

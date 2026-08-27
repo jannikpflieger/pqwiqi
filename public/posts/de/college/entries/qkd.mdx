@@ -1,0 +1,296 @@
+---
+title: "Quantum Key Distribution"
+subtitle: "QKD: eine neue Form sicherer Kommunikation (hard)"
+author: "Marianna Ruggeri"
+date: "2026-08-16"
+---
+
+## Warum brauchen wir Quantenkryptografie?
+
+Moderne sichere Kommunikation beruht in hohem Maße auf kryptografischen Schlüsseln.
+
+Bei konventioneller Public-Key-Kryptografie basiert die Sicherheit vieler Protokolle auf rechnerischen Annahmen: Bestimmte mathematische Probleme gelten als extrem schwer für klassische Computer zu lösen.
+
+Quantencomputer verändern diese Situation.
+
+Algorithmen wie der **Shor-Algorithmus** können auf einem ausreichend großen fehlertoleranten Quantencomputer Probleme wie die Faktorisierung ganzer Zahlen und den diskreten Logarithmus effizient lösen und damit verschiedene weit verbreitete kryptografische Verfahren gefährden.
+
+## Eine andere Idee: Quantum Key Distribution
+
+Quantum Key Distribution, kurz **QKD**, verfolgt einen anderen Ansatz.
+
+Anstatt die Sicherheit ausschließlich auf rechnerischer Komplexität aufzubauen, nutzt QKD fundamentale Eigenschaften der Quantenmechanik, damit zwei Parteien erkennen können, ob während der Erzeugung eines geheimen Schlüssels Informationen abgefangen wurden.
+
+![Pic](/posts/assets/entries/qkd/whyqkd.png)
+*Konventionelle kryptografische Kommunikation im Vergleich zu QKD [6]*
+
+Eines der grundlegenden QKD-Protokolle ist **BB84**, das 1984 von Bennett und Brassard vorgeschlagen wurde.
+
+## Kodierung des Schlüssels
+
+Angenommen, Alice möchte mit Bob einen geheimen binären Schlüssel erzeugen.
+
+Sie erzeugt zufällig zwei klassische Bitfolgen:
+
+* eine bestimmt die Werte der Schlüsselbits;
+* die andere bestimmt die Basis, mit der jedes Bit kodiert wird.
+
+Für jedes Bit präpariert Alice ein Photon in einem von vier möglichen Quantenzuständen, die zu zwei verschiedenen Basen gehören.
+
+![Pic](/posts/assets/entries/qkd/basis.png)
+*Prinzipien des BB84-Protokolls [6]*
+
+## Zwei Quantenbasen
+
+Wenn wir die Polarisation als Beispiel verwenden, können wir die Rechenbasis definieren als
+
+$$
+|0\rangle, \qquad |1\rangle
+$$
+
+und die diagonale Basis als
+
+$$
+|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}},
+\qquad
+|-\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}}.
+$$
+
+Alice kann daher eine klassische 0 oder 1 entweder in der $Z$-Basis,
+
+$$
+{|0\rangle, |1\rangle},
+$$
+
+oder in der $X$-Basis kodieren,
+
+$$
+{|+\rangle, |-\rangle}.
+$$
+
+Für jedes Photon wählt sie die Basis zufällig aus und sendet die resultierenden Zustände an Bob.
+
+## Bob führt die Messungen durch
+
+Bob weiß nicht, welche Basis Alice verwendet hat.
+
+Für jedes eintreffende Photon wählt er daher zufällig entweder die $Z$- oder die $X$-Basis und führt eine Messung durch.
+
+Wenn Bob dieselbe Basis wie Alice auswählt, rekonstruiert er im Idealfall Alices Bit mit Sicherheit.
+
+Wählt er jedoch die falsche Basis, ist das Ergebnis zufällig.
+
+Zum Beispiel:
+
+$$
+|\langle + | 0 \rangle|^2
+=
+|\langle - | 0 \rangle|^2
+=
+\frac{1}{2}
+$$
+
+## Sifting des Schlüssels
+
+Nach der Quantenübertragung kommunizieren Alice und Bob über einen **authentifizierten klassischen Kanal**.
+
+Sie geben öffentlich bekannt, welche Basen sie verwendet haben, verraten jedoch nicht die Werte ihrer Bits.
+
+Immer wenn sie unterschiedliche Basen verwendet haben, wird das entsprechende Ergebnis verworfen.
+
+Sie behalten nur die Fälle, in denen ihre Basen übereinstimmen.
+
+Dieser Vorgang wird als **Sifting** bezeichnet.
+
+![Pic](/posts/assets/entries/qkd/BB84.png)
+*BB84-Schema [3]*
+
+## Eve fängt die Photonen ab
+
+Betrachten wir nun eine Lauscherin namens Eve.
+
+Die einfachste mögliche Strategie ist der sogenannte **Intercept-and-Resend-Angriff**.
+
+Eve fängt jedes Photon ab, wählt zufällig eine Basis, misst den Zustand und präpariert anschließend ein neues Photon entsprechend ihrem Messergebnis, das sie an Bob weiterleitet.
+
+Das Problem besteht darin, dass Eve Alices Präparationsbasis nicht kennt.
+
+## Eine Messung verursacht eine Störung
+
+Eve wählt mit der Wahrscheinlichkeit
+
+$$
+P_{\text{wrong basis}} = \frac{1}{2}.
+$$
+
+die falsche Basis.
+
+Wenn sie in der falschen Basis misst, wird der ursprüngliche Zustand auf einen der Zustände ihrer gewählten Basis projiziert.
+
+Die Information über Alices ursprüngliche Präparation wird dadurch teilweise zerstört.
+
+Wenn Bob anschließend in Alices korrekter Basis misst, kann er daher das falsche Ergebnis erhalten.
+
+![Pic](/posts/assets/entries/qkd/eve.png)
+*Eves Abhörversuch [5]*
+
+## Die Fehlerrate von 25 %
+
+Nehmen wir an, Alice und Bob behalten nur die Ereignisse, bei denen sie dieselbe Basis verwendet haben.
+
+Eve wählt die falsche Basis mit der Wahrscheinlichkeit
+
+$$
+\frac{1}{2},
+$$
+
+und in diesen Fällen erhält Bob mit der Wahrscheinlichkeit
+
+$$
+\frac{1}{2}.
+$$
+
+das falsche Bit.
+
+Die Gesamtwahrscheinlichkeit eines Fehlers, der durch einen idealen Intercept-and-Resend-Angriff verursacht wird, beträgt daher
+
+$$
+P_{\mathrm{error}}
+=
+\frac{1}{2} \times \frac{1}{2}
+=
+\frac{1}{4}
+$$
+
+Dies entspricht einer idealen Quantum Bit Error Rate von
+
+$$
+\mathrm{QBER} = 25\%.
+$$
+
+Die von Eve verursachte Störung kann somit statistisch nachgewiesen werden.
+
+## Warum kann Eve den Zustand nicht einfach kopieren?
+
+Eve könnte eine andere Strategie versuchen: Warum sollte sie das Photon messen, wenn sie es stattdessen einfach kopieren könnte?
+
+Die Quantenmechanik verhindert dies durch das **No-Cloning-Theorem**.
+
+Es gibt keine universelle Quantenoperation, die einen beliebigen unbekannten Quantenzustand perfekt kopieren kann:
+
+$$
+|\psi\rangle |0\rangle
+\not\longrightarrow
+|\psi\rangle |\psi\rangle
+$$
+
+für jeden möglichen Zustand $|\psi\rangle$.
+
+Eve kann daher nicht einfach eine perfekte Kopie des Zustands behalten und eine zweite, unveränderte Kopie an Bob weiterleiten.
+
+## Abschätzung der Fehlerrate
+
+Nach dem Sifting besitzen Alice und Bob noch nicht sofort einen sicheren endgültigen Schlüssel.
+
+Reale Experimente weisen Verluste, unvollkommene Detektoren und Umgebungsrauschen auf. Deshalb können auch dann Fehler auftreten, wenn Eve gar nicht vorhanden ist.
+
+Alice und Bob vergleichen öffentlich einen zufällig ausgewählten Teil ihrer gesifteten Bits und bestimmen daraus die **Quantum Bit Error Rate**
+
+$$
+Q =
+\frac{N_{\mathrm{errors}}}{N_{\mathrm{compared}}}.
+$$
+
+Wenn die QBER den Sicherheitsschwellenwert des Protokolls überschreitet, brechen sie die Kommunikation ab.
+
+## Fehlerkorrektur
+
+Wenn die Fehlerrate ausreichend niedrig ist, setzen Alice und Bob die klassische Nachverarbeitung fort.
+
+Der erste Schritt ist die **Information Reconciliation**, also die Fehlerkorrektur.
+
+Dadurch können sie Unterschiede zwischen ihren Bitfolgen erkennen und korrigieren, bis beide Parteien identische Schlüssel besitzen.
+
+## Privacy Amplification
+
+Fehlerkorrektur allein reicht jedoch nicht aus.
+
+Eve könnte bereits teilweise Informationen über den Schlüssel erhalten haben, ohne genügend Fehler zu erzeugen, um Alice und Bob zum Abbruch des Protokolls zu zwingen.
+
+Deshalb führen Alice und Bob eine **Privacy Amplification** durch.
+
+Dabei wird der teilweise sichere Schlüssel zu einem kürzeren endgültigen Schlüssel komprimiert, wodurch Eves Information auf ein beliebig kleines Niveau reduziert werden kann.
+
+## Secret-Key-Rate
+
+In einer asymptotischen Sicherheitsanalyse kann die erreichbare Secret-Key-Rate schematisch geschrieben werden als
+
+$$
+R \sim I(A:B) - \chi(E),
+$$
+
+wobei $I(A:B)$ die von Alice und Bob geteilten Korrelationen beschreibt, während $\chi(E)$ eine obere Grenze für die Eve zugängliche Information darstellt.
+
+Der genaue Ausdruck hängt vom verwendeten Protokoll, der Implementierung und dem angenommenen Rauschmodell ab.
+
+## Warum Authentifizierung wichtig ist
+
+Der klassische Kanal, den Alice und Bob verwenden, muss nicht geheim sein.
+
+Er **muss jedoch authentifiziert sein**.
+
+Ohne Authentifizierung könnte Eve einen Man-in-the-Middle-Angriff durchführen: Sie könnte eine QKD-Verbindung mit Alice aufbauen und sich dabei als Bob ausgeben sowie eine zweite Verbindung mit Bob herstellen und sich als Alice ausgeben.
+
+QKD beseitigt daher nicht die Notwendigkeit einer Authentifizierung.
+
+Stattdessen kann ein kleiner anfänglicher Authentifizierungsschlüssel verwendet werden, um wesentlich größere Mengen neuen geheimen Schlüsselmaterials zu erzeugen.
+
+## QKD verschlüsselt nicht die Nachricht
+
+Ein wichtiger Unterschied besteht darin, dass QKD selbst die geheime Nachricht weder verschlüsselt noch überträgt.
+
+Seine Aufgabe ist die **Schlüsselerzeugung**.
+
+Sobald Alice und Bob einen sicheren geheimen Schlüssel besitzen, können sie diesen zusammen mit konventioneller symmetrischer Verschlüsselung verwenden.
+
+Prinzipiell kann der Schlüssel sogar mit einem **One-Time Pad** kombiniert werden.
+
+Wenn der Schlüssel wirklich zufällig ist, nur einmal verwendet wird und mindestens so lang wie die Nachricht ist, bietet die daraus resultierende Verschlüsselung informationstheoretische Sicherheit.
+
+## Rechnerische vs. physikalische Sicherheit
+
+Der zentrale Unterschied zwischen konventioneller Public-Key-Kryptografie und QKD liegt im Ursprung ihrer Sicherheit.
+
+Klassische Public-Key-Verfahren beruhen normalerweise auf Annahmen darüber, welche Berechnungen ein Angreifer durchführen kann.
+
+Bei QKD kann die Sicherheit dagegen aus einem physikalischen Modell auf Basis der Quantenmechanik bewiesen werden, selbst wenn angenommen wird, dass Eve über extrem leistungsfähige Rechenressourcen verfügt.
+
+## Reale Geräte sind nicht ideal
+
+Das bedeutet jedoch nicht, dass jedes praktische QKD-System automatisch vollkommen sicher ist.
+
+Reale Geräte können Schwachstellen wie Detektor-Side-Channels, unvollkommene Photonenquellen, Verluste oder Kalibrierungsfehler aufweisen.
+
+Die moderne QKD-Forschung unterscheidet daher sorgfältig zwischen der Sicherheit eines idealen Protokolls und der Sicherheit seiner physikalischen Implementierung.
+
+## Die zentrale Idee
+
+Quantum Key Distribution macht eine der ungewöhnlichsten Eigenschaften der Quantenmechanik zu einer technologischen Ressource: Die Messung eines unbekannten Quantenzustands ist nicht immer ein passiver Vorgang.
+
+Indem Alice und Bob Störungen im Quantenkommunikationskanal überwachen, können sie abschätzen, wie viel Information eine Lauscherin möglicherweise erhalten hat.
+
+Anschließend können sie ihre Daten so verarbeiten, dass ein endgültiger Schlüssel entsteht, dessen Geheimhaltung letztlich auf den Gesetzen der Quantenphysik beruht.
+
+### Literature
+
+[1] Carrasco-Casado, Alberto & Marmol, Veronica & Denisenko, Natalia. (2016), *Free-Space Quantum Key Distribution*, 10.1007/978-3-319-30201-0_27
+
+[2] Nielsen, M. A., & Chuang, I. L. (2010), *Quantum Computation and Quantum Information: 10th Anniversary Edition*, Cambridge: Cambridge University Press
+
+[3] QNu Labs, "Guide: Quantum Key Distribution (QKD) and How it Works?", QNu Labs, Dec. 20, 2023. [Online]. Available: https://www.qnulabs.com/guides/quantum-key-distribution-qkd-and-how-it-works
+
+[4] Bennett, C. H., & Brassard, G. (1984), "Quantum cryptography: Public key distribution and coin tossing," *Proceedings of IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, India, pp. 175–179
+
+[5] El Hassane, Laaji & Azizi, Abdelmalek. (2022). *A Combination of BB84 Quantum Key Distribution and An Improved Scheme of NTRU Post-Quantum Cryptosystem*. Journal of Cyber Security and Mobility. 10.13052/jcsm2245-1439.1152
+
+[6] Toshiba Digital Solutions Corporation, "Quantum Key Distribution, Protecting the Future of Digital Society (Part 1): The Principles of Quantum Key Distribution Technology and the BB84 Protocol," DiGiTAL T-SOUL, 2022. [Online]. Available: https://www.global.toshiba/ww/company/digitalsolution/articles/tsoul/38/004.html

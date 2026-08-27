@@ -1,0 +1,77 @@
+---
+title: "Spontaneous symmetry breaking"
+subtitle: "Little guide on how to choose your physical state (sometimes spontaneity is the key!) (hard)"
+author: "Vincenzo Di Terlizzi, Marianna Ruggeri"
+date: "2026-03-18"
+---
+
+## What is a phase transition?
+It is possible to classify phase transitions in many ways: a naïve approach uses a qualitative description, where phases correspond to different strength in the chemical bonds between the molecules: ice, for example, has strong bonds, conferring it a lattice structure and its own volume and shape; while fluids have weaker bonds, hence just their own volume (liquid water) or not even this (steam).
+
+However, this kind of paradigm is simplistic and obviously has been overcome throughout the years. First, Ehrenfest tried to classify phase transitions looking at the lowest-order derivative of the Gibbs free energy G that exhibits a discontinuity. This means for example that a solidification (or liquefaction) is a first-order phase transition, since the latent heat required to realize it corresponds to a discontinuity in the entropy of the system:
+
+$$S = -\left(\frac{\partial G}{\partial T}\right)_P$$
+
+## Landau’s paradigm
+Ehrenfest classification was, nevertheless, not complete. In 1944, solving the 2D Ising model, Lars Onsager discovered a logarithmic divergence in the specific heat, i.e. the second derivative of the free energy. This feature made it impossible to classify this phase transition according to Ehrenfest’s paradigm. Therefore, Landau had to propose a new theory, introducing an order parameter and classifying different phases according to their symmetry: a phase transition is a change in the order parameter which, tuning down a particular variable, can assume a non-zero value at a critical point to minimize the free energy. The order parameter can change continuously (continuous phase transitions) or jump abruptly (first-order ones).
+
+The process described above is what we call spontaneous symmetry breaking: the Hamiltonian describing the system respects some symmetries and the state in which the system is does the same as long as the order parameter is 0 but, once it assumes a different value, the system evolves into a state that doesn’t manifest this symmetry anymore. Liquid water, for example, has translational and rotational symmetry, while the lattice structure does not anymore, since the structure is now periodic.
+
+![phase transition](/posts/assets/entries/ssb/pt.png)
+
+## The 2D Ising model
+You may now be asking: what is the role of quantum physics in this? At the end of the day, we can break the symmetry just tuning down the temperature, as we do with water. We do the same even to pass from the paramagnetic to the ferromagnetic state in the 2D Ising model, described by the Hamiltonian:
+
+$$H = - J \sum_{\langle i,j \rangle} \sigma_i \sigma_j - B \sum_{i} \sigma_i$$
+
+At B=0, the system has $Z_2$ symmetry: flipping the spin of all the particles wouldn’t change the energy of the system. Above a certain temperature (Curie temperature) thermal fluctuations are such that the macrostate of the system would have the same symmetry (indistinguishable after spin flip) and would have a magnetization m=0. But below it, the macrostate would correspond to a finite magnetization m≠0. That’s a spontaneous symmetry breaking!
+
+![phase transition diagram](/posts/assets/entries/ssb/phasetransition.png)
+*Magnetization with respect to the relative temperature*
+
+## Quantum phase transitions
+The amazing thing is that phase transitions can also happen at 0 K: in this case, the cause of the SSB would not be a change in the thermal fluctuation but instead a change in quantum fluctuations, ultimately due to Heisenberg uncertainty principle.
+To describe a second order phase transition, we use the following approach: the ground state becomes parametrized by the order parameter and, at second order, for a particular value of the order parameter (quantum critical point), the gap between ground state and the first excited state becomes 0 and the correlation length (the typical distance over which parts of the system "feel" each other's fluctuation) becomes infinite, allowing the system to behave like a big quantum wave.
+Let’s see an example: the weakly interacting Bose gas at T=0 K. In D dimensions, the action describing the system is: 
+$$S = \int_0^\beta d\tau \int d^D r \left\{ \overline{\varphi}(r,\tau) \left( \partial_\tau - \frac{\hbar^2 \nabla^2}{2m} - \mu \right) \varphi(r,\tau) + \frac{U}{2} \left[ \overline{\varphi}(r,\tau)\varphi(r,\tau) \right]^2 \right\}$$
+
+Bosons, obeying Bose-Einstein statistics, don’t have to fulfil Pauli’s exclusion principle. This allows them to condensate and occupy macroscopically the ground state. Since the number of condensed particles will be $O(N)$ while the uncertainty $O(\sqrt{N})$, we can neglect fluctuations and describe the condensed part with a macroscopic wavefunction:
+
+$$\varphi_0(\tau) = |\varphi_0| e^{i\theta}$$
+
+Minimizing the action, hence using the so-called saddle point approximation, one obtains for the macroscopic wavefunction the condition:
+
+$$\left( - \mu + U \overline{\varphi}_0 \varphi_0 \right) \varphi_0 = 0$$
+
+Therefore, as long as the chemical potential remains negative, we only get one, symmetric solution ($\varphi_0 = 0$) and the gas behaves as a normal, non-condensed quantum gas. But, as soon as it becomes positive, the magic happens: 
+
+$$|\varphi_0| = \sqrt{\frac{\mu}{U}} \implies \varphi_0 = \sqrt{\frac{\mu}{U}} e^{i\theta} \quad \forall \ \theta \in [0, \, 2\pi]$$
+
+also become valid solutions; the order parameter becomes nonzero and the ground state becomes macroscopically occupied: we have a Bose-Einstein condensate, exhibiting interesting properties like quantization of circulation! Moreover, the interactions we allowed make the system a superfluid and other amazing properties arise, such as dissipationless and irrotational flow!
+
+![vortex](/posts/assets/entries/ssb/rod.png)
+*Observation of Vortex Larrices in Bose-Einstein Condensates, consequent to quantization of circulation [1]
+
+## Which symmetry have we actually broken?
+
+The symmetry we need to break in this case is the global gauge symmetry $U(1)$. To explain what it is about, let's consider the contribution of $\varphi_0$ to the action:
+
+$$S_0 = V\beta \left[ -\mu |\varphi_0|^2 + \frac{U}{2}|\varphi_0|^4 \right]$$
+
+Notice that, if $\varphi_0$ is a complex number, changing its phase won’t have any effect on $S_0$! That is exactly the $U(1)$ symmetry.
+
+We can now try to represent this on a plane, where we use the real and imaginary parts of $\varphi_0$ to label the axes. We will have 2 cases. In the “disordered” phase, where the symmetry is still intact and $\mu$ stays negative, we have a paraboloid shape: the system will stay in its unique minimum, respecting the same symmetry of the action:
+![paraboloid](/posts/assets/entries/ssb/paraboloid.png)
+
+On the other hand, in the “ordered” phase, when µ is positive, the same graph morphs in a shape like this:
+![sombrero](/posts/assets/entries/ssb/sombrero.png)
+
+Now  there isn’t only one minimum: each point on the brim of the “sombrero” is a minimum, which means that the ground state is degenerate and the condensate has to pick a random phase θ, thus breaking the $U(1)$ symmetry. This has amazing consequences, like the ones mentioned above, and also implies that the conjugate variable of the phase, the number of particles, is not known, which makes sense only in the thermodynamic limit.
+
+## What happens at low dimensions?
+As a final note, notice that what we said is always true in 3 dimensions, even at temperatures different from 0 K. However, in 2 dimensions only at 0 K we can have continuous spontaneous symmetry breaking and in 1 dimension we cannot have it at all: this is because of quantum fluctuations in 1D and thermal fluctuations in 2D, which in these cases can be powerful enough to destroy long-range order. This analogy in the behaviour of 1D system at 0 K and 2D systems at T>0 K is basically the content of the Mermin-Wagner theorem.
+
+
+### References
+
+[1] J. R. Abo-Shaeer, C. Raman, J. M. Vogels, and W. Ketterle, "Observation of vortex lattices in Bose-Einstein condensates" Science, vol. 292, no. 5516, pp. 476–479, Mar. 2001, doi: 10.1126/science.1060182

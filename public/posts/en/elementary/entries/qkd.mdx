@@ -1,0 +1,47 @@
+---
+title: "Quantum Key Distribution"
+subtitle: "QKD: a new form of secure communication (easy)"
+author: "Kashish Singh, Marianna Ruggeri"
+date: "2026-03-18"
+---
+
+## Why do we need secret keys?
+
+Every time you buy something online, your browser and the shop's server exchange a secret “key”, a string of random numbers used to scramble and unscramble your credit card details. The security of this process relies on mathematical problems that are extremely difficult for classical computers to solve, and today's computers would take millions of years to crack it. However, a sufficiently powerful computer, including the quantum computers being built right now, could potentially break some of these cryptographic schemes much faster than classical computers.
+
+## A different kind of security
+
+**Quantum key distribution**, or **QKD**, offers a different kind of guarantee. 
+Instead of making eavesdropping computationally difficult, QKD makes it physically detectable: in quantum mechanics, measuring an unknown quantum state can disturb and modify it.
+
+
+## Meet Alice and Bob
+Imagine that Alice wants to create a secret key that she can share with Bob.
+
+Alice, the sender, generates her secret key as a series of single photons (individual particles of light) and also randomly chooses between two different ways of encoding each bit (1 or 0). She sends them to Bob, the receiver, one by one through a fiber-optic cable.
+
+## Bob measures the photons
+Bob independently chooses how to measure each photon. 
+
+Afterwards, they publicly (over an authenticated classical channel, such as an ordinary communication line) compare which encoding and measurement choices they used and keep only the compatible results, which will be used to construct their shared secret key.
+
+(/posts/assets/entries/qkd/BB84.png)
+*Alice and Bob qkd scheme [3]*
+
+## What if Eve is listening?
+
+Now imagine Eve, an eavesdropper, tries to intercept the photons along the way. To read a photon, she has to measure it, and by measuring she risks disturbing it. When she passes the photon on to Bob, it arrives in a subtly erroneous state. 
+
+## Detecting Eve
+By comparing a small portion of their shared results, Alice and Bob can check for these errors. If the error rate is too high, they know someone is watching. 
+They simply throw the key away and try again. No amount of computing power helps Eve. 
+
+There is no clever algorithm that lets you read a quantum state without touching it. In this way, QKD enables a new form of secure communication based on the physical laws of the universe. 
+
+### References
+
+[1] Carrasco-Casado, Alberto & Marmol, Veronica & Denisenko, Natalia. (2016), Free-Space Quantum Key Distribution, 10.1007/978-3-319-30201-0_27
+
+[2] Nielsen, M. A., & Chuang, I. L. (2010), Quantum Computation and Quantum Information: 10th Anniversary Edition, Cambridge: Cambridge University Press
+
+[3] QNu Labs, "Guide: Quantum Key Distribution (QKD) and How it Works?", QNu Labs, Dec. 20, 2023. [Online]. Available: https://www.qnulabs.com/guides/quantum-key-distribution-qkd-and-how-it-works

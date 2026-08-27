@@ -1,0 +1,42 @@
+---
+title: "Quantum Sensors"
+subtitle: "What is a quantum sensor? (hard)"
+author: "Marianna Ruggeri"
+date: "2026-04-13"
+---
+
+How can we measure extremely small quantities, such as tiny magnetic fields, very slight changes in gravity, or incredibly short intervals of time? Classical sensors usually detect signals directly, for example by measuring a voltage, a displacement, or an intensity. However, when the signal becomes very weak, these methods begin to fail due to noise and limited resolution, typically constrained by shot noise, thermal fluctuations, or electronic noise.
+
+Quantum sensors follow a fundamentally different strategy. Instead of measuring a quantity directly, they use a quantum system - such as an atom, a photon, or an electron spin - as a probe. These systems obey the laws of quantum mechanics and can exist in superpositions of states, meaning that the relevant information can be encoded in relative phases and amplitudes. This provides access to interference effects and coherence, which are key resources for enhancing sensitivity.
+
+A typical quantum sensing protocol can be described in three main steps. First, the system is prepared in a well-defined quantum state, often a coherent superposition optimized for phase sensitivity. Then, it evolves under a parameter-dependent Hamiltonian of the form
+
+$$H = H_0 + \lambda H_1,$$
+
+where $\lambda$ is the physical quantity to be estimated. During this interaction, the parameter modifies the system’s evolution, typically leading to the accumulation of a phase proportional to 𝜆 and to the interaction time. Finally, the system is measured, and this phase difference is converted into a measurable signal through an appropriate readout procedure.
+
+A concrete example is provided by nitrogen-vacancy (NV) centers in diamond. These are defects in the diamond lattice that host an electron spin, which can be initialized, controlled, and read out optically. When exposed to a magnetic field, the energy levels of the spin shift (Zeeman effect), causing a change in the relative phase accumulated between spin states. By preparing the spin in a superposition and letting it evolve, this phase shift can be measured through fluorescence, allowing one to infer the magnetic field with very high sensitivity and even at the nanoscale.
+
+This phase is not observed directly but revealed through interference between quantum amplitudes. The sensitivity of the measurement is therefore determined by how accurately this phase can be estimated. Within quantum metrology, this is quantified by the quantum Fisher information 𝐹𝑄, which sets the ultimate precision through the Cramér–Rao bound
+$$\Delta\lambda \ge \frac{1}{\sqrt{\nu F_Q}}.$$
+For $N$ independent probes, the precision scales as $1/\sqrt{N}$, known as the Standard Quantum Limit (SQL). By exploiting entanglement, it is in principle possible to reach the Heisenberg scaling $1/N$, although such scaling is highly sensitive to noise and imperfections.
+
+The role of coherence is central. While the accumulated phase increases with interaction time, longer evolution also amplifies the effects of decoherence, leading to a trade-off between signal accumulation and noise. This trade-off determines the optimal sensing time and sets practical limits on performance. Additional constraints arise from measurement backaction and finite detection efficiency.
+
+These principles are implemented across different physical platforms. Atomic clocks and interferometers encode parameters in phase evolution of atomic superpositions, while superconducting devices like SQUIDs measure magnetic flux through macroscopic quantum interference. Optical platforms using squeezed states can surpass classical noise limits by redistributing quantum fluctuations.
+
+![Pic](/posts/assets/entries/qsensors/atomicclock.png)
+*Atomic Clock scheme [1]*
+
+![Pic](/posts/assets/entries/qsensors/nv.png)
+*NV centre scheme [2]*
+
+![Pic](/posts/assets/entries/qsensors/squid.png)
+*Squid scheme [3]*
+
+In this way, quantum sensors transform physical quantities into changes in quantum evolution, enabling high-precision measurements while also revealing the fundamental limits imposed by quantum noise, decoherence, and measurement backaction.
+
+## References
+[1] McCarthy DD, Seidelmann PK. Microwave Atomic Clocks. In: Time: From Earth Rotation to Atomic Physics. Cambridge University Press; 2018:171-202
+[2] Hamamatsu Photonics, "Nitrogen vacancy (NV)," Hamamatsu Photonics Applications, [Online]. https://www.hamamatsu.com/eu/en/applications/quantum-technologies/nitrogen-vacancy-nv.html
+[3] Mpofu, Kelvin & Mthunzi-Kufa, Patience. (2024). Recent Advances in Quantum Biosensing Technologies. 10.5772/intechopen.1007858
