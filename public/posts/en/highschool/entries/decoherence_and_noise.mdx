@@ -1,0 +1,108 @@
+---
+title: "Decoherence and Noise"
+subtitle: "Quantum Decoherence and Noise (medium)"
+author: "Zeynep Kilic"
+date: "2026-08-18"
+---
+
+## What is Decoherence
+
+To define decoherence, it is easier to start with the opposite and explain what coherence is. Many things are unique to quantum mechanics, such as [entanglement](/en/posts/entries/highschool/entanglement) or [superposition](/en/posts/entries/highschool/superposition), and as long as a quantum system stays coherent, it is described by these characteristics.
+
+We can be more precise about what "coherent" means. A qubit in superposition is written
+
+$$
+|\psi\rangle = a|0\rangle + b|1\rangle
+$$
+
+where $a$ and $b$ are **complex** numbers, and that detail matters more than it looks. Each carries a size and a **phase**. The probabilities of measuring 0 or 1 are $|a|^2$ and $|b|^2$, which throw the phases away completely — so if outcomes were all we cared about, phase would be irrelevant.
+
+But phase is precisely what makes quantum computing work. [Interference](/en/posts/entries/highschool/interference) between computational paths depends on their relative phase, and algorithms are built by arranging for wrong answers to cancel and right answers to reinforce. **Coherence** means the relative phase between $|0\rangle$ and $|1\rangle$ is still well defined.
+
+Decoherence therefore means the loss of quantum information to the environment — specifically, the loss of that phase relationship. Afterwards you still have a system with the same measurement probabilities, but it behaves like an ordinary weighted coin rather than a qubit. The bigger a system is, the more likely decoherence appears, which is why you don't notice quantum properties in everyday life [1].
+
+## How does Decoherence happen
+
+Decoherence is induced very easily and takes great effort to prevent. This is why quantum computers are built in special labs where environmental factors are kept to a minimum — even a bus driving on the road outside can mess up a measurement. Other factors are a slight rise in temperature (quantum computers are kept very cold so that particles can be moved precisely) or other atoms in the system.
+
+The picture of the environment "shaking" the qubit is intuitive but incomplete. The deeper mechanism is entanglement. No quantum system is truly isolated. It sits among stray photons, chip vibrations, fluctuating fields and material defects, and when it interacts with any of these it becomes entangled with them:
+
+$$
+\left( a|0\rangle + b|1\rangle \right) \otimes |E_0\rangle
+\;\longrightarrow\;
+a|0\rangle|E_0\rangle + b|1\rangle|E_1\rangle
+$$
+
+Here $|E_0\rangle$ and $|E_1\rangle$ are two states of the environment. The right-hand side is still a perfectly good state of the *combined* system — nothing has been destroyed. But the environment now holds a record of which state the qubit is in, and we have no access to it. If $|E_0\rangle$ and $|E_1\rangle$ are distinguishable, the environment has effectively measured the qubit, and interference between the two branches is no longer visible to us.
+
+This is why decoherence is sometimes called a "quantum leak". The information is not annihilated; it is dispersed into degrees of freedom nobody can track, and there is no way for us to get it back. This is currently a big problem when building quantum computers.
+
+## Tracking it with the density matrix
+
+To describe a qubit whose environment we cannot access, the state vector is no longer enough. We use the **density matrix**:
+
+$$
+\rho =
+\begin{pmatrix}
+|a|^2 & a b^* \\
+a^* b & |b|^2
+\end{pmatrix}
+$$
+
+The diagonal entries are the measurement probabilities; the off-diagonal entries are the **coherences**, carrying the phase information. Under decoherence they decay:
+
+$$
+\rho(t) =
+\begin{pmatrix}
+|a|^2 & a b^* e^{-t/T_2} \\
+a^* b\, e^{-t/T_2} & |b|^2
+\end{pmatrix}
+$$
+
+As $t$ grows the diagonal is untouched but the off-diagonal terms shrink to zero, leaving a diagonal matrix — nothing more than a classical probability distribution over 0 and 1. The qubit has become a coin [2].
+
+## Two clocks: $T_1$ and $T_2$
+
+Real hardware quotes two decay times, and the difference between them matters.
+
+**$T_1$, energy relaxation.** The qubit gives up energy and decays from $|1\rangle$ towards $|0\rangle$, changing the diagonal of $\rho$. It is the quantum version of an excited atom emitting a photon.
+
+**$T_2$, dephasing.** The relative phase randomises with no energy exchanged at all — a purely quantum failure mode with no classical counterpart. A typical cause is a drifting field that shifts the qubit's frequency slightly, so it accumulates phase at a rate that isn't quite the one you assumed.
+
+Losing energy also destroys phase, so relaxation feeds into dephasing, but not the other way round:
+
+$$
+\frac{1}{T_2} = \frac{1}{2 T_1} + \frac{1}{T_\phi}
+$$
+
+where $T_\phi$ covers pure dephasing on its own. Since $T_\phi$ is always positive, this gives a hard ceiling: $T_2 \leq 2 T_1$. You cannot have good phase coherence in a qubit that is rapidly losing energy.
+
+## Quantum Noise
+
+Quantum noise is one of the main reasons decoherence happens, and it is also one of the central features of quantum objects.
+
+A famous inequality states that position and momentum cannot both be measured with unlimited accuracy. This uncertainty leads to genuine fluctuations — shot noise when counting photons, projection noise when reading out a qubit — and there is no way of getting around it, even with a perfect setup.
+
+It is worth separating this from decoherence, because the two are often run together. The uncertainty principle produces randomness that is *irreducible*: better equipment will not remove it. Decoherence comes from uncontrolled coupling to an environment, and it *can* be reduced, by better isolation, better materials and error correction. If the two were the same thing, quantum computing would be hopeless. They are not.
+
+In today's hardware the practical sources include defects in oxide layers and at material interfaces that absorb energy at the qubit frequency, stray heat leaking down control wires, imprecise control pulses, and crosstalk between neighbouring qubits.
+
+## The NISQ era and what comes next
+
+Today we are in the NISQ era of quantum computers, with the N standing for noisy — Noisy Intermediate-Scale Quantum, a term coined by John Preskill [3]. You can find out more about this in [a different article](/en/posts/entries/highschool/nisq). The practical limit is circuit depth: run too many gates and errors accumulate faster than useful computation.
+
+The way out is **quantum error correction**, which spreads one logical qubit across many physical ones so errors can be spotted and undone without measuring the encoded information. This only helps if the physical error rate is below a critical **threshold**; above it, adding qubits adds more errors than it fixes.
+
+That threshold has now been crossed. Google's Willow processor ran error-correcting memories where making the code *larger* made the logical error rate *smaller* — a 101-qubit code reached about 0.14% error per cycle, and the encoded qubit outlived the best single physical qubit on the chip by roughly 2.4 times [4]. For the first time, encoding made a qubit better rather than worse. Meanwhile the physical qubits keep improving, with transmon lifetimes now passing a millisecond [5]. Useful machines will need both advances.
+
+## References
+
+[1] W. H. Zurek, "Decoherence, einselection, and the quantum origins of the classical," *Rev. Mod. Phys.*, vol. 75, no. 3, pp. 715–775, Jul. 2003.
+
+[2] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010, ch. 8.
+
+[3] J. Preskill, "Quantum computing in the NISQ era and beyond," *Quantum*, vol. 2, art. 79, Aug. 2018.
+
+[4] Google Quantum AI and Collaborators, "Quantum error correction below the surface code threshold," *Nature*, vol. 638, no. 8052, pp. 920–926, Feb. 2025.
+
+[5] M. P. Bland et al., "Millisecond lifetimes and coherence times in 2D transmon qubits," *Nature*, vol. 647, pp. 343–348, Nov. 2025.

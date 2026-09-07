@@ -1,0 +1,107 @@
+---
+title: "Supraleitung"
+subtitle: "Supraleitung: null Widerstand, Cooper-Paare und Quantencomputing (medium)"
+author: "Zeynep Kilic"
+date: "2026-08-19"
+---
+
+## Einführung
+
+Stell dir vor, du fährst mit dem Fahrrad auf einer Straße voller Bodenwellen und Steine. Beim Vorwärtskommen wirst du langsamer, verlierst Energie und musst ständig weitertreten. Ähnlich verhält sich Elektrizität in gewöhnlichen Materialien wie den Leitungen bei dir zu Hause: Beim Fließen „stößt" sie ständig an etwas im Material und verliert Energie in Form von Wärme.
+
+Stell dir nun eine vollkommen glatte Straße vor, auf der du ewig fahren kannst, ohne langsamer zu werden, selbst wenn du aufhörst zu treten. Genau das passiert in einem Supraleiter.
+
+Supraleitung ist ein besonderer Zustand, in dem Strom völlig ohne Widerstand fließen kann – es geht also keine Energie verloren.
+
+## Wie Elektrizität in Alltagsmaterialien funktioniert
+
+In gewöhnlichen Materialien wird Strom von Elektronen getragen. Während sie sich bewegen, stoßen sie an die Atome des Materials – genauer gesagt an Schwingungen des Atomgitters und an Verunreinigungen. Jeder Stoß bringt die Bewegung des Elektrons durcheinander und wandelt einen Teil der Energie in Wärme um. Deshalb gilt:
+
+* Leitungen und elektronische Geräte können warm werden
+* Auf langen Strecken geht Energie verloren
+
+## Was in einem Supraleiter geschieht
+
+Supraleitung wird meist als „Strom ohne Widerstand" eingeführt. Das stimmt, ist aber nur die halbe Geschichte – und die andere Hälfte ist es, die daraus einen wirklich neuen Materiezustand macht und nicht bloß einen sehr guten Leiter.
+
+Die **erste** Eigenschaft ist der verschwindende Widerstand unterhalb einer bestimmten Temperatur, der **kritischen Temperatur** $T_c$.
+
+Die **zweite** ist der **Meißner-Effekt**: Ein Supraleiter drängt Magnetfelder aktiv aus seinem Inneren heraus. In einer dünnen Schicht an der Oberfläche fließen Ströme, die das Feld im Innern auslöschen.
+
+![Ein Magnet schwebt über einem mit flüssigem Stickstoff gekühlten Supraleiter](images/magnet-above-sc.webp)
+
+Genau das lässt Magnete schweben. Das verdrängte Feld erzeugt eine abstoßende Kraft, die stark genug ist, einen Magneten in der Luft zu halten [6].
+
+Der Unterschied ist schärfer, als es klingt. Denk dir einen hypothetischen „perfekten Leiter" mit null Widerstand und sonst nichts: Kühlt man ihn in einem Magnetfeld ab, bliebe das Feld einfach in ihm eingefroren. Ein echter Supraleiter drängt das Feld *hinaus*. Dieser Unterschied zeigt uns, dass Supraleitung eine echte Phase der Materie ist und nicht der Grenzfall gewöhnlicher Leitung.
+
+## Warum der Widerstand verschwindet
+
+Warum also stoßen die Elektronen nicht mehr zusammen?
+
+Unterhalb von $T_c$ bewegen sich Elektronen nicht länger einzeln, sondern binden sich zu **Cooper-Paaren**. Der Mechanismus ist indirekt: Ein Elektron, das durch den Kristall läuft, zieht die positiven Ionen zu sich, verzerrt dadurch das Gitter leicht und hinterlässt einen Bereich mit überschüssiger positiver Ladung. Ein zweites Elektron wird von diesem Bereich angezogen. Insgesamt entsteht eine schwache, vom Gitter vermittelte Anziehung zwischen zwei Elektronen, die ihre elektrische Abstoßung übertreffen kann.
+
+Daraus folgen zwei Dinge.
+
+**Paare verhalten sich anders als einzelne Elektronen.** Elektronen gehorchen dem Pauli-Prinzip, sodass niemals zwei denselben Zustand teilen können. Ein Paar hat dagegen ganzzahligen Gesamtspin und verhält sich wie ein Boson – und Bosonen *dürfen* sich alle im selben Zustand sammeln. Das Ergebnis ist ein einziger riesiger, koordinierter Quantenzustand über das gesamte Material hinweg: eben jene „koordinierte" Bewegung.
+
+**Es gibt eine Energielücke.** Ein Paar aufzubrechen kostet einen Mindestbetrag an Energie, geschrieben als $2\Delta$. Nahe dem absoluten Nullpunkt sagt die Theorie voraus:
+
+$$
+2\Delta \approx 3.5\, k_B T_c
+$$
+
+Dabei ist $\Delta$ die Energielücke, $T_c$ die kritische Temperatur und $k_B$ die Boltzmann-Konstante, die eine Temperatur in eine Energie umrechnet.
+
+Das ist der eigentliche Grund für den verschwindenden Widerstand. Widerstand entsteht durch Streuung, und Streuung erfordert den Austausch einer kleinen Energiemenge. Kostet die billigste verfügbare Störung $2\Delta$, während die umgebende thermische Energie $k_B T$ deutlich darunter liegt, gibt es für die Paare schlicht nichts, in das sie streuen könnten. Der Strom fließt ungehindert – nicht weil Stöße selten sind, sondern weil sie verboten sind.
+
+## Der Nachweis, dass Paare real sind
+
+Cooper-Paare klingen nach einer praktischen Erzählung, deshalb ist es gut zu wissen, dass man sie messen kann. Fängt man Magnetfeld in einem supraleitenden Ring ein, ist die eingeschlossene Menge nicht beliebig – sie tritt nur in ganzzahligen Vielfachen einer festen Größe auf, dem **Flussquant**:
+
+$$
+\Phi_0 = \frac{h}{2e} \approx 2.07 \times 10^{-15} \ \text{Wb}
+$$
+
+Dabei ist $h$ das Plancksche Wirkungsquantum und $e$ die Ladung eines einzelnen Elektrons.
+
+Sieh dir den Nenner genau an. Wären die Ladungsträger einzelne Elektronen, stünde dort $h/e$. Der gemessene Wert ist halb so groß, was bedeutet, dass die Träger die Ladung $2e$ besitzen – also genau zwei Elektronen. Die Paarbildung wird durch eine Magnetfeldmessung bestätigt.
+
+## Experimente und Entdeckung
+
+Die Supraleitung wurde 1911 von Heike Kamerlingh Onnes entdeckt, der kurz zuvor als Erster Helium verflüssigt hatte und daher Temperaturen nahe 4 K erreichen konnte. Er kühlte Quecksilber ab und beobachtete, wie dessen Widerstand fiel – nicht allmählich, sondern bei 4,2 K schlagartig auf null [1].
+
+Der Meißner-Effekt wurde später gefunden, 1933 von Meißner und Ochsenfeld. Die Erklärung ließ noch länger auf sich warten: Bardeen, Cooper und Schrieffer veröffentlichten die Paarungstheorie 1957, sechsundvierzig Jahre nach der Entdeckung [2].
+
+Seither wurden viele supraleitende Materialien gefunden, die meisten müssen jedoch weiterhin extrem kalt gehalten werden.
+
+## Die drei Grenzen
+
+Supraleitung bricht zusammen, wenn man eine von drei Größen zu weit treibt:
+
+* **Kritische Temperatur $T_c$** – thermische Energie bricht Paare schneller auf, als sie entstehen
+* **Kritisches Magnetfeld $H_c$** – ein hinreichend starkes Feld zerstört den Zustand
+* **Kritischer Strom $I_c$** – zu viel Strom bedeutet, dass sich die Paare zu schnell bewegen
+
+Alle drei müssen gleichzeitig eingehalten werden, was in der Praxis wichtig ist. Überschreitet ein MRT-Magnet auch nur eine davon, kommt es zum „Quench": Er fällt in die gewöhnliche Leitung zurück, und die enorme gespeicherte Energie entlädt sich als Wärme in den Wicklungen.
+
+## Warum ist Supraleitung wichtig?
+
+Supraleiter sind bereits im Einsatz. Das bekannteste Beispiel ist der MRT-Scanner, der sehr starke und äußerst stabile Magnetfelder braucht, um das Körperinnere abzubilden – supraleitende Wicklungen liefern genau das, ohne Energie als Wärme zu verschwenden [3]. Dieselbe Technik treibt die Beschleunigermagnete am CERN an [4].
+
+Hinzu kommt eine neuere Anwendung: **Quantencomputer**. Die meisten von Google und IBM gebauten Maschinen nutzen supraleitende Schaltkreise als Qubits, denn ein Supraleiter trägt eine Quantenphase, die über einen ganzen Chip hinweg besteht und nicht nur über ein einzelnes Atom. Das Schlüsselbauteil ist ein **Josephson-Kontakt** – zwei Supraleiter, getrennt durch eine sehr dünne Isolierbarriere, durch die Cooper-Paare tunneln können.
+
+Derzeit funktionieren die meisten Supraleiter nur bei extremer Kälte, was ihren Einsatz teuer macht. Ein wichtiger Schritt gelang 1986, als Bednorz und Müller Supraleitung in einer Kupferoxid-Keramik fanden; verwandte Materialien überschritten bald 77 K, den Siedepunkt von flüssigem Stickstoff, der billig und leicht zu handhaben ist [5]. Fände man je Supraleiter bei Raumtemperatur, gäbe es Stromleitungen ohne Verluste – ob das erreichbar ist, kann derzeit allerdings niemand sagen.
+
+## Quellen
+
+[1] D. van Delft and P. Kes, "The discovery of superconductivity," *Phys. Today*, vol. 63, no. 9, pp. 38–43, Sep. 2010.
+
+[2] J. Bardeen, L. N. Cooper, and J. R. Schrieffer, "Theory of superconductivity," *Phys. Rev.*, vol. 108, no. 5, pp. 1175–1204, Dec. 1957.
+
+[3] National Institute of Biomedical Imaging and Bioengineering, "Magnetic resonance imaging (MRI)." [Online]. Available: https://www.nibib.nih.gov/science-education/science-topics/magnetic-resonance-imaging-mri
+
+[4] CERN, "Superconductivity." [Online]. Available: https://home.cern/science/engineering/superconductivity
+
+[5] J. G. Bednorz and K. A. Müller, "Possible high $T_c$ superconductivity in the Ba–La–Cu–O system," *Z. Phys. B*, vol. 64, no. 2, pp. 189–193, Jun. 1986.
+
+[6] Scientific American, "How do they do that? A closer look at quantum magnetic levitation." [Online]. Available: https://www.scientificamerican.com/article/how-do-they-do-that-a-closer-look-at-quantum-magnetic-levitation/

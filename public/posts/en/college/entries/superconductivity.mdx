@@ -1,0 +1,192 @@
+---
+title: "Superconductivity"
+subtitle: "Superconductivity: zero resistance, Cooper pairs and quantum computing (difficult)"
+author: "Zeynep Kilic"
+date: "2026-08-20"
+---
+
+## Introduction
+
+Imagine you are riding a bicycle on a road full of bumps and stones. As you move forward, you slow down, lose energy, and have to keep pedalling. This is similar to how electricity behaves in normal materials: as current flows, it keeps "bumping" into things inside the material and loses energy as heat.
+
+Now imagine a perfectly smooth road where you can ride forever without slowing down, even if you stop pedalling. That is what happens in a superconductor.
+
+Superconductivity is a macroscopic quantum phenomenon: below a critical temperature, the electronic ground state becomes a coherent condensate of paired electrons described by a single complex order parameter with a well-defined phase across the entire sample. That last point — a quantum phase you can measure at centimetre scale — is what makes superconducting circuits viable as quantum computing hardware.
+
+## Two Defining Properties
+
+**Zero resistance.** Below $T_c$ — first observed in mercury at 4.2 K by Kamerlingh Onnes in 1911 [1] — the DC resistivity is exactly zero. Persistent currents in superconducting rings have been observed without measurable decay over years.
+
+**The Meissner–Ochsenfeld effect.** A superconductor expels magnetic flux from its bulk, regardless of its magnetic history.
+
+![A magnet levitating above a superconductor cooled by liquid nitrogen](images/magnet-above-sc.webp)
+
+The second property is not a consequence of the first, and the distinction is worth being precise about. For a hypothetical perfect conductor, Faraday's law gives $\partial \vec{B}/\partial t = 0$ inside, so cooling it in a field would freeze the flux in place. A superconductor instead enforces $\vec{B} = 0$ outright. Superconductivity is therefore a genuine thermodynamic phase, reachable by any path, not the limiting case of ordinary conduction.
+
+The London brothers captured this phenomenologically. Combining the London equation with Ampère's law gives
+
+$$
+\nabla^2 \vec{B} = \frac{1}{\lambda_L^2} \vec{B},
+\qquad
+\lambda_L = \sqrt{\frac{m}{\mu_0 n_s e^2}}
+$$
+
+so the field decays exponentially into the bulk over the **London penetration depth** $\lambda_L$, typically tens to hundreds of nanometres, where $n_s$ is the density of superconducting carriers [6].
+
+## Cooper Pairing and the Energy Gap
+
+Cooper's 1956 result is the foundation. Add two electrons above a filled Fermi sea, interacting through an arbitrarily weak attraction within a shell of width $\hbar\omega_D$ around the Fermi energy. Solving the two-body problem in the presence of the sea gives a bound state of binding energy
+
+$$
+E_b \approx 2\hbar\omega_D \, e^{-2/N(0)V}
+$$
+
+where $N(0)$ is the density of states at the Fermi level and $V$ the interaction strength. Two features matter: a bound state forms for *any* $V > 0$, so the Fermi sea is unstable against pairing; and the exponential is non-analytic in $V$, so no order of perturbation theory around the free-electron state produces it. This is why superconductivity resisted explanation for nearly fifty years.
+
+The attraction is phonon-mediated — a passing electron polarises the lattice, and the slowly-responding positive charge attracts a second electron. Because ionic motion is far slower than electronic motion the two electrons need not be close together, and the retardation lets the attraction beat screened Coulomb repulsion. The **isotope effect**, $T_c \propto M^{-1/2}$, is the fingerprint: a heavier isotope shifts the phonon frequencies and $T_c$ with them.
+
+BCS built the many-body ground state from this [2]:
+
+$$
+|\Psi_{\text{BCS}}\rangle = \prod_{k} \left( u_k + v_k \, c^\dagger_{k\uparrow} c^\dagger_{-k\downarrow} \right) |0\rangle
+$$
+
+a coherent superposition over occupancy of time-reversed pairs, with $|u_k|^2 + |v_k|^2 = 1$. Note this state has no definite particle number — it has a definite *phase* instead, which is the conjugate variable. That broken $U(1)$ symmetry is what makes the Josephson effect possible.
+
+Minimising the mean-field Hamiltonian gives the self-consistent gap equation, whose weak-coupling solution is
+
+$$
+\Delta(0) \approx 2 \hbar \omega_D \, e^{-1/N(0)V}
+$$
+
+The quasiparticle spectrum $E_k = \sqrt{\xi_k^2 + \Delta^2}$ has minimum $\Delta$: there are no excitations below the gap. Combined with the $T_c$ equation this yields a parameter-free universal ratio
+
+$$
+\frac{2\Delta(0)}{k_B T_c} \approx 3.53
+$$
+
+confirmed to within a few percent across conventional superconductors, and one of the strongest confirmations of the theory. Zero resistance follows: scattering a pair out of the condensate costs at least $2\Delta$, and for $k_B T \ll \Delta$ that phase space is thermally inaccessible.
+
+## Flux Quantization
+
+Requiring the order parameter $\psi = |\psi| e^{i\theta}$ to be single-valued around a closed loop quantises the enclosed flux:
+
+$$
+\Phi = n \Phi_0, \qquad \Phi_0 = \frac{h}{2e} \approx 2.068 \times 10^{-15} \ \text{Wb}
+$$
+
+The $2e$ in the denominator is a direct measurement of the pair charge — pairing confirmed by a magnetic measurement.
+
+## The Josephson Effect
+
+Separate two superconductors by a barrier thin enough for Cooper pairs to tunnel through. Josephson showed in 1962 that the supercurrent depends only on the difference $\varphi = \theta_1 - \theta_2$ between the two phases [7]:
+
+$$
+I = I_c \sin \varphi
+\qquad\text{(DC Josephson effect)}
+$$
+
+$$
+\frac{d\varphi}{dt} = \frac{2eV}{\hbar}
+\qquad\text{(AC Josephson effect)}
+$$
+
+A current flows with no voltage across the junction at all. These two relations are the entire basis of superconducting quantum computing, for a reason developed in the Math Note at the end of this article.
+
+## From Circuit to Qubit
+
+Consider first an ordinary LC oscillator. Its Hamiltonian is harmonic, so its energy levels are evenly spaced by $\hbar\omega_0$. This is fatal for a qubit: a microwave pulse tuned to drive $|0\rangle \to |1\rangle$ drives $|1\rangle \to |2\rangle$ equally well, and population leaks straight out of the two levels you wanted. **Anharmonicity is mandatory**, and a linear inductor cannot provide it.
+
+Replacing the inductor with a Josephson junction gives
+
+$$
+H = 4 E_C \, \hat{n}^2 - E_J \cos \hat{\varphi}
+$$
+
+where $\hat{n}$ counts Cooper pairs transferred across the junction, $\hat{\varphi}$ is the conjugate phase, $E_C = e^2/2C$ is the charging energy and $E_J = I_c \Phi_0 / 2\pi$ the Josephson energy. The cosine is the anharmonic term, and it is there because of the Math Note's result.
+
+The ratio $E_J/E_C$ sets the regime. Early Cooper-pair-box qubits ran at $E_J/E_C \lesssim 1$: strongly anharmonic, but so sensitive to stray charge that dephasing times were nanoseconds. The **transmon** [8] takes the opposite limit, $E_J/E_C \sim 50$–$100$, by shunting the junction with a large capacitor. Expanding the cosine to quartic order gives
+
+$$
+\hbar \omega_{01} \approx \sqrt{8 E_J E_C} - E_C,
+\qquad
+\alpha \equiv \omega_{12} - \omega_{01} \approx - \frac{E_C}{\hbar}
+$$
+
+The design's key property is an asymmetry: sensitivity to offset charge falls off *exponentially* in $\sqrt{E_J/E_C}$, while anharmonicity decreases only as a weak power law. Charge noise can therefore be suppressed by orders of magnitude while giving up only a modest factor of anharmonicity. Typical transmons run near 5 GHz with anharmonicity around $-200$ MHz.
+
+Operating temperature follows from the energy scale: $\hbar\omega_{01}/k_B \approx 240$ mK for a 5 GHz qubit, so dilution refrigerators at 10–20 mK keep thermal excitation below $10^{-5}$. Coherence is limited mainly by two-level-system defects in surface oxides; materials work — tantalum on high-resistivity silicon — has pushed $T_1$ to 1.68 ms [9]. Blais et al. [10] give the full circuit-QED treatment.
+
+The most widespread application remains the MRI scanner, whose superconducting windings sustain a large, exceptionally stable field with no ohmic heating [3]; the same technology powers the accelerator magnets at CERN [4].
+
+## Beyond BCS
+
+BCS describes phonon-mediated $s$-wave pairing, and several important families do not fit it.
+
+The **cuprates**, discovered by Bednorz and Müller in 1986 [5], are layered copper oxides — Mott insulators when undoped, superconducting on doping, with $T_c$ reaching roughly 133 K at ambient pressure. The order parameter has $d_{x^2-y^2}$ symmetry with nodes, the normal state is not a Fermi liquid, and the pairing mechanism, probably involving antiferromagnetic spin fluctuations, is still unsettled after four decades. It remains a major open problem in condensed matter physics.
+
+**Nickelates** have emerged as a third high-$T_c$ family, with bulk superconductivity near 40 K at ambient pressure and onset near 80 K under pressure. **Hydrides** under megabar pressures reach high $T_c$, plausibly by conventional BCS pairing boosted by hydrogen's high phonon frequencies, but the pressures required rule out application.
+
+This subfield has a history of high-profile claims that failed to replicate, including retracted papers. Recent reports of ambient-pressure records should be treated as provisional until independently reproduced — which is normal scientific practice, not scepticism about the field.
+
+## Math Note: Why a Josephson Junction Is a Nonlinear Inductor
+
+The claim that underpins the entire transmon is that a Josephson junction behaves as an inductor whose inductance depends on the current through it. This follows from the two Josephson relations in three lines.
+
+Start with the DC relation and differentiate with respect to time:
+
+$$
+I = I_c \sin\varphi
+\quad\Longrightarrow\quad
+\frac{dI}{dt} = I_c \cos\varphi \, \frac{d\varphi}{dt}
+$$
+
+Now substitute the AC relation, $d\varphi/dt = 2eV/\hbar$:
+
+$$
+\frac{dI}{dt} = I_c \cos\varphi \cdot \frac{2eV}{\hbar}
+$$
+
+Rearranging for the voltage:
+
+$$
+V = \frac{\hbar}{2 e I_c \cos\varphi} \, \frac{dI}{dt}
+$$
+
+Compare this with the defining equation of an ordinary inductor, $V = L \, dI/dt$. The two have identical form, so we can read off an effective inductance:
+
+$$
+L_J(\varphi) = \frac{\hbar}{2 e I_c \cos \varphi} = \frac{\Phi_0}{2\pi I_c \cos \varphi}
+$$
+
+That is the whole derivation, and the result is worth staring at. $L_J$ depends on $\varphi$, and through $I = I_c\sin\varphi$ it therefore depends on the current. The junction is an inductor whose inductance changes according to how much current flows through it.
+
+Three observations follow.
+
+First, nothing dissipates. The relation contains no resistive term, because the current is carried by Cooper pairs and there are no excitations below the gap for them to scatter into. The junction is **nonlinear and non-dissipative at the same time** — and no ordinary circuit element manages both. A resistor is dissipative; a normal inductor is linear. This combination is precisely what a qubit needs, and it is why superconductivity, rather than any other branch of electronics, ended up hosting one of the leading quantum computing platforms.
+
+Second, the nonlinearity is what unevenly spaces the energy levels. Substituting $L_J$ into a circuit Hamiltonian produces the $-E_J\cos\hat\varphi$ term of the previous section, whose higher-order corrections separate $\omega_{12}$ from $\omega_{01}$ and let a microwave pulse address the lowest two levels alone.
+
+Third, note where the physics entered. The AC relation $d\varphi/dt = 2eV/\hbar$ carries the factor $2e$ — the Cooper pair charge from the flux quantum. The qubit at the heart of a modern quantum computer works because electrons pair up, and you can trace that fact all the way from the bicycle on the bumpy road to the anharmonicity of the level ladder.
+
+## References
+
+[1] D. van Delft and P. Kes, "The discovery of superconductivity," *Phys. Today*, vol. 63, no. 9, pp. 38–43, Sep. 2010.
+
+[2] J. Bardeen, L. N. Cooper, and J. R. Schrieffer, "Theory of superconductivity," *Phys. Rev.*, vol. 108, no. 5, pp. 1175–1204, Dec. 1957.
+
+[3] National Institute of Biomedical Imaging and Bioengineering, "Magnetic resonance imaging (MRI)." [Online]. Available: https://www.nibib.nih.gov/science-education/science-topics/magnetic-resonance-imaging-mri
+
+[4] CERN, "Superconductivity." [Online]. Available: https://home.cern/science/engineering/superconductivity
+
+[5] J. G. Bednorz and K. A. Müller, "Possible high $T_c$ superconductivity in the Ba–La–Cu–O system," *Z. Phys. B*, vol. 64, no. 2, pp. 189–193, Jun. 1986.
+
+[6] M. Tinkham, *Introduction to Superconductivity*, 2nd ed. New York, NY, USA: McGraw-Hill, 1996.
+
+[7] B. D. Josephson, "Possible new effects in superconductive tunnelling," *Phys. Lett.*, vol. 1, no. 7, pp. 251–253, Jul. 1962.
+
+[8] J. Koch, T. M. Yu, J. Gambetta, A. A. Houck, D. I. Schuster, J. Majer, A. Blais, M. H. Devoret, S. M. Girvin, and R. J. Schoelkopf, "Charge-insensitive qubit design derived from the Cooper pair box," *Phys. Rev. A*, vol. 76, no. 4, art. 042319, Oct. 2007.
+
+[9] M. P. Bland et al., "Millisecond lifetimes and coherence times in 2D transmon qubits," *Nature*, vol. 647, pp. 343–348, Nov. 2025.
+
+[10] A. Blais, A. L. Grimsmo, S. M. Girvin, and A. Wallraff, "Circuit quantum electrodynamics," *Rev. Mod. Phys.*, vol. 93, no. 2, art. 025005, May 2021.

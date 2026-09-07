@@ -1,0 +1,168 @@
+---
+title: "Quantum Communication"
+subtitle: "Quantum Communication – How to form a quantum internet (difficult)"
+author: "Zeynep Kilic"
+date: "2026-08-19"
+---
+
+## What is quantum communication?
+
+Quantum communication is what a quantum internet would be built from. Today's internet runs on optical networks: laser pulses travelling down glass fibres, carrying information between locations at close to the speed of light.
+
+![Internet](images/internet.png)
+
+A quantum internet would send **qubits** instead of bits. The attraction is entanglement — two particles linked so that doing something to one affects the other, however far apart they are. It looks as though this should let us send messages instantly, but quantum mechanics prevents that: the correlations are real, yet extracting anything useful from them always requires an ordinary classical message too, and that travels no faster than light. The Math Note at the end of this article shows exactly where that requirement enters.
+
+## Why we can't just boost the signal
+
+Glass is not perfectly transparent, so laser pulses fade as they travel. Classical networks solve this with amplifiers: every 80 km or so, a device reads the weakened signal, works out what it was meant to be, and sends out a fresh bright copy. For qubits, this is forbidden. The **no-cloning theorem** says there is no unitary operation that takes an unknown quantum state and produces two identical copies of it — a consequence of linearity alone, proved in our [article on the non-cloning theorem](/en/posts/entries/college/noncloning) [1].
+
+This is not purely bad news. The impossibility of copying is exactly what makes [quantum key distribution](/en/posts/entries/college/qkd) secure: an eavesdropper cannot quietly duplicate a qubit in transit, because nobody can.
+
+## The rate–loss limit
+
+Model a fibre of length $L$ as a pure-loss channel with transmissivity
+
+$$
+\eta = 10^{-\alpha L / 10}
+$$
+
+where $\eta$ is the fraction of photons transmitted, $L$ is the fibre length in kilometres, and $\alpha \approx 0.2$ dB/km is the attenuation of standard telecom fibre at 1550 nm.
+
+Over 100 km the loss is 20 dB, so $\eta = 10^{-2}$; over 1000 km it is 200 dB, giving $\eta = 10^{-20}$ — at ten billion attempts per second, roughly three hundred years per photon.
+
+The important question is not what one scheme achieves but what *any* scheme could. Pirandola, Laurenza, Ottaviani and Banchi answered this in 2017 by bounding the two-way assisted secret-key capacity of a lossy channel [2]. Their result, the **PLOB bound**, is
+
+$$
+K(\eta) = -\log_2(1 - \eta)
+$$
+
+and it is an exact capacity rather than merely an upper limit. It holds under arbitrary local operations assisted by unlimited two-way classical communication, so no amount of cleverness at the two endpoints evades it.
+
+For $\eta \ll 1$ we can expand the logarithm, giving
+
+$$
+K(\eta) \approx \frac{\eta}{\ln 2} \approx 1.44\,\eta
+$$
+
+The capacity is therefore linear in $\eta$, and so exponentially small in distance. This is why surpassing the PLOB bound has become the field's operational definition of a working repeater: it is the line that separates *repeating* from merely *relaying*.
+
+## Entanglement as the resource
+
+The way around loss is not to send the message itself, but to share entanglement first.
+
+Two qubits can be prepared in a **Bell state**, such as
+
+$$
+|\Phi^+\rangle = \frac{1}{\sqrt{2}} \left( |00\rangle + |11\rangle \right)
+$$
+
+Neither qubit has a definite value on its own, but their outcomes are perfectly correlated. Once Alice and Bob share such a pair they can teleport a qubit or distil a shared secret key [11], without any fragile quantum state having to survive the full journey between them.
+
+## Quantum repeaters: strengthening the web
+
+Entanglement is fragile, like a spider web, and hard to establish over long distances.
+
+![Web](images/web.png)
+
+The reason is exactly the loss problem above: entangling two distant labs normally means sending a photon between them, and that photon suffers the same exponential attenuation.
+
+But entanglement over a *short* distance is comparatively easy. So, just as you would strengthen a spiderweb at certain points rather than stretching one strand across the whole gap, we build the long connection out of short strong links and then join them.
+
+The joining operation is **entanglement swapping** [3]. Alice shares a pair with the left half of a middle node; Bob shares a separate pair with the right half; at this stage Alice and Bob share nothing. The middle node performs a **Bell-state measurement** on its two qubits, destroying them and leaving Alice and Bob entangled — despite their photons never having met. Two classical bits announcing the outcome tell them which correction to apply.
+
+## Repeater architectures
+
+Swapping alone is not enough. Two independent error sources must be handled, and how an architecture handles them defines its generation [4].
+
+**Loss errors.** Link generation is heralded and probabilistic, succeeding with probability scaling as $\eta_{\text{link}}$, and a swap needs both adjacent links available simultaneously. Without storage those probabilities multiply, collapsing back to direct-transmission scaling. **Quantum memories** decouple the attempts: a successful link is held while its neighbour keeps trying.
+
+**Operation errors.** Imperfect gates, memories and measurements degrade fidelity, and swapping compounds it — two links of fidelity $F$ produce a swapped pair with fidelity strictly below $F$. Over many nested levels this is fatal unless actively countered.
+
+*First-generation* repeaters, following Briegel, Dür, Cirac and Zoller [5], alternate swapping with **entanglement purification** [6]: several noisy pairs are consumed to distil one of higher fidelity. Purifying before each swap holds fidelity above threshold as distance doubles, so resources grow polynomially rather than exponentially in $L$ — at the price of two-way signalling, which makes the round-trip time the rate bottleneck. *Second-* and *third-generation* schemes progressively replace purification and heralding with quantum error correction, trading one-way communication for much steeper demands on code distance and gate fidelity.
+
+## Where we are now
+
+The single-node benchmark has been passed. Bhaskar et al. used a silicon-vacancy centre in a diamond nanophotonic cavity to perform asynchronous Bell-state measurements, achieving a fourfold increase in MDI-QKD secret-key rate over the loss-equivalent direct link and exceeding the repeaterless bound [7]. This is the first unambiguous demonstration that an intermediate node beats direct transmission.
+
+Field deployment is advancing separately: entangled photons have been distributed continuously over 34 km of installed metropolitan fibre in New York with automated polarisation stabilisation [8]. For intercontinental scale, satellites remain the only demonstrated route — *Micius* distributed entangled pairs to ground stations 1120 km apart and performed entanglement-based QKD between them without acting as a trusted node [9]. What has not been demonstrated is a multi-node chain showing the polynomial rate–distance scaling that motivates the architecture in the first place [10].
+
+## Math Note: Entanglement Swapping Step by Step
+
+Label the four qubits $A$ (Alice), $B$ and $C$ (the two halves of the middle node), and $D$ (Bob). Both links start in the same Bell state:
+
+$$
+|\Phi^+\rangle_{AB} \otimes |\Phi^+\rangle_{CD}
+= \frac{1}{2}\left(|00\rangle_{AB} + |11\rangle_{AB}\right)\left(|00\rangle_{CD} + |11\rangle_{CD}\right)
+$$
+
+Expanding and regrouping the kets so that $A$ and $D$ sit together, and $B$ and $C$ sit together:
+
+$$
+= \frac{1}{2}\Big( |00\rangle_{AD}|00\rangle_{BC} + |01\rangle_{AD}|01\rangle_{BC} + |10\rangle_{AD}|10\rangle_{BC} + |11\rangle_{AD}|11\rangle_{BC} \Big)
+$$
+
+Nothing physical has happened yet — this is only a relabelling. Now rewrite the $BC$ pair in the Bell basis, using
+
+$$
+|00\rangle = \frac{|\Phi^+\rangle + |\Phi^-\rangle}{\sqrt{2}}, \qquad
+|11\rangle = \frac{|\Phi^+\rangle - |\Phi^-\rangle}{\sqrt{2}}
+$$
+
+$$
+|01\rangle = \frac{|\Psi^+\rangle + |\Psi^-\rangle}{\sqrt{2}}, \qquad
+|10\rangle = \frac{|\Psi^+\rangle - |\Psi^-\rangle}{\sqrt{2}}
+$$
+
+Substituting and collecting terms by the $BC$ Bell state gives
+
+$$
+= \frac{1}{2}\Big(
+|\Phi^+\rangle_{BC}|\Phi^+\rangle_{AD}
++ |\Phi^-\rangle_{BC}|\Phi^-\rangle_{AD}
++ |\Psi^+\rangle_{BC}|\Psi^+\rangle_{AD}
++ |\Psi^-\rangle_{BC}|\Psi^-\rangle_{AD}
+\Big)
+$$
+
+This is the whole result. Each of the four amplitudes is $\tfrac{1}{2}$, so the middle node's Bell-state measurement returns each outcome with probability $\left|\tfrac{1}{2}\right|^2 = \tfrac{1}{4}$, and in every case $A$ and $D$ are left maximally entangled.
+
+The four possible outcomes differ only by a Pauli correction on one qubit:
+
+$$
+|\Phi^-\rangle_{AD} = (Z \otimes I)|\Phi^+\rangle_{AD}, \qquad
+|\Psi^+\rangle_{AD} = (X \otimes I)|\Phi^+\rangle_{AD}
+$$
+
+and $|\Psi^-\rangle_{AD} = (XZ \otimes I)|\Phi^+\rangle_{AD}$ up to a global phase. So once Alice and Bob learn the two classical bits identifying the outcome, one of them applies $I$, $X$, $Z$ or $XZ$ and they hold $|\Phi^+\rangle$.
+
+Two things are worth noticing. First, before those two classical bits arrive, the reduced state of $AD$ obtained by averaging over the four equally likely outcomes is maximally mixed — Alice and Bob can extract nothing from it. This is precisely why entanglement swapping transmits no information faster than light, and it is the formal version of the caveat in the opening section. Second, the entanglement between $A$ and $D$ was never sent anywhere; it was assembled locally at the middle node out of two shorter links. That is the sense in which the spiderweb is strengthened at a point rather than stretched across the gap.
+
+## References
+
+[1] W. K. Wootters and W. H. Zurek, "A single quantum cannot be cloned," *Nature*, vol. 299, no. 5886, pp. 802–803, Oct. 1982.
+
+[2] S. Pirandola, R. Laurenza, C. Ottaviani, and L. Banchi, "Fundamental limits of repeaterless quantum communications," *Nat. Commun.*, vol. 8, art. 15043, Apr. 2017.
+
+[3] M. Żukowski, A. Zeilinger, M. A. Horne, and A. K. Ekert, "'Event-ready-detectors' Bell experiment via entanglement swapping," *Phys. Rev. Lett.*, vol. 71, no. 26, pp. 4287–4290, Dec. 1993.
+
+[4] K. Azuma, S. E. Economou, D. Elkouss, P. Hilaire, L. Jiang, H.-K. Lo, and I. Tzitrin, "Quantum repeaters: From quantum networks to the quantum internet," *Rev. Mod. Phys.*, vol. 95, no. 4, art. 045006, Dec. 2023.
+
+[5] H.-J. Briegel, W. Dür, J. I. Cirac, and P. Zoller, "Quantum repeaters: The role of imperfect local operations in quantum communication," *Phys. Rev. Lett.*, vol. 81, no. 26, pp. 5932–5935, Dec. 1998.
+
+[6] W. Dür, H.-J. Briegel, J. I. Cirac, and P. Zoller, "Quantum repeaters based on entanglement purification," *Phys. Rev. A*, vol. 59, no. 1, pp. 169–181, Jan. 1999.
+
+[7] M. K. Bhaskar et al., "Experimental demonstration of memory-enhanced quantum communication," *Nature*, vol. 580, no. 7801, pp. 60–64, Apr. 2020.
+
+[8] A. N. Craddock, A. Lazenby, G. B. Portmann, R. Sekelsky, M. Flament, and M. Namazi, "Automated distribution of polarization-entangled photons using deployed New York City fibers," *PRX Quantum*, vol. 5, no. 3, art. 030330, Aug. 2024.
+
+[9] J. Yin et al., "Entanglement-based secure quantum cryptography over 1,120 kilometres," *Nature*, vol. 582, no. 7813, pp. 501–505, Jun. 2020.
+
+[10] S. Wehner, D. Elkouss, and R. Hanson, "Quantum internet: A vision for the road ahead," *Science*, vol. 362, no. 6412, art. eaam9288, Oct. 2018.
+
+[11] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010, ch. 12.
+
+### Image Sources
+
+* Internet Image: Globe with global communication lines. Shutterstock. https://www.shutterstock.com
+* Web Image: Standard vector illustration of a spider web structure. Retrieved from vector graphic repositories.

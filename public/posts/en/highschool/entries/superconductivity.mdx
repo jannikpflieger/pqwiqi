@@ -1,0 +1,107 @@
+---
+title: "Superconductivity"
+subtitle: "Superconductivity: zero resistance, Cooper pairs and quantum computing (medium)"
+author: "Zeynep Kilic"
+date: "2026-08-19"
+---
+
+## Introduction
+
+Imagine you are riding a bicycle on a road full of bumps and stones. As you move forward, you slow down, lose energy, and have to keep pedalling. This is similar to how electricity behaves in normal materials like the wires in your home: as it flows, it keeps "bumping" into things inside the material and loses energy as heat.
+
+Now imagine a perfectly smooth road where you can ride forever without slowing down, even if you stop pedalling. That is what happens in a superconductor.
+
+Superconductivity is a special state where electricity can flow with no resistance at all, meaning no energy is lost.
+
+## How Electricity Works in Everyday Materials
+
+In normal materials, electricity is carried by electrons. As they move, they bump into the atoms of the material — more precisely, into vibrations of the atomic lattice and into impurities. Each collision randomises the electron's motion and turns some energy into heat. That's why:
+
+* Wires and electronic devices can get warm
+* Energy is lost when electricity travels long distances
+
+## What Happens in a Superconductor
+
+Superconductivity is usually introduced as "electricity with no resistance". That is true, but it is only half the story — and the other half is what makes it a genuinely new state of matter rather than just a very good conductor.
+
+The **first** property is zero resistance below a certain temperature, called the **critical temperature** $T_c$.
+
+The **second** is the **Meissner effect**: a superconductor actively pushes magnetic fields out of its interior. Currents flow in a thin layer at the surface and cancel the field inside.
+
+![A magnet levitating above a superconductor cooled by liquid nitrogen](images/magnet-above-sc.webp)
+
+This is what makes magnets float. The expelled field creates a repulsive force strong enough to hold a magnet in mid-air [6].
+
+The distinction is sharper than it sounds. Imagine a hypothetical "perfect conductor" with zero resistance and nothing else: cooled in a magnetic field, the field would simply stay frozen inside. A real superconductor pushes the field *out*. That difference tells us superconductivity is a true phase of matter, not the extreme limit of ordinary conduction.
+
+## Why the Resistance Disappears
+
+So why don't the electrons collide any more?
+
+Below $T_c$, electrons stop travelling as individuals and bind into **Cooper pairs**. The mechanism is indirect: an electron moving through the crystal tugs the positive ions towards it, distorting the lattice slightly and leaving behind a region of excess positive charge. A second electron is attracted to that region. The overall effect is a weak attraction between two electrons, carried by the lattice, that can beat their electrical repulsion.
+
+Two consequences follow.
+
+**Pairs behave differently from single electrons.** Electrons obey the Pauli exclusion principle, so no two can share a state. A pair has whole-number total spin and behaves as a boson, and bosons *can* all pile into the same state. The result is one enormous coordinated quantum state spanning the whole material — the "coordinated way" of moving mentioned above.
+
+**There is an energy gap.** Breaking a pair apart costs a minimum amount of energy, written $2\Delta$. Near absolute zero, theory predicts
+
+$$
+2\Delta \approx 3.5\, k_B T_c
+$$
+
+where $\Delta$ is the energy gap, $T_c$ is the critical temperature and $k_B$ is Boltzmann's constant, which converts a temperature into an energy.
+
+This is the real reason resistance vanishes. Resistance comes from scattering, and scattering needs a small amount of energy to be exchanged. If the cheapest available disturbance costs $2\Delta$, and the surrounding thermal energy $k_B T$ is well below that, there is simply nothing for the pairs to scatter into. The current flows unimpeded — not because collisions are rare, but because they are forbidden.
+
+## Evidence That Pairs Are Real
+
+Cooper pairs sound like a convenient story, so it is worth knowing they can be measured. If you trap magnetic field inside a superconducting ring, the trapped amount is not arbitrary — it comes only in whole multiples of a fixed quantity called the **flux quantum**:
+
+$$
+\Phi_0 = \frac{h}{2e} \approx 2.07 \times 10^{-15} \ \text{Wb}
+$$
+
+Here $h$ is Planck's constant and $e$ is the charge of a single electron.
+
+Look closely at the denominator. If the charge carriers were single electrons, it would read $h/e$. The measured value is half that, which means the carriers have charge $2e$ — exactly two electrons. Pairing is confirmed by measuring a magnetic field.
+
+## Experiments and Discovery
+
+Superconductivity was discovered in 1911 by Heike Kamerlingh Onnes, who had recently become the first person to liquefy helium and so had access to temperatures near 4 K. He cooled mercury and watched its resistance drop — not gradually, but abruptly to zero at 4.2 K [1].
+
+The Meissner effect was found later, by Meissner and Ochsenfeld in 1933. The explanation took longer still: Bardeen, Cooper and Schrieffer published the pairing theory in 1957, forty-six years after the discovery [2].
+
+Since then many superconducting materials have been found, although most must still be kept extremely cold.
+
+## The Three Limits
+
+Superconductivity collapses if you push any of three quantities too far:
+
+* **Critical temperature $T_c$** — thermal energy breaks pairs faster than they form
+* **Critical magnetic field $H_c$** — a strong enough field destroys the state
+* **Critical current $I_c$** — too much current means the pairs move too fast
+
+All three must be respected at once, which matters in practice. If an MRI magnet exceeds any one of them it "quenches": it reverts to ordinary conduction, and the huge stored energy dumps into the windings as heat.
+
+## Why Is Superconductivity Important?
+
+Superconductors are already useful. The best-known example is the MRI scanner, which needs very strong and extremely stable magnets to image the inside of the body — and superconducting windings provide exactly that, with no energy wasted as heat [3]. The same technology powers the accelerator magnets at CERN [4].
+
+There is also a newer application: **quantum computers**. Most machines built by Google and IBM use superconducting circuits as their qubits, because a superconductor carries a quantum phase that survives across a whole chip rather than a single atom. The key component is a **Josephson junction** — two superconductors separated by a very thin insulating barrier that Cooper pairs can tunnel through.
+
+Right now most superconductors only work when extremely cold, which makes them expensive to use. A major step came in 1986, when Bednorz and Müller found superconductivity in a copper-oxide ceramic; related materials soon passed 77 K, the boiling point of liquid nitrogen, which is cheap and easy to handle [5]. If room-temperature superconductors are ever found we could have power lines that waste no energy — but nobody can currently say whether that is achievable.
+
+## References
+
+[1] D. van Delft and P. Kes, "The discovery of superconductivity," *Phys. Today*, vol. 63, no. 9, pp. 38–43, Sep. 2010.
+
+[2] J. Bardeen, L. N. Cooper, and J. R. Schrieffer, "Theory of superconductivity," *Phys. Rev.*, vol. 108, no. 5, pp. 1175–1204, Dec. 1957.
+
+[3] National Institute of Biomedical Imaging and Bioengineering, "Magnetic resonance imaging (MRI)." [Online]. Available: https://www.nibib.nih.gov/science-education/science-topics/magnetic-resonance-imaging-mri
+
+[4] CERN, "Superconductivity." [Online]. Available: https://home.cern/science/engineering/superconductivity
+
+[5] J. G. Bednorz and K. A. Müller, "Possible high $T_c$ superconductivity in the Ba–La–Cu–O system," *Z. Phys. B*, vol. 64, no. 2, pp. 189–193, Jun. 1986.
+
+[6] Scientific American, "How do they do that? A closer look at quantum magnetic levitation." [Online]. Available: https://www.scientificamerican.com/article/how-do-they-do-that-a-closer-look-at-quantum-magnetic-levitation/

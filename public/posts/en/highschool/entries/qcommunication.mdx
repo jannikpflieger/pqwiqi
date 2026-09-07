@@ -1,0 +1,97 @@
+---
+title: "Quantum Communication"
+subtitle: "Quantum Communication – How to form a quantum internet (medium)"
+author: "Zeynep Kilic"
+date: "2026-08-18"
+---
+
+## What is quantum communication?
+
+Quantum communication is what a quantum internet would be built from. Today's internet runs on optical networks: laser pulses travelling down glass fibres, carrying information between locations at close to the speed of light.
+
+![Internet](images/internet.png)
+
+A quantum internet would send **qubits** instead of bits. The attraction is entanglement — two particles linked so that doing something to one affects the other, however far apart they are. It looks as though this should let us send messages instantly, but quantum mechanics prevents that: the correlations are real, yet extracting anything useful from them always requires an ordinary classical message too, and that travels no faster than light.
+
+## Why we can't just boost the signal
+
+Glass is not perfectly transparent, so laser pulses fade as they travel. Classical networks solve this with amplifiers: every 80 km or so, a device reads the weakened signal, works out what it was meant to be, and sends out a fresh bright copy. For qubits, this is forbidden.
+
+The **no-cloning theorem** says there is no operation that takes an unknown quantum state and produces two identical copies of it. This is not a limitation of our engineering — it follows from the mathematics of quantum mechanics itself [1], and you can read the proof in our [article on the non-cloning theorem](/en/posts/entries/highschool/noncloning).
+
+This is not purely bad news: the impossibility of copying is exactly what makes [quantum key distribution](/en/posts/entries/highschool/qkd) secure, since an eavesdropper cannot quietly duplicate a qubit in transit either. But it does mean a quantum network cannot borrow the classical solution.
+
+## How much light actually survives
+
+Standard telecom fibre loses about 0.2 decibels of signal per kilometre. Decibels are a logarithmic scale, so the fraction of photons that make it through a fibre of length $L$ is
+
+$$
+\eta = 10^{-\alpha L / 10}
+$$
+
+Here $\eta$ (eta) is the fraction of photons that survive, $L$ is the length of the fibre in kilometres, and $\alpha$ (alpha) is the loss per kilometre, roughly $0.2$ dB/km.
+
+Put numbers in and the problem becomes obvious. Over 100 km the loss is $0.2 \times 100 = 20$ dB, so $\eta = 10^{-2}$: one photon in a hundred arrives. Over 1000 km the loss is 200 dB, giving $\eta = 10^{-20}$ — fire photons in ten billion times a second and you would wait roughly **three hundred years** for one to come out the other end.
+
+This is why fibre-based quantum links have stalled at a few hundred kilometres while ordinary internet traffic crosses oceans. The classical signal gets amplified along the way; the quantum one does not.
+
+## Entanglement as the resource
+
+The way around loss is not to send the message itself, but to share entanglement first.
+
+Two qubits can be prepared in a **Bell state**, such as
+
+$$
+|\Phi^+\rangle = \frac{1}{\sqrt{2}} \left( |00\rangle + |11\rangle \right)
+$$
+
+Here $|00\rangle$ means "both qubits read 0", $|11\rangle$ means "both read 1", and the $\tfrac{1}{\sqrt{2}}$ makes the two outcomes equally likely. Neither qubit has a definite value on its own, but the moment you measure one you know the other.
+
+Once Alice and Bob share such a pair they can use it to teleport a qubit or build a shared secret key [6] — without any fragile quantum state having to survive the whole journey between them.
+
+## Quantum repeaters: strengthening the web
+
+Entanglement is fragile, like a spider web, and hard to establish over long distances.
+
+![Web](images/web.png)
+
+The reason is the loss problem above: entangling two distant labs means sending a photon between them, and that photon suffers the same exponential attenuation. But entanglement over a *short* distance is comparatively easy. So, just as you would strengthen a spiderweb at certain points rather than stretching one strand across the whole gap, we build the long connection out of short strong links and then join them.
+
+The joining step is called **entanglement swapping**. Picture three stations: Alice, a middle node, and Bob. Alice shares an entangled pair with the left half of the middle node, Bob shares a separate pair with the right half, and at this point Alice and Bob share nothing at all.
+
+The middle node then performs a **Bell-state measurement** on its two qubits — a joint measurement asking which of the four Bell states the pair is in, without asking what either qubit is doing individually. This destroys the two middle qubits, and what it leaves behind is entanglement between Alice and Bob, whose photons never met. The node then sends its result over an ordinary classical channel so they know which correction to apply. That message is essential and travels at the speed of light, which is why swapping never lets anyone signal faster than light.
+
+Chain enough swaps together and entanglement reaches across a distance no single photon could have crossed. A device that does this is a **quantum repeater**.
+
+## Why this is hard
+
+Two problems stand between the idea and a working device.
+
+**Timing.** Creating entanglement between neighbouring stations succeeds only occasionally, and a swap needs *both* adjacent links ready at the same moment. Since successes arrive at random, that almost never happens by luck. The fix is a **quantum memory**: something that holds one half of a successful pair, coherently and without measuring it, while its neighbour keeps trying.
+
+**Errors pile up.** Each swap combines two imperfect links into one that is worse than either, so quality degrades until the final pair is useless. The 1998 repeater proposal by Briegel, Dür, Cirac and Zoller solved this by alternating swapping with **entanglement purification** — sacrificing several poor pairs to distil one good one [2]. Interleaving the two keeps quality above a working threshold while the distance doubles at each stage.
+
+## Where we are now
+
+A single repeater node has been shown to beat direct transmission. In 2020 a Harvard-led team used a silicon-vacancy defect in a diamond nanocavity as a memory node and reached a secret key rate about four times higher than the best possible direct fibre link over the same loss [3] — the proof of principle that a repeater genuinely repeats. For global distances, one alternative skips fibre altogether: the satellite *Micius* distributed entangled pairs to two ground observatories 1120 km apart and used them to establish a key [4]. What has not yet been built is a chain of several repeater nodes working together.
+
+The point of all this is not to replace the internet we have, but to add what the classical network provably cannot do [5]: key distribution whose security rests on physics rather than on an attacker's computing power, links between quantum processors so several modest machines can work as one, and networks of entangled atomic clocks. The physics is settled — what remains is engineering.
+
+## References
+
+[1] W. K. Wootters and W. H. Zurek, "A single quantum cannot be cloned," *Nature*, vol. 299, no. 5886, pp. 802–803, Oct. 1982.
+
+[2] H.-J. Briegel, W. Dür, J. I. Cirac, and P. Zoller, "Quantum repeaters: The role of imperfect local operations in quantum communication," *Phys. Rev. Lett.*, vol. 81, no. 26, pp. 5932–5935, Dec. 1998.
+
+[3] M. K. Bhaskar et al., "Experimental demonstration of memory-enhanced quantum communication," *Nature*, vol. 580, no. 7801, pp. 60–64, Apr. 2020.
+
+[4] J. Yin et al., "Entanglement-based secure quantum cryptography over 1,120 kilometres," *Nature*, vol. 582, no. 7813, pp. 501–505, Jun. 2020.
+
+[5] S. Wehner, D. Elkouss, and R. Hanson, "Quantum internet: A vision for the road ahead," *Science*, vol. 362, no. 6412, art. eaam9288, Oct. 2018.
+
+[6] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010.
+
+### Image Sources
+
+* Internet Image: Globe with global communication lines. Shutterstock. https://www.shutterstock.com
+* Web Image: Standard vector illustration of a spider web structure. Retrieved from vector graphic repositories.
