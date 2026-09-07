@@ -1,0 +1,166 @@
+---
+title: "Quantenkommunikation"
+subtitle: "Quantenkommunikation – Wie ein Quanteninternet entsteht (difficult)"
+author: "Zeynep Kilic"
+date: "2026-08-19"
+---
+
+## Was ist Quantenkommunikation?
+
+Quantenkommunikation ist der Baustein, aus dem ein Quanteninternet entstehen würde. Das heutige Internet beruht auf optischen Netzen: Laserpulse laufen durch Glasfasern und übertragen Informationen nahezu mit Lichtgeschwindigkeit von einem Ort zum anderen.
+
+![Internet](images/internet.png)
+
+Ein Quanteninternet würde statt Bits **Qubits** übertragen. Reizvoll ist dabei die Verschränkung – zwei Teilchen sind so miteinander verbunden, dass eine Handlung am einen das andere beeinflusst, wie weit sie auch voneinander entfernt sind. Es sieht so aus, als ließen sich damit Nachrichten augenblicklich übertragen, doch die Quantenmechanik verhindert genau das: Die Korrelationen sind real, aber um etwas Nutzbares aus ihnen zu gewinnen, braucht man immer zusätzlich eine gewöhnliche klassische Nachricht – und die ist nicht schneller als das Licht. Die mathematische Anmerkung am Ende dieses Artikels zeigt genau, an welcher Stelle diese Bedingung ins Spiel kommt.
+
+## Warum sich das Signal nicht einfach verstärken lässt
+
+Glas ist nicht vollkommen durchsichtig, deshalb werden Laserpulse auf ihrem Weg schwächer. Klassische Netze lösen das mit Verstärkern: Etwa alle 80 km liest ein Gerät das abgeschwächte Signal aus, rekonstruiert, was gemeint war, und sendet eine frische, helle Kopie weiter. Für Qubits ist das verboten. Das **No-Cloning-Theorem** besagt, dass es keine unitäre Operation gibt, die einen unbekannten Quantenzustand nimmt und zwei identische Kopien davon erzeugt – eine Folge allein der Linearität, bewiesen in unserem [Artikel zum No-Cloning-Theorem](/de/posts/entries/college/noncloning) [1].
+
+Das ist nicht nur eine schlechte Nachricht: Genau diese Unmöglichkeit des Kopierens macht die [Quantenschlüsselverteilung](/de/posts/entries/college/qkd) sicher, denn auch eine Lauscherin kann ein Qubit unterwegs nicht heimlich duplizieren.
+
+## Die Raten-Verlust-Grenze
+
+Modelliert man eine Faser der Länge $L$ als reinen Verlustkanal mit der Transmission
+
+$$
+\eta = 10^{-\alpha L / 10}
+$$
+
+so ist $\eta$ der Anteil der übertragenen Photonen, $L$ die Faserlänge in Kilometern und $\alpha \approx 0.2$ dB/km die Dämpfung gewöhnlicher Telekommunikationsfasern bei 1550 nm.
+
+Über 100 km beträgt der Verlust 20 dB, also $\eta = 10^{-2}$; über 1000 km sind es 200 dB und damit $\eta = 10^{-20}$ – bei zehn Milliarden Versuchen pro Sekunde also rund dreihundert Jahre pro Photon.
+
+Entscheidend ist jedoch nicht, was ein bestimmtes Verfahren erreicht, sondern was *irgendein* Verfahren erreichen könnte. Pirandola, Laurenza, Ottaviani und Banchi beantworteten dies 2017, indem sie die zweiseitig unterstützte Geheimschlüsselkapazität eines verlustbehafteten Kanals begrenzten [2]. Ihr Ergebnis, die **PLOB-Schranke**, lautet
+
+$$
+K(\eta) = -\log_2(1 - \eta)
+$$
+
+und ist eine exakte Kapazität, nicht bloß eine obere Schranke. Sie gilt unter beliebigen lokalen Operationen mit unbegrenzter zweiseitiger klassischer Kommunikation, sodass keine noch so raffinierte Strategie an den beiden Endpunkten sie umgeht.
+
+Für $\eta \ll 1$ lässt sich der Logarithmus entwickeln:
+
+$$
+K(\eta) \approx \frac{\eta}{\ln 2} \approx 1.44\,\eta
+$$
+
+Die Kapazität ist also linear in $\eta$ und damit exponentiell klein in der Entfernung. Deshalb gilt das Überschreiten der PLOB-Schranke als operationale Definition eines funktionierenden Repeaters: Sie trennt echtes *Verstärken* vom bloßen *Weiterleiten*.
+
+## Verschränkung als Ressource
+
+Der Ausweg besteht nicht darin, die Nachricht selbst zu verschicken, sondern zuerst Verschränkung zu teilen.
+
+Zwei Qubits lassen sich in einem **Bell-Zustand** präparieren, zum Beispiel
+
+$$
+|\Phi^+\rangle = \frac{1}{\sqrt{2}} \left( |00\rangle + |11\rangle \right)
+$$
+
+Für sich genommen hat keines der beiden Qubits einen festen Wert, doch ihre Messergebnisse sind perfekt korreliert. Teilen Alice und Bob ein solches Paar, können sie ein Qubit teleportieren oder einen gemeinsamen geheimen Schlüssel destillieren [11], ohne dass ein empfindlicher Quantenzustand die gesamte Strecke überstehen müsste.
+
+## Quantenrepeater: das Netz verstärken
+
+Verschränkung ist zerbrechlich wie ein Spinnennetz und über große Entfernungen schwer herzustellen.
+
+![Netz](images/web.png)
+
+Der Grund ist genau das Verlustproblem von oben: Zwei weit entfernte Labore zu verschränken bedeutet, ein Photon zwischen ihnen zu verschicken, und dieses Photon erleidet dieselbe exponentielle Dämpfung. Über *kurze* Entfernungen ist Verschränkung dagegen vergleichsweise leicht herzustellen. Genau wie man ein Spinnennetz an bestimmten Stellen verstärkt, statt einen einzigen Faden über die ganze Lücke zu spannen, bauen wir die lange Verbindung aus kurzen, stabilen Teilstücken auf und fügen sie zusammen.
+
+Die Verbindungsoperation ist das **Entanglement Swapping** [3]. Alice teilt ein Paar mit der linken Hälfte eines mittleren Knotens, Bob ein eigenes Paar mit der rechten Hälfte; zu diesem Zeitpunkt teilen Alice und Bob nichts. Der mittlere Knoten führt eine **Bell-Zustandsmessung** an seinen beiden Qubits durch, zerstört sie dabei und hinterlässt Alice und Bob verschränkt – obwohl ihre Photonen einander nie begegnet sind. Zwei klassische Bits, die das Ergebnis mitteilen, sagen ihnen, welche Korrektur anzuwenden ist.
+
+## Repeater-Architekturen
+
+Swapping allein genügt nicht. Zwei unabhängige Fehlerquellen müssen behandelt werden, und wie eine Architektur damit umgeht, bestimmt ihre Generation [4].
+
+**Verlustfehler.** Die Erzeugung einer Verbindung ist angekündigt (heralded) und probabilistisch, mit einer Erfolgswahrscheinlichkeit, die wie $\eta_{\text{link}}$ skaliert, und ein Swap benötigt beide angrenzenden Verbindungen gleichzeitig. Ohne Speicherung multiplizieren sich diese Wahrscheinlichkeiten, und man fällt auf die Skalierung der direkten Übertragung zurück. **Quantenspeicher** entkoppeln die Versuche: Eine gelungene Verbindung wird festgehalten, während der Nachbar es weiter probiert.
+
+**Operationsfehler.** Unvollkommene Gatter, Speicher und Messungen verschlechtern die Fidelity, und Swapping verstärkt diesen Effekt – zwei Verbindungen der Fidelity $F$ ergeben ein geswapptes Paar mit einer Fidelity strikt unterhalb von $F$. Über viele verschachtelte Ebenen ist das fatal, sofern nicht aktiv gegengesteuert wird.
+
+*Repeater der ersten Generation* nach Briegel, Dür, Cirac und Zoller [5] wechseln Swapping mit **Entanglement Purification** ab [6]: Mehrere verrauschte Paare werden verbraucht, um eines höherer Fidelity zu destillieren. Reinigt man vor jedem Swap, bleibt die Fidelity oberhalb der Schwelle, während sich die Entfernung verdoppelt, sodass der Ressourcenbedarf polynomiell statt exponentiell in $L$ wächst – zum Preis zweiseitiger Signalübertragung, wodurch die Umlaufzeit zum Flaschenhals für die Rate wird. Verfahren der *zweiten* und *dritten Generation* ersetzen Purification und Heralding schrittweise durch Quantenfehlerkorrektur und tauschen einseitige Kommunikation gegen weit höhere Anforderungen an Codedistanz und Gattertreue.
+
+## Wo wir heute stehen
+
+Der Maßstab für einen einzelnen Knoten ist erreicht. Bhaskar et al. nutzten ein Silizium-Fehlstellenzentrum in einem nanophotonischen Diamantresonator für asynchrone Bell-Zustandsmessungen und erzielten eine vierfach höhere MDI-QKD-Schlüsselrate als die verlustäquivalente direkte Verbindung, womit sie die repeaterlose Schranke überschritten [7]. Das ist der erste eindeutige Nachweis, dass ein Zwischenknoten die direkte Übertragung schlägt.
+
+Die Feldbereitstellung schreitet parallel voran: Verschränkte Photonen wurden über 34 km verlegter Stadtfaser in New York kontinuierlich verteilt, mit automatisierter Polarisationsstabilisierung [8]. Für interkontinentale Entfernungen bleiben Satelliten der einzige nachgewiesene Weg – *Micius* verteilte verschränkte Paare an 1120 km voneinander entfernte Bodenstationen und führte dazwischen eine verschränkungsbasierte QKD durch, ohne selbst als vertrauenswürdiger Knoten zu fungieren [9]. Noch nicht gezeigt wurde eine Kette mehrerer Knoten mit jener polynomiellen Raten-Distanz-Skalierung, die die Architektur überhaupt erst motiviert [10].
+
+## Mathematische Anmerkung: Entanglement Swapping Schritt für Schritt
+
+Wir bezeichnen die vier Qubits mit $A$ (Alice), $B$ und $C$ (die beiden Hälften des mittleren Knotens) und $D$ (Bob). Beide Verbindungen starten im selben Bell-Zustand:
+
+$$
+|\Phi^+\rangle_{AB} \otimes |\Phi^+\rangle_{CD}
+= \frac{1}{2}\left(|00\rangle_{AB} + |11\rangle_{AB}\right)\left(|00\rangle_{CD} + |11\rangle_{CD}\right)
+$$
+
+Ausmultiplizieren und Umgruppieren der Kets, sodass $A$ und $D$ zusammenstehen und ebenso $B$ und $C$:
+
+$$
+= \frac{1}{2}\Big( |00\rangle_{AD}|00\rangle_{BC} + |01\rangle_{AD}|01\rangle_{BC} + |10\rangle_{AD}|10\rangle_{BC} + |11\rangle_{AD}|11\rangle_{BC} \Big)
+$$
+
+Physikalisch ist bisher nichts geschehen – das ist nur eine Umbenennung. Nun schreiben wir das Paar $BC$ in der Bell-Basis, mit
+
+$$
+|00\rangle = \frac{|\Phi^+\rangle + |\Phi^-\rangle}{\sqrt{2}}, \qquad
+|11\rangle = \frac{|\Phi^+\rangle - |\Phi^-\rangle}{\sqrt{2}}
+$$
+
+$$
+|01\rangle = \frac{|\Psi^+\rangle + |\Psi^-\rangle}{\sqrt{2}}, \qquad
+|10\rangle = \frac{|\Psi^+\rangle - |\Psi^-\rangle}{\sqrt{2}}
+$$
+
+Einsetzen und Sortieren nach dem Bell-Zustand von $BC$ ergibt
+
+$$
+= \frac{1}{2}\Big(
+|\Phi^+\rangle_{BC}|\Phi^+\rangle_{AD}
++ |\Phi^-\rangle_{BC}|\Phi^-\rangle_{AD}
++ |\Psi^+\rangle_{BC}|\Psi^+\rangle_{AD}
++ |\Psi^-\rangle_{BC}|\Psi^-\rangle_{AD}
+\Big)
+$$
+
+Das ist bereits das gesamte Ergebnis. Jede der vier Amplituden ist $\tfrac{1}{2}$, sodass die Bell-Zustandsmessung des mittleren Knotens jedes Ergebnis mit Wahrscheinlichkeit $\left|\tfrac{1}{2}\right|^2 = \tfrac{1}{4}$ liefert – und in jedem Fall bleiben $A$ und $D$ maximal verschränkt zurück.
+
+Die vier möglichen Ergebnisse unterscheiden sich nur durch eine Pauli-Korrektur an einem Qubit:
+
+$$
+|\Phi^-\rangle_{AD} = (Z \otimes I)|\Phi^+\rangle_{AD}, \qquad
+|\Psi^+\rangle_{AD} = (X \otimes I)|\Phi^+\rangle_{AD}
+$$
+
+und $|\Psi^-\rangle_{AD} = (XZ \otimes I)|\Phi^+\rangle_{AD}$ bis auf eine globale Phase. Sobald Alice und Bob also die zwei klassischen Bits kennen, die das Ergebnis angeben, wendet eine von beiden $I$, $X$, $Z$ oder $XZ$ an, und sie besitzen $|\Phi^+\rangle$.
+
+Zwei Punkte lohnen die Aufmerksamkeit. Erstens: Bevor diese zwei klassischen Bits eintreffen, ist der reduzierte Zustand von $AD$ – gemittelt über die vier gleich wahrscheinlichen Ergebnisse – maximal gemischt, und Alice und Bob können ihm nichts entnehmen. Genau deshalb überträgt Entanglement Swapping keine Information schneller als Licht, und das ist die formale Fassung des Vorbehalts aus dem ersten Abschnitt. Zweitens wurde die Verschränkung zwischen $A$ und $D$ nirgendwohin geschickt; sie wurde lokal am mittleren Knoten aus zwei kürzeren Verbindungen zusammengesetzt. In genau diesem Sinne wird das Spinnennetz an einer Stelle verstärkt, statt über die Lücke gespannt zu werden.
+
+## Quellen
+
+[1] W. K. Wootters and W. H. Zurek, "A single quantum cannot be cloned," *Nature*, vol. 299, no. 5886, pp. 802–803, Oct. 1982.
+
+[2] S. Pirandola, R. Laurenza, C. Ottaviani, and L. Banchi, "Fundamental limits of repeaterless quantum communications," *Nat. Commun.*, vol. 8, art. 15043, Apr. 2017.
+
+[3] M. Żukowski, A. Zeilinger, M. A. Horne, and A. K. Ekert, "'Event-ready-detectors' Bell experiment via entanglement swapping," *Phys. Rev. Lett.*, vol. 71, no. 26, pp. 4287–4290, Dec. 1993.
+
+[4] K. Azuma, S. E. Economou, D. Elkouss, P. Hilaire, L. Jiang, H.-K. Lo, and I. Tzitrin, "Quantum repeaters: From quantum networks to the quantum internet," *Rev. Mod. Phys.*, vol. 95, no. 4, art. 045006, Dec. 2023.
+
+[5] H.-J. Briegel, W. Dür, J. I. Cirac, and P. Zoller, "Quantum repeaters: The role of imperfect local operations in quantum communication," *Phys. Rev. Lett.*, vol. 81, no. 26, pp. 5932–5935, Dec. 1998.
+
+[6] W. Dür, H.-J. Briegel, J. I. Cirac, and P. Zoller, "Quantum repeaters based on entanglement purification," *Phys. Rev. A*, vol. 59, no. 1, pp. 169–181, Jan. 1999.
+
+[7] M. K. Bhaskar et al., "Experimental demonstration of memory-enhanced quantum communication," *Nature*, vol. 580, no. 7801, pp. 60–64, Apr. 2020.
+
+[8] A. N. Craddock, A. Lazenby, G. B. Portmann, R. Sekelsky, M. Flament, and M. Namazi, "Automated distribution of polarization-entangled photons using deployed New York City fibers," *PRX Quantum*, vol. 5, no. 3, art. 030330, Aug. 2024.
+
+[9] J. Yin et al., "Entanglement-based secure quantum cryptography over 1,120 kilometres," *Nature*, vol. 582, no. 7813, pp. 501–505, Jun. 2020.
+
+[10] S. Wehner, D. Elkouss, and R. Hanson, "Quantum internet: A vision for the road ahead," *Science*, vol. 362, no. 6412, art. eaam9288, Oct. 2018.
+
+[11] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010, ch. 12.
+
+### Bildquellen
+
+* Internet-Bild: Globus mit weltweiten Kommunikationslinien. Shutterstock. https://www.shutterstock.com
+* Netz-Bild: Vektorgrafik eines Spinnennetzes. Aus Vektorgrafik-Sammlungen.

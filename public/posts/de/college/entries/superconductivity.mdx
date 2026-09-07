@@ -1,0 +1,192 @@
+---
+title: "Supraleitung"
+subtitle: "Supraleitung: null Widerstand, Cooper-Paare und Quantencomputing (difficult)"
+author: "Zeynep Kilic"
+date: "2026-08-20"
+---
+
+## Einführung
+
+Stell dir vor, du fährst mit dem Fahrrad auf einer Straße voller Bodenwellen und Steine. Beim Vorwärtskommen wirst du langsamer, verlierst Energie und musst ständig weitertreten. Ähnlich verhält sich Elektrizität in gewöhnlichen Materialien: Beim Fließen „stößt" der Strom ständig an etwas im Material und verliert Energie in Form von Wärme.
+
+Stell dir nun eine vollkommen glatte Straße vor, auf der du ewig fahren kannst, ohne langsamer zu werden, selbst wenn du aufhörst zu treten. Genau das passiert in einem Supraleiter.
+
+Supraleitung ist ein makroskopisches Quantenphänomen: Unterhalb einer kritischen Temperatur wird der elektronische Grundzustand zu einem kohärenten Kondensat gepaarter Elektronen, beschrieben durch einen einzigen komplexen Ordnungsparameter mit einer über die gesamte Probe wohldefinierten Phase. Gerade dieser letzte Punkt – eine Quantenphase, die man auf Zentimeterskala messen kann – macht supraleitende Schaltkreise als Quantencomputer-Hardware brauchbar.
+
+## Zwei definierende Eigenschaften
+
+**Verschwindender Widerstand.** Unterhalb von $T_c$ – erstmals 1911 von Kamerlingh Onnes an Quecksilber bei 4,2 K beobachtet [1] – ist der Gleichstromwiderstand exakt null. Dauerströme in supraleitenden Ringen wurden über Jahre hinweg ohne messbaren Abfall beobachtet.
+
+**Der Meißner-Ochsenfeld-Effekt.** Ein Supraleiter verdrängt magnetischen Fluss aus seinem Inneren, unabhängig von seiner magnetischen Vorgeschichte.
+
+![Ein Magnet schwebt über einem mit flüssigem Stickstoff gekühlten Supraleiter](images/magnet-above-sc.webp)
+
+Die zweite Eigenschaft folgt nicht aus der ersten, und diese Unterscheidung verdient Genauigkeit. Für einen hypothetischen perfekten Leiter liefert das Faradaysche Gesetz $\partial \vec{B}/\partial t = 0$ im Innern, sodass Abkühlen im Feld den Fluss einfrieren würde. Ein Supraleiter erzwingt stattdessen $\vec{B} = 0$ von sich aus. Supraleitung ist damit eine echte thermodynamische Phase, auf jedem Weg erreichbar, und nicht der Grenzfall gewöhnlicher Leitung.
+
+Die Brüder London erfassten dies phänomenologisch. Kombiniert man die London-Gleichung mit dem Ampèreschen Gesetz, so ergibt sich
+
+$$
+\nabla^2 \vec{B} = \frac{1}{\lambda_L^2} \vec{B},
+\qquad
+\lambda_L = \sqrt{\frac{m}{\mu_0 n_s e^2}}
+$$
+
+Das Feld klingt also exponentiell ins Innere ab, über die **Londonsche Eindringtiefe** $\lambda_L$, typischerweise einige zehn bis hundert Nanometer, wobei $n_s$ die Dichte der supraleitenden Ladungsträger ist [6].
+
+## Cooper-Paarung und die Energielücke
+
+Coopers Ergebnis von 1956 bildet die Grundlage. Man füge zwei Elektronen oberhalb einer gefüllten Fermi-See hinzu, die über eine beliebig schwache Anziehung innerhalb einer Schale der Breite $\hbar\omega_D$ um die Fermi-Energie wechselwirken. Löst man das Zweikörperproblem in Gegenwart der See, erhält man einen gebundenen Zustand der Bindungsenergie
+
+$$
+E_b \approx 2\hbar\omega_D \, e^{-2/N(0)V}
+$$
+
+wobei $N(0)$ die Zustandsdichte an der Fermi-Kante und $V$ die Wechselwirkungsstärke ist. Zwei Merkmale sind entscheidend: Ein gebundener Zustand bildet sich für *jedes* $V > 0$, die Fermi-See ist also instabil gegenüber Paarbildung; und die Exponentialfunktion ist nicht-analytisch in $V$, sodass keine Ordnung der Störungstheorie um den freien Elektronenzustand sie hervorbringt. Deshalb widersetzte sich die Supraleitung fast fünfzig Jahre lang einer Erklärung.
+
+Die Anziehung wird durch Phononen vermittelt – ein vorbeilaufendes Elektron polarisiert das Gitter, und die träge nachfolgende positive Ladung zieht ein zweites Elektron an. Da die Ionenbewegung weit langsamer ist als die elektronische, müssen die beiden Elektronen einander nicht nahe sein, und die Verzögerung lässt die Anziehung die abgeschirmte Coulomb-Abstoßung übertreffen. Der **Isotopeneffekt**, $T_c \propto M^{-1/2}$, ist der Fingerabdruck: Ein schwereres Isotop verschiebt die Phononenfrequenzen und mit ihnen $T_c$.
+
+BCS konstruierten daraus den Vielteilchen-Grundzustand [2]:
+
+$$
+|\Psi_{\text{BCS}}\rangle = \prod_{k} \left( u_k + v_k \, c^\dagger_{k\uparrow} c^\dagger_{-k\downarrow} \right) |0\rangle
+$$
+
+eine kohärente Überlagerung über die Besetzung zeitumkehrsymmetrischer Paare, mit $|u_k|^2 + |v_k|^2 = 1$. Dieser Zustand besitzt keine definierte Teilchenzahl – er besitzt stattdessen eine definierte *Phase*, die konjugierte Variable. Genau diese gebrochene $U(1)$-Symmetrie macht den Josephson-Effekt möglich.
+
+Die Minimierung des Molekularfeld-Hamiltonoperators liefert die selbstkonsistente Gap-Gleichung, deren Lösung im Grenzfall schwacher Kopplung lautet:
+
+$$
+\Delta(0) \approx 2 \hbar \omega_D \, e^{-1/N(0)V}
+$$
+
+Das Quasiteilchenspektrum $E_k = \sqrt{\xi_k^2 + \Delta^2}$ besitzt das Minimum $\Delta$: Unterhalb der Lücke gibt es keine Anregungen. Zusammen mit der Gleichung für $T_c$ ergibt sich ein parameterfreies universelles Verhältnis
+
+$$
+\frac{2\Delta(0)}{k_B T_c} \approx 3.53
+$$
+
+das bei konventionellen Supraleitern auf wenige Prozent genau bestätigt wurde und zu den stärksten Bestätigungen der Theorie zählt. Der verschwindende Widerstand folgt daraus: Ein Paar aus dem Kondensat herauszustreuen kostet mindestens $2\Delta$, und für $k_B T \ll \Delta$ ist dieser Phasenraum thermisch unerreichbar.
+
+## Flussquantisierung
+
+Fordert man, dass der Ordnungsparameter $\psi = |\psi| e^{i\theta}$ entlang einer geschlossenen Schleife eindeutig ist, so wird der eingeschlossene Fluss quantisiert:
+
+$$
+\Phi = n \Phi_0, \qquad \Phi_0 = \frac{h}{2e} \approx 2.068 \times 10^{-15} \ \text{Wb}
+$$
+
+Das $2e$ im Nenner ist eine direkte Messung der Paarladung – die Paarbildung wird also durch eine magnetische Messung bestätigt.
+
+## Der Josephson-Effekt
+
+Trennt man zwei Supraleiter durch eine Barriere, die dünn genug ist, dass Cooper-Paare hindurchtunneln, so zeigte Josephson 1962, dass der Suprastrom allein von der Differenz $\varphi = \theta_1 - \theta_2$ der beiden Phasen abhängt [7]:
+
+$$
+I = I_c \sin \varphi
+\qquad\text{(Josephson-Gleichstromeffekt)}
+$$
+
+$$
+\frac{d\varphi}{dt} = \frac{2eV}{\hbar}
+\qquad\text{(Josephson-Wechselstromeffekt)}
+$$
+
+Ein Strom fließt völlig ohne Spannung über dem Kontakt. Diese beiden Beziehungen bilden die gesamte Grundlage des supraleitenden Quantencomputings – aus einem Grund, der in der mathematischen Anmerkung am Ende dieses Artikels entwickelt wird.
+
+## Vom Schaltkreis zum Qubit
+
+Betrachten wir zunächst einen gewöhnlichen LC-Schwingkreis. Sein Hamiltonoperator ist harmonisch, seine Energieniveaus liegen also gleichmäßig um $\hbar\omega_0$ auseinander. Für ein Qubit ist das fatal: Ein Mikrowellenpuls, der auf $|0\rangle \to |1\rangle$ abgestimmt ist, treibt ebenso gut $|1\rangle \to |2\rangle$, und die Besetzung läuft direkt aus den beiden gewünschten Niveaus heraus. **Anharmonizität ist zwingend erforderlich**, und eine lineare Induktivität kann sie nicht liefern.
+
+Ersetzt man die Spule durch einen Josephson-Kontakt, ergibt sich
+
+$$
+H = 4 E_C \, \hat{n}^2 - E_J \cos \hat{\varphi}
+$$
+
+wobei $\hat{n}$ die über den Kontakt transferierten Cooper-Paare zählt, $\hat{\varphi}$ die konjugierte Phase ist, $E_C = e^2/2C$ die Ladungsenergie und $E_J = I_c \Phi_0 / 2\pi$ die Josephson-Energie. Der Kosinus ist der anharmonische Term, und er steht dort wegen des Ergebnisses der mathematischen Anmerkung.
+
+Das Verhältnis $E_J/E_C$ legt das Regime fest. Frühe Cooper-Paar-Box-Qubits arbeiteten bei $E_J/E_C \lesssim 1$: stark anharmonisch, aber so empfindlich gegenüber Streuladungen, dass die Dephasierungszeiten im Nanosekundenbereich lagen. Das **Transmon** [8] wählt den entgegengesetzten Grenzfall, $E_J/E_C \sim 50$–$100$, indem der Kontakt mit einer großen Kapazität überbrückt wird. Entwickelt man den Kosinus bis zur vierten Ordnung, so folgt
+
+$$
+\hbar \omega_{01} \approx \sqrt{8 E_J E_C} - E_C,
+\qquad
+\alpha \equiv \omega_{12} - \omega_{01} \approx - \frac{E_C}{\hbar}
+$$
+
+Die entscheidende Eigenschaft dieses Entwurfs ist eine Asymmetrie: Die Empfindlichkeit gegenüber Offset-Ladungen fällt *exponentiell* in $\sqrt{E_J/E_C}$ ab, während die Anharmonizität nur schwach polynomiell abnimmt. Ladungsrauschen lässt sich daher um Größenordnungen unterdrücken, wobei man lediglich einen moderaten Faktor an Anharmonizität aufgibt. Typische Transmons arbeiten nahe 5 GHz mit einer Anharmonizität um $-200$ MHz.
+
+Die Betriebstemperatur folgt aus der Energieskala: $\hbar\omega_{01}/k_B \approx 240$ mK für ein 5-GHz-Qubit, sodass Mischungskryostaten bei 10–20 mK die thermische Anregung unter $10^{-5}$ halten. Die Kohärenz wird vor allem durch Zwei-Niveau-System-Defekte in Oberflächenoxiden begrenzt; Materialforschung – Tantal auf hochohmigem Silizium – hat $T_1$ auf 1,68 ms gesteigert [9]. Blais et al. [10] geben die vollständige Behandlung im Rahmen der Schaltkreis-Quantenelektrodynamik.
+
+Die verbreitetste Anwendung bleibt der MRT-Scanner, dessen supraleitende Wicklungen ein starkes, außergewöhnlich stabiles Feld ohne ohmsche Erwärmung aufrechterhalten [3]; dieselbe Technik treibt die Beschleunigermagnete am CERN an [4].
+
+## Jenseits von BCS
+
+BCS beschreibt phononenvermittelte $s$-Wellen-Paarung, und mehrere wichtige Materialfamilien passen nicht dazu.
+
+Die **Cuprate**, 1986 von Bednorz und Müller entdeckt [5], sind geschichtete Kupferoxide – Mott-Isolatoren im undotierten Zustand, supraleitend bei Dotierung, mit $T_c$ bis etwa 133 K bei Normaldruck. Der Ordnungsparameter besitzt $d_{x^2-y^2}$-Symmetrie mit Knoten, der Normalzustand ist keine Fermi-Flüssigkeit, und der Paarungsmechanismus, an dem vermutlich antiferromagnetische Spinfluktuationen beteiligt sind, ist nach vier Jahrzehnten weiterhin ungeklärt. Er bleibt eines der großen offenen Probleme der Festkörperphysik.
+
+**Nickelate** haben sich als dritte Hoch-$T_c$-Familie herausgebildet, mit Volumensupraleitung nahe 40 K bei Normaldruck und einem Einsatz nahe 80 K unter Druck. **Hydride** unter Megabar-Drücken erreichen hohe $T_c$-Werte, vermutlich durch konventionelle BCS-Paarung, verstärkt durch die hohen Phononenfrequenzen des Wasserstoffs – die erforderlichen Drücke schließen eine Anwendung jedoch aus.
+
+Dieses Teilgebiet hat eine Geschichte prominenter Behauptungen, die sich nicht reproduzieren ließen, einschließlich zurückgezogener Veröffentlichungen. Jüngste Berichte über Rekorde bei Normaldruck sollten daher als vorläufig behandelt werden, bis sie unabhängig bestätigt sind – was normale wissenschaftliche Praxis ist und keine Skepsis gegenüber dem Feld.
+
+## Mathematische Anmerkung: Warum ein Josephson-Kontakt eine nichtlineare Induktivität ist
+
+Die Behauptung, auf der das gesamte Transmon beruht, lautet: Ein Josephson-Kontakt verhält sich wie eine Spule, deren Induktivität vom hindurchfließenden Strom abhängt. Das folgt in drei Zeilen aus den beiden Josephson-Beziehungen.
+
+Man beginne mit der Gleichstrombeziehung und leite nach der Zeit ab:
+
+$$
+I = I_c \sin\varphi
+\quad\Longrightarrow\quad
+\frac{dI}{dt} = I_c \cos\varphi \, \frac{d\varphi}{dt}
+$$
+
+Nun setze man die Wechselstrombeziehung $d\varphi/dt = 2eV/\hbar$ ein:
+
+$$
+\frac{dI}{dt} = I_c \cos\varphi \cdot \frac{2eV}{\hbar}
+$$
+
+Nach der Spannung umgestellt:
+
+$$
+V = \frac{\hbar}{2 e I_c \cos\varphi} \, \frac{dI}{dt}
+$$
+
+Man vergleiche dies mit der definierenden Gleichung einer gewöhnlichen Spule, $V = L \, dI/dt$. Beide haben dieselbe Form, sodass sich eine effektive Induktivität ablesen lässt:
+
+$$
+L_J(\varphi) = \frac{\hbar}{2 e I_c \cos \varphi} = \frac{\Phi_0}{2\pi I_c \cos \varphi}
+$$
+
+Das ist die ganze Herleitung, und das Ergebnis verdient genaues Hinsehen. $L_J$ hängt von $\varphi$ ab und über $I = I_c\sin\varphi$ damit vom Strom. Der Kontakt ist also eine Spule, deren Induktivität sich danach richtet, wie viel Strom durch sie fließt.
+
+Drei Beobachtungen folgen daraus.
+
+Erstens wird nichts dissipiert. Die Beziehung enthält keinen Widerstandsterm, denn der Strom wird von Cooper-Paaren getragen, und unterhalb der Energielücke gibt es keine Anregungen, in die sie streuen könnten. Der Kontakt ist **zugleich nichtlinear und dissipationsfrei** – und kein gewöhnliches Schaltungselement schafft beides. Ein Widerstand dissipiert, eine normale Spule ist linear. Genau diese Kombination benötigt ein Qubit, und deshalb wurde ausgerechnet die Supraleitung und kein anderer Zweig der Elektronik zur Heimat einer der führenden Quantencomputer-Plattformen.
+
+Zweitens ist es die Nichtlinearität, die die Energieniveaus ungleichmäßig verteilt. Setzt man $L_J$ in einen Schaltkreis-Hamiltonoperator ein, entsteht der Term $-E_J\cos\hat\varphi$ des vorigen Abschnitts, dessen Korrekturen höherer Ordnung $\omega_{12}$ von $\omega_{01}$ trennen und es einem Mikrowellenpuls erlauben, allein die beiden untersten Niveaus anzusprechen.
+
+Drittens lohnt der Blick darauf, wo die Physik eingetreten ist. Die Wechselstrombeziehung $d\varphi/dt = 2eV/\hbar$ trägt den Faktor $2e$ – die Cooper-Paar-Ladung aus dem Flussquant. Das Qubit im Herzen eines modernen Quantencomputers funktioniert, weil sich Elektronen paaren, und diese Tatsache lässt sich lückenlos vom Fahrrad auf der holprigen Straße bis zur Anharmonizität der Niveauleiter verfolgen.
+
+## Quellen
+
+[1] D. van Delft and P. Kes, "The discovery of superconductivity," *Phys. Today*, vol. 63, no. 9, pp. 38–43, Sep. 2010.
+
+[2] J. Bardeen, L. N. Cooper, and J. R. Schrieffer, "Theory of superconductivity," *Phys. Rev.*, vol. 108, no. 5, pp. 1175–1204, Dec. 1957.
+
+[3] National Institute of Biomedical Imaging and Bioengineering, "Magnetic resonance imaging (MRI)." [Online]. Available: https://www.nibib.nih.gov/science-education/science-topics/magnetic-resonance-imaging-mri
+
+[4] CERN, "Superconductivity." [Online]. Available: https://home.cern/science/engineering/superconductivity
+
+[5] J. G. Bednorz and K. A. Müller, "Possible high $T_c$ superconductivity in the Ba–La–Cu–O system," *Z. Phys. B*, vol. 64, no. 2, pp. 189–193, Jun. 1986.
+
+[6] M. Tinkham, *Introduction to Superconductivity*, 2nd ed. New York, NY, USA: McGraw-Hill, 1996.
+
+[7] B. D. Josephson, "Possible new effects in superconductive tunnelling," *Phys. Lett.*, vol. 1, no. 7, pp. 251–253, Jul. 1962.
+
+[8] J. Koch, T. M. Yu, J. Gambetta, A. A. Houck, D. I. Schuster, J. Majer, A. Blais, M. H. Devoret, S. M. Girvin, and R. J. Schoelkopf, "Charge-insensitive qubit design derived from the Cooper pair box," *Phys. Rev. A*, vol. 76, no. 4, art. 042319, Oct. 2007.
+
+[9] M. P. Bland et al., "Millisecond lifetimes and coherence times in 2D transmon qubits," *Nature*, vol. 647, pp. 343–348, Nov. 2025.
+
+[10] A. Blais, A. L. Grimsmo, S. M. Girvin, and A. Wallraff, "Circuit quantum electrodynamics," *Rev. Mod. Phys.*, vol. 93, no. 2, art. 025005, May 2021.

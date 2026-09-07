@@ -1,0 +1,101 @@
+---
+title: "Quantenkommunikation"
+subtitle: "Quantenkommunikation – Wie ein Quanteninternet entsteht (medium)"
+author: "Zeynep Kilic"
+date: "2026-08-18"
+---
+
+## Was ist Quantenkommunikation?
+
+Quantenkommunikation ist der Baustein, aus dem ein Quanteninternet entstehen würde. Das heutige Internet beruht auf optischen Netzen: Laserpulse laufen durch Glasfasern und übertragen Informationen nahezu mit Lichtgeschwindigkeit von einem Ort zum anderen.
+
+![Internet](images/internet.png)
+
+Ein Quanteninternet würde statt Bits **Qubits** übertragen. Reizvoll ist dabei die Verschränkung – zwei Teilchen sind so miteinander verbunden, dass eine Handlung am einen das andere beeinflusst, wie weit sie auch voneinander entfernt sind. Es sieht so aus, als ließen sich damit Nachrichten augenblicklich übertragen, doch die Quantenmechanik verhindert genau das: Die Korrelationen sind real, aber um etwas Nutzbares aus ihnen zu gewinnen, braucht man immer zusätzlich eine gewöhnliche klassische Nachricht – und die ist nicht schneller als das Licht.
+
+## Warum sich das Signal nicht einfach verstärken lässt
+
+Glas ist nicht vollkommen durchsichtig, deshalb werden Laserpulse auf ihrem Weg schwächer. Klassische Netze lösen das mit Verstärkern: Etwa alle 80 km liest ein Gerät das abgeschwächte Signal aus, rekonstruiert, was gemeint war, und sendet eine frische, helle Kopie weiter. Für Qubits ist das verboten.
+
+Das **No-Cloning-Theorem** besagt, dass es keine Operation gibt, die einen unbekannten Quantenzustand nimmt und zwei identische Kopien davon erzeugt. Das ist keine Grenze unserer Technik, sondern folgt aus der Mathematik der Quantenmechanik selbst [1]; den Beweis findest du in unserem [Artikel zum No-Cloning-Theorem](/de/posts/entries/highschool/noncloning).
+
+Das ist nicht nur eine schlechte Nachricht: Genau diese Unmöglichkeit des Kopierens macht die [Quantenschlüsselverteilung](/de/posts/entries/highschool/qkd) sicher, denn auch eine Lauscherin kann ein Qubit unterwegs nicht heimlich duplizieren. Es bedeutet aber, dass ein Quantennetz die klassische Lösung nicht übernehmen kann.
+
+## Wie viel Licht tatsächlich ankommt
+
+Eine gewöhnliche Telekommunikationsfaser verliert etwa 0.2 Dezibel Signal pro Kilometer. Dezibel sind eine logarithmische Skala, daher beträgt der Anteil der Photonen, die eine Faser der Länge $L$ überstehen:
+
+$$
+\eta = 10^{-\alpha L / 10}
+$$
+
+Dabei ist $\eta$ (eta) der Anteil der überlebenden Photonen, $L$ die Faserlänge in Kilometern und $\alpha$ (alpha) der Verlust pro Kilometer, also ungefähr $0.2$ dB/km.
+
+Setzt man Zahlen ein, wird das Problem offensichtlich. Über 100 km beträgt der Verlust $0.2 \times 100 = 20$ dB, also $\eta = 10^{-2}$: Eines von hundert Photonen kommt an. Über 1000 km sind es 200 dB und damit $\eta = 10^{-20}$ – schickt man zehn Milliarden Photonen pro Sekunde hinein, wartet man rund **dreihundert Jahre**, bis eines am anderen Ende herauskommt.
+
+Deshalb sind faserbasierte Quantenverbindungen bislang bei einigen hundert Kilometern stehen geblieben, während gewöhnlicher Internetverkehr ganze Ozeane überquert. Das klassische Signal wird unterwegs verstärkt, das Quantensignal nicht.
+
+## Verschränkung als Ressource
+
+Der Ausweg besteht nicht darin, die Nachricht selbst zu verschicken, sondern zuerst Verschränkung zu teilen.
+
+Zwei Qubits lassen sich in einem **Bell-Zustand** präparieren, zum Beispiel
+
+$$
+|\Phi^+\rangle = \frac{1}{\sqrt{2}} \left( |00\rangle + |11\rangle \right)
+$$
+
+Dabei bedeutet $|00\rangle$ „beide Qubits zeigen 0", $|11\rangle$ „beide zeigen 1", und der Vorfaktor $\tfrac{1}{\sqrt{2}}$ macht beide Ergebnisse gleich wahrscheinlich. Für sich genommen hat keines der beiden Qubits einen festen Wert, doch sobald man eines misst, kennt man das andere.
+
+Teilen Alice und Bob ein solches Paar, können sie damit ein Qubit teleportieren oder einen gemeinsamen geheimen Schlüssel erzeugen [6] – ohne dass ein empfindlicher Quantenzustand die gesamte Strecke zwischen ihnen überstehen müsste.
+
+## Quantenrepeater: das Netz verstärken
+
+Verschränkung ist zerbrechlich wie ein Spinnennetz und über große Entfernungen schwer herzustellen.
+
+![Netz](images/web.png)
+
+Der Grund ist genau das Verlustproblem von oben: Um zwei weit entfernte Labore zu verschränken, muss man ein Photon zwischen ihnen verschicken, und dieses Photon erleidet dieselbe exponentielle Dämpfung. Über *kurze* Entfernungen ist Verschränkung dagegen vergleichsweise leicht herzustellen. Genau wie man ein Spinnennetz an bestimmten Stellen verstärkt, statt einen einzigen Faden über die ganze Lücke zu spannen, bauen wir die lange Verbindung aus kurzen, stabilen Teilstücken auf und fügen sie anschließend zusammen.
+
+Dieser Verbindungsschritt heißt **Entanglement Swapping** (Verschränkungsaustausch). Stell dir drei Stationen vor: Alice, einen mittleren Knoten und Bob. Alice teilt ein verschränktes Paar mit der linken Hälfte des mittleren Knotens, Bob ein eigenes Paar mit der rechten Hälfte – und Alice und Bob teilen zu diesem Zeitpunkt noch gar nichts miteinander.
+
+Der mittlere Knoten führt nun eine **Bell-Zustandsmessung** an seinen beiden Qubits durch: eine gemeinsame Messung, die fragt, in welchem der vier Bell-Zustände das Paar ist, ohne zu fragen, was die einzelnen Qubits tun. Dabei werden die beiden mittleren Qubits zerstört, und zurück bleibt Verschränkung zwischen Alice und Bob, deren Photonen einander nie begegnet sind. Anschließend schickt der Knoten sein Messergebnis über einen gewöhnlichen klassischen Kanal, damit beide wissen, welche Korrektur sie anwenden müssen. Diese Nachricht ist unverzichtbar und bewegt sich mit Lichtgeschwindigkeit – deshalb erlaubt das Swapping trotz des ersten Anscheins keine Signalübertragung schneller als Licht.
+
+Verkettet man genügend solcher Swaps, reicht die Verschränkung über eine Strecke, die kein einzelnes Photon hätte überwinden können. Ein Gerät, das dies leistet, heißt **Quantenrepeater**.
+
+## Warum das so schwierig ist
+
+Zwischen der Idee und einem funktionierenden Gerät stehen zwei Probleme.
+
+**Zeitliche Abstimmung.** Verschränkung zwischen benachbarten Stationen gelingt nur gelegentlich, und ein Swap benötigt *beide* angrenzenden Verbindungen im selben Moment. Da die Erfolge zufällig eintreffen, geschieht das durch Glück so gut wie nie. Die Lösung ist ein **Quantenspeicher**: etwas, das eine Hälfte eines erfolgreichen Paares kohärent und ohne Messung festhält, während der Nachbar es weiter versucht.
+
+**Fehler summieren sich.** Jeder Swap verbindet zwei unvollkommene Teilstücke zu einem, das schlechter ist als beide, sodass die Qualität sinkt, bis das Endpaar unbrauchbar ist. Der Repeater-Vorschlag von Briegel, Dür, Cirac und Zoller aus dem Jahr 1998 löste dies, indem er Swapping mit **Entanglement Purification** abwechselte – mehrere schlechte Paare werden geopfert, um ein gutes zu destillieren [2]. Wechselt man beides ab, bleibt die Qualität oberhalb einer Arbeitsschwelle, während sich die Entfernung bei jedem Schritt verdoppelt.
+
+## Wo wir heute stehen
+
+Ein einzelner Repeater-Knoten hat die direkte Übertragung bereits geschlagen. Im Jahr 2020 nutzte ein Team unter Harvard-Leitung einen Silizium-Fehlstellen-Defekt in einem Diamant-Nanoresonator als Speicherknoten und erreichte eine Schlüsselrate, die etwa viermal höher lag als bei der bestmöglichen direkten Faserverbindung mit demselben Verlust [3] – der grundsätzliche Nachweis, dass ein Repeater tatsächlich verstärkt.
+
+Für globale Entfernungen umgeht eine Alternative die Faser vollständig: Der Satellit *Micius* verteilte verschränkte Paare an zwei 1120 km voneinander entfernte Bodenobservatorien und erzeugte damit einen Schlüssel [4]. Der leere Raum ist weitaus durchlässiger als Glas, allerdings braucht das Verfahren klaren Himmel und funktioniert nur, wenn der Satellit gerade überfliegt.
+
+Noch nicht gebaut wurde eine Kette aus mehreren zusammenarbeitenden Repeater-Knoten. Das bleibt das Ziel.
+
+Es geht bei alldem nicht darum, das bestehende Internet zu ersetzen, sondern darum, das hinzuzufügen, was das klassische Netz nachweislich nicht leisten kann [5]: Schlüsselverteilung, deren Sicherheit auf Physik beruht statt auf Annahmen über die Rechenleistung eines Angreifers; Verbindungen zwischen Quantenprozessoren, sodass mehrere kleine Maschinen als eine arbeiten; und Netze verschränkter Atomuhren, die eine Präzision erreichen, die keine einzelne Uhr erreicht. Die Physik ist geklärt – was bleibt, ist Ingenieursarbeit.
+
+## Quellen
+
+[1] W. K. Wootters and W. H. Zurek, "A single quantum cannot be cloned," *Nature*, vol. 299, no. 5886, pp. 802–803, Oct. 1982.
+
+[2] H.-J. Briegel, W. Dür, J. I. Cirac, and P. Zoller, "Quantum repeaters: The role of imperfect local operations in quantum communication," *Phys. Rev. Lett.*, vol. 81, no. 26, pp. 5932–5935, Dec. 1998.
+
+[3] M. K. Bhaskar et al., "Experimental demonstration of memory-enhanced quantum communication," *Nature*, vol. 580, no. 7801, pp. 60–64, Apr. 2020.
+
+[4] J. Yin et al., "Entanglement-based secure quantum cryptography over 1,120 kilometres," *Nature*, vol. 582, no. 7813, pp. 501–505, Jun. 2020.
+
+[5] S. Wehner, D. Elkouss, and R. Hanson, "Quantum internet: A vision for the road ahead," *Science*, vol. 362, no. 6412, art. eaam9288, Oct. 2018.
+
+[6] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010.
+
+### Bildquellen
+
+* Internet-Bild: Globus mit weltweiten Kommunikationslinien. Shutterstock. https://www.shutterstock.com
+* Netz-Bild: Vektorgrafik eines Spinnennetzes. Aus Vektorgrafik-Sammlungen.

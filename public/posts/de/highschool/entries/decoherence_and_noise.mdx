@@ -1,0 +1,108 @@
+---
+title: "Dekohärenz und Rauschen"
+subtitle: "Quantendekohärenz und Rauschen (medium)"
+author: "Zeynep Kilic"
+date: "2026-08-18"
+---
+
+## Was ist Dekohärenz?
+
+Um Dekohärenz zu definieren, beginnt man leichter mit dem Gegenteil und erklärt, was Kohärenz ist. Vieles ist einzigartig für die Quantenmechanik, etwa [Verschränkung](/de/posts/entries/highschool/entanglement) oder [Superposition](/de/posts/entries/highschool/superposition), und solange ein Quantensystem kohärent bleibt, wird es durch diese Eigenschaften beschrieben.
+
+Wir können genauer sagen, was „kohärent" bedeutet. Ein Qubit in Superposition schreibt man als
+
+$$
+|\psi\rangle = a|0\rangle + b|1\rangle
+$$
+
+wobei $a$ und $b$ **komplexe** Zahlen sind – ein Detail, das mehr bedeutet, als es zunächst aussieht. Jede von ihnen trägt einen Betrag und eine **Phase**. Die Wahrscheinlichkeiten, 0 oder 1 zu messen, sind $|a|^2$ und $|b|^2$, und dabei fallen die Phasen vollständig heraus. Wären allein die Messergebnisse von Belang, wäre die Phase also unerheblich.
+
+Doch gerade die Phase ist es, die Quantencomputing funktionieren lässt. [Interferenz](/de/posts/entries/highschool/interference) zwischen verschiedenen Rechenwegen hängt von ihrer relativen Phase ab, und Algorithmen werden so gebaut, dass falsche Antworten sich auslöschen und richtige sich verstärken. **Kohärenz** bedeutet, dass die relative Phase zwischen $|0\rangle$ und $|1\rangle$ noch wohldefiniert ist.
+
+Dekohärenz bezeichnet daher den Verlust von Quanteninformation an die Umgebung – genauer: den Verlust genau dieser Phasenbeziehung. Danach hat man immer noch ein System mit denselben Messwahrscheinlichkeiten, aber es verhält sich wie eine gewöhnliche gezinkte Münze und nicht wie ein Qubit. Je größer ein System ist, desto wahrscheinlicher tritt Dekohärenz auf – und deshalb bemerkt man im Alltag keine Quanteneigenschaften [1].
+
+## Wie kommt es zur Dekohärenz?
+
+Dekohärenz wird sehr leicht ausgelöst und erfordert großen Aufwand, um sie zu verhindern. Deshalb werden Quantencomputer in speziellen Laboren gebaut, in denen Umgebungseinflüsse auf ein Minimum reduziert werden – schon ein Bus, der draußen auf der Straße vorbeifährt, kann eine Messung verderben. Weitere Faktoren sind ein leichter Temperaturanstieg (Quantencomputer werden sehr kalt gehalten, damit sich Teilchen präzise bewegen lassen) oder andere Atome im System.
+
+Das Bild, die Umgebung würde das Qubit „durchschütteln", ist anschaulich, aber unvollständig. Der tiefere Mechanismus ist Verschränkung. Kein Quantensystem ist wirklich isoliert. Es befindet sich inmitten von Streuphotonen, Chipschwingungen, fluktuierenden Feldern und Materialdefekten, und sobald es mit einem davon wechselwirkt, verschränkt es sich damit:
+
+$$
+\left( a|0\rangle + b|1\rangle \right) \otimes |E_0\rangle
+\;\longrightarrow\;
+a|0\rangle|E_0\rangle + b|1\rangle|E_1\rangle
+$$
+
+Hier sind $|E_0\rangle$ und $|E_1\rangle$ zwei Zustände der Umgebung. Die rechte Seite ist immer noch ein völlig intakter Zustand des *Gesamtsystems* – nichts wurde zerstört. Aber die Umgebung besitzt nun eine Aufzeichnung darüber, in welchem Zustand das Qubit ist, und wir haben keinen Zugriff darauf. Sind $|E_0\rangle$ und $|E_1\rangle$ unterscheidbar, hat die Umgebung das Qubit faktisch gemessen, und Interferenz zwischen den beiden Zweigen ist für uns nicht mehr sichtbar.
+
+Deshalb spricht man bei Dekohärenz auch von einem „Quantenleck". Die Information wird nicht vernichtet; sie verteilt sich auf Freiheitsgrade, die niemand verfolgen kann, und wir haben keine Möglichkeit, sie zurückzuholen. Das ist derzeit ein großes Problem beim Bau von Quantencomputern.
+
+## Die Dichtematrix als Buchführung
+
+Um ein Qubit zu beschreiben, dessen Umgebung uns unzugänglich ist, genügt der Zustandsvektor nicht mehr. Wir verwenden die **Dichtematrix**:
+
+$$
+\rho =
+\begin{pmatrix}
+|a|^2 & a b^* \\
+a^* b & |b|^2
+\end{pmatrix}
+$$
+
+Die Diagonaleinträge sind die Messwahrscheinlichkeiten; die Nichtdiagonaleinträge heißen **Kohärenzen** und tragen die Phaseninformation. Unter Dekohärenz zerfallen sie:
+
+$$
+\rho(t) =
+\begin{pmatrix}
+|a|^2 & a b^* e^{-t/T_2} \\
+a^* b\, e^{-t/T_2} & |b|^2
+\end{pmatrix}
+$$
+
+Mit wachsendem $t$ bleibt die Diagonale unangetastet, während die Nichtdiagonalterme gegen null schrumpfen und eine Diagonalmatrix zurücklassen – nichts weiter als eine klassische Wahrscheinlichkeitsverteilung über 0 und 1. Das Qubit ist zur Münze geworden [2].
+
+## Zwei Uhren: $T_1$ und $T_2$
+
+Für reale Hardware werden zwei Zerfallszeiten angegeben, und der Unterschied zwischen ihnen ist wesentlich.
+
+**$T_1$, die Energierelaxation.** Das Qubit gibt Energie ab und zerfällt von $|1\rangle$ in Richtung $|0\rangle$, wodurch sich die Diagonale von $\rho$ ändert. Das ist das Quantenanalogon eines angeregten Atoms, das ein Photon aussendet.
+
+**$T_2$, die Dephasierung.** Die relative Phase wird zufällig, ohne dass überhaupt Energie ausgetauscht wird – ein rein quantenmechanischer Ausfallmodus ohne klassisches Gegenstück. Eine typische Ursache ist ein langsam driftendes Feld, das die Frequenz des Qubits geringfügig verschiebt, sodass es Phase mit einer anderen Rate ansammelt als angenommen.
+
+Energieverlust zerstört auch die Phase, also fließt die Relaxation in die Dephasierung ein – umgekehrt aber nicht:
+
+$$
+\frac{1}{T_2} = \frac{1}{2 T_1} + \frac{1}{T_\phi}
+$$
+
+wobei $T_\phi$ die reine Dephasierung für sich beschreibt. Da $T_\phi$ stets positiv ist, ergibt sich eine harte Obergrenze: $T_2 \leq 2 T_1$. Ein Qubit, das rasch Energie verliert, kann keine gute Phasenkohärenz haben.
+
+## Quantenrauschen
+
+Quantenrauschen ist einer der Hauptgründe für Dekohärenz und zugleich eines der zentralen Merkmale von Quantenobjekten.
+
+Eine berühmte Ungleichung besagt, dass Ort und Impuls eines Teilchens nicht beide mit unbegrenzter Genauigkeit gemessen werden können. Diese Unschärfe führt zu echten Messfluktuationen – Schrotrauschen beim Zählen von Photonen, Projektionsrauschen beim Auslesen eines Qubits – und daran führt kein Weg vorbei, selbst mit einem perfekten Aufbau.
+
+Es lohnt sich, dies von der Dekohärenz zu trennen, denn beides wird oft vermengt. Die Unschärferelation erzeugt Zufälligkeit, die *nicht reduzierbar* ist: Bessere Geräte beseitigen sie nicht. Dekohärenz entsteht durch unkontrollierte Kopplung an eine Umgebung und *kann* verringert werden – durch bessere Isolation, bessere Materialien und Fehlerkorrektur. Wären beide dasselbe, wäre Quantencomputing aussichtslos. Sie sind es nicht.
+
+In heutiger Hardware zählen zu den praktischen Rauschquellen Defekte in Oxidschichten und an Materialgrenzflächen, die Energie bei der Qubit-Frequenz absorbieren, Streuwärme, die über die Steuerleitungen eindringt, ungenaue Steuerpulse und Übersprechen zwischen benachbarten Qubits.
+
+## Die NISQ-Ära und was danach kommt
+
+Heute befinden wir uns in der NISQ-Ära der Quantencomputer, wobei das N für „noisy" (verrauscht) steht – Noisy Intermediate-Scale Quantum, ein von John Preskill geprägter Begriff [3]. Mehr dazu findest du in [einem anderen Artikel](/de/posts/entries/highschool/nisq). Die praktische Grenze ist die Schaltungstiefe: Führt man zu viele Gatter aus, häufen sich Fehler schneller an, als nützlich gerechnet wird.
+
+Der Ausweg heißt **Quantenfehlerkorrektur**. Dabei wird ein logisches Qubit über viele physikalische verteilt, sodass Fehler erkannt und rückgängig gemacht werden können, ohne die kodierte Information zu messen. Das hilft allerdings nur, wenn die physikalische Fehlerrate unterhalb einer kritischen **Schwelle** liegt; oberhalb davon fügt jedes zusätzliche Qubit mehr Fehler hinzu, als es behebt.
+
+Diese Schwelle ist inzwischen unterschritten worden. Googles Willow-Prozessor betrieb fehlerkorrigierende Speicher, bei denen ein *größerer* Code die logische Fehlerrate *kleiner* machte – ein Code aus 101 Qubits erreichte etwa 0.14 % Fehler pro Korrekturzyklus, und das kodierte Qubit überdauerte das beste einzelne physikalische Qubit auf dem Chip um rund das 2,4-Fache [4]. Zum ersten Mal machte die Kodierung ein Qubit besser statt schlechter. Zugleich verbessern sich die physikalischen Qubits weiter, mit Transmon-Lebensdauern jenseits einer Millisekunde [5]. Für nutzbare Maschinen wird man beide Fortschritte brauchen.
+
+## Quellen
+
+[1] W. H. Zurek, "Decoherence, einselection, and the quantum origins of the classical," *Rev. Mod. Phys.*, vol. 75, no. 3, pp. 715–775, Jul. 2003.
+
+[2] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010, ch. 8.
+
+[3] J. Preskill, "Quantum computing in the NISQ era and beyond," *Quantum*, vol. 2, art. 79, Aug. 2018.
+
+[4] Google Quantum AI and Collaborators, "Quantum error correction below the surface code threshold," *Nature*, vol. 638, no. 8052, pp. 920–926, Feb. 2025.
+
+[5] M. P. Bland et al., "Millisecond lifetimes and coherence times in 2D transmon qubits," *Nature*, vol. 647, pp. 343–348, Nov. 2025.

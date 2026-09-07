@@ -1,0 +1,195 @@
+---
+title: "Dekohärenz und Rauschen"
+subtitle: "Quantendekohärenz und Rauschen (difficult)"
+author: "Zeynep Kilic"
+date: "2026-08-19"
+---
+
+## Was ist Dekohärenz?
+
+Um Dekohärenz zu definieren, beginnt man leichter mit dem Gegenteil und erklärt, was Kohärenz ist. Vieles ist einzigartig für die Quantenmechanik, etwa [Verschränkung](/de/posts/entries/college/entanglement) oder [Superposition](/de/posts/entries/college/superposition), und solange ein Quantensystem kohärent bleibt, wird es durch diese Eigenschaften beschrieben.
+
+Wir können genau angeben, was „kohärent" bedeutet. Ein Qubit in Superposition schreibt man als
+
+$$
+|\psi\rangle = a|0\rangle + b|1\rangle
+$$
+
+wobei $a$ und $b$ komplexe Amplituden sind, jede mit einem Betrag und einer **Phase**. Die Wahrscheinlichkeiten, 0 oder 1 zu messen, sind $|a|^2$ und $|b|^2$, und dabei fallen die Phasen vollständig heraus – wären allein die Ergebnisse von Belang, wäre die Phase unerheblich. Doch gerade die Phase lässt Quantencomputing funktionieren: [Interferenz](/de/posts/entries/college/interference) zwischen Rechenwegen hängt von der relativen Phase ab, und Algorithmen werden so gebaut, dass falsche Antworten sich auslöschen und richtige sich verstärken. **Kohärenz** bedeutet, dass diese relative Phase noch wohldefiniert ist.
+
+Dekohärenz ist ihr Verlust an die Umgebung. Danach besitzt das System dieselbe Messstatistik, verhält sich aber wie eine klassische gezinkte Münze. Je größer das System, desto schneller geschieht das – und deshalb bemerkt man im Alltag keine Quanteneigenschaften [1].
+
+## Wie kommt es zur Dekohärenz?
+
+Dekohärenz wird sehr leicht ausgelöst und erfordert großen Aufwand, um sie zu verhindern; deshalb werden Quantencomputer in speziellen Laboren gebaut, in denen Umgebungseinflüsse minimiert werden – schon ein Bus auf der Straße draußen kann ein Experiment stören. Weitere Faktoren sind ein leichter Temperaturanstieg oder andere Atome im System.
+
+Das Bild, die Umgebung würde das Qubit „durchschütteln", ist anschaulich, aber unvollständig; der tiefere Mechanismus ist Verschränkung. Sobald ein Qubit mit etwas wechselwirkt, wovon es nicht isoliert ist, korreliert es sich damit:
+
+$$
+\left( a|0\rangle + b|1\rangle \right) \otimes |E_0\rangle
+\;\longrightarrow\;
+a|0\rangle|E_0\rangle + b|1\rangle|E_1\rangle
+$$
+
+Die rechte Seite ist ein vollkommen kohärenter Zustand des *Gesamtsystems*; nichts wurde zerstört. Aber die Umgebung besitzt nun eine Aufzeichnung darüber, in welchem Zustand das Qubit ist, und sind $|E_0\rangle$ und $|E_1\rangle$ unterscheidbar, hat sie das Qubit faktisch gemessen, sodass Interferenz zwischen den Zweigen für uns nicht mehr beobachtbar ist. Deshalb spricht man von einem „Quantenleck": Die Information wird nicht vernichtet, sie verteilt sich auf Freiheitsgrade, die niemand verfolgen kann.
+
+## Offene Systeme und Quantenkanäle
+
+Die formale Fassung des Obigen lohnt sorgfältige Behandlung, denn sie zeigt, dass Dekohärenz kein zusätzliches Postulat benötigt – sie ist gewöhnliche unitäre Zeitentwicklung, von innen betrachtet.
+
+Man nehme ein System $S$ und eine Umgebung $E$, anfangs unkorreliert, mit $E$ in einem reinen Zustand $|e_0\rangle$. Die gemeinsame Zeitentwicklung ist unitär, und der Zustand des Systems allein ist das, was nach Ausspuren der Umgebung übrig bleibt:
+
+$$
+\rho' = \mathcal{E}(\rho) = \mathrm{Tr}_E \left[ U \left( \rho \otimes |e_0\rangle\langle e_0| \right) U^\dagger \right]
+$$
+
+Fügt man eine vollständige Basis $\{|e_k\rangle\}$ der Umgebung ein und definiert die **Kraus-Operatoren**
+
+$$
+E_k \equiv \langle e_k | U | e_0 \rangle
+$$
+
+die allein auf das System wirken, so erhält man die **Operatorsummen-Darstellung** [2], [6]:
+
+$$
+\mathcal{E}(\rho) = \sum_k E_k \, \rho \, E_k^\dagger,
+\qquad
+\sum_k E_k^\dagger E_k = I
+$$
+
+Die zweite Bedingung stellt sicher, dass sich die Wahrscheinlichkeiten weiterhin zu eins summieren. Jede Abbildung dieser Form ist ein **Quantenkanal**, und umgekehrt lässt sich jeder physikalisch zulässige Kanal so schreiben. Die unitäre Entwicklung von $S \cup E$, eingeschränkt auf $S$, *ist* also ein Quantenkanal – mehr braucht es nicht, um aus reversibler Physik irreversible Dynamik zu gewinnen.
+
+## Die kanonischen Kanäle
+
+Zwei Kanäle beschreiben das meiste, was einem realen Qubit widerfährt.
+
+Die **Amplitudendämpfung** beschreibt Energieverlust an eine kalte Umgebung, mit $\gamma$ als Zerfallswahrscheinlichkeit:
+
+$$
+E_0 = \begin{pmatrix} 1 & 0 \\ 0 & \sqrt{1-\gamma} \end{pmatrix},
+\qquad
+E_1 = \begin{pmatrix} 0 & \sqrt{\gamma} \\ 0 & 0 \end{pmatrix}
+$$
+
+$E_1$ bewirkt den Sprung $|1\rangle \to |0\rangle$. Beachtenswert ist, dass $E_0$ *nicht* proportional zur Identität ist: Selbst das Ergebnis „kein Sprung" verändert den Zustand, denn ein ausbleibender Photonennachweis ist selbst ein Hinweis. Dieser Kanal ist das, was $T_1$ misst.
+
+Die **Phasendämpfung** zerstört Kohärenz ohne Energieaustausch, mit dem Parameter $p$:
+
+$$
+E_0 = \begin{pmatrix} 1 & 0 \\ 0 & \sqrt{1-p} \end{pmatrix},
+\qquad
+E_1 = \begin{pmatrix} 0 & 0 \\ 0 & \sqrt{p} \end{pmatrix}
+$$
+
+Wendet man diese auf ein allgemeines $\rho$ an, bleibt die Diagonale unangetastet und die Nichtdiagonalelemente werden mit $\sqrt{1-p}$ multipliziert. Das ist der rein quantenmechanische Rauschprozess ohne klassisches Gegenstück; die mathematische Anmerkung am Ende leitet ihn von Grund auf her.
+
+Ausgeschrieben lautet ein Einzelqubit-Zustand
+
+$$
+\rho =
+\begin{pmatrix}
+|a|^2 & a b^* \\
+a^* b & |b|^2
+\end{pmatrix}
+$$
+
+Die Diagonaleinträge sind die Messwahrscheinlichkeiten, die Nichtdiagonalelemente die **Kohärenzen**, die die Phasendämpfung exponentiell gegen null treibt:
+
+$$
+\rho(t) =
+\begin{pmatrix}
+|a|^2 & a b^* e^{-t/T_2} \\
+a^* b\, e^{-t/T_2} & |b|^2
+\end{pmatrix}
+$$
+
+Der Endzustand ist diagonal – eine klassische Wahrscheinlichkeitsverteilung über 0 und 1.
+
+## Zwei Uhren: $T_1$ und $T_2$
+
+**$T_1$** ist die Energierelaxation: Das Qubit zerfällt von $|1\rangle$ in Richtung $|0\rangle$ und verändert dabei die Besetzungen. **$T_2$** ist die Dephasierung: Die relative Phase wird zufällig, ohne dass Energie ausgetauscht wird, typischerweise weil ein driftendes Feld die Qubit-Frequenz verschiebt, sodass Phase mit der falschen Rate angesammelt wird. Relaxation zerstört ebenfalls die Phase und fließt daher in $T_2$ ein, umgekehrt aber nicht:
+
+$$
+\frac{1}{T_2} = \frac{1}{2 T_1} + \frac{1}{T_\phi}
+$$
+
+wobei $T_\phi$ die reine Dephasierung allein bezeichnet. Da $T_\phi > 0$, gilt die Schranke $T_2 \leq 2 T_1$. Diese Grenze zu erreichen bedeutet, dass die reine Dephasierung beseitigt wurde und das Qubit relaxationsbegrenzt ist – dort befinden sich heute die besten Bauelemente.
+
+## Quantenrauschen
+
+Quantenrauschen ist einer der Hauptgründe für Dekohärenz. Eine berühmte Ungleichung besagt, dass Ort und Impuls nicht beide mit unbegrenzter Genauigkeit gemessen werden können, was echte Fluktuationen erzeugt – Schrotrauschen beim Photonenzählen, Projektionsrauschen beim Qubit-Auslesen –, die kein Aufbau beseitigen kann.
+
+Es lohnt sich, dies von der Dekohärenz zu trennen. Die Unschärferelation erzeugt Zufälligkeit, die *nicht reduzierbar* ist. Dekohärenz entsteht durch unkontrollierte Kopplung an eine Umgebung und *kann* verringert werden, durch bessere Isolation, bessere Materialien und Fehlerkorrektur. Wären beide dasselbe, wäre Quantencomputing aussichtslos; sie sind es nicht.
+
+In heutiger Hardware ist die dominierende Beschränkung durch **Zwei-Niveau-System-Defekte** in amorphen Oxiden an Oberflächen und Grenzflächen gegeben, die Energie bei der Qubit-Frequenz resonant absorbieren. Fortschritte dagegen kamen aus der Materialforschung statt aus dem Schaltungsentwurf: Tantal auf hochohmigem Silizium hat Transmons mit $T_1$ bis 1,68 ms und einem Hahn-Echo-$T_2$ oberhalb von $T_1$ hervorgebracht [5].
+
+## Die NISQ-Ära und was danach kommt
+
+Heute befinden wir uns in der NISQ-Ära – Noisy Intermediate-Scale Quantum, ein von John Preskill geprägter Begriff [3]. Mehr dazu findest du in [einem anderen Artikel](/de/posts/entries/college/nisq).
+
+Der Ausweg ist die Quantenfehlerkorrektur, und der Grund, warum sie überhaupt funktioniert, ist subtil. Rauschen ist *kontinuierlich* – die Amplitudendämpfung besitzt einen kontinuierlichen Parameter $\gamma$ –, während Codes nur eine diskrete Menge von Fehlern korrigieren. Die Auflösung liegt darin, dass sich jeder Einzelqubit-Kraus-Operator in der Pauli-Basis entwickeln lässt,
+
+$$
+E_k = \alpha_k I + \beta_k X + \gamma_k Y + \delta_k Z
+$$
+
+sodass die Messung der Stabilisatoren des Codes den gestörten Zustand auf einen einzelnen diskreten Pauli-Fehler projiziert. Die Syndrommessung **digitalisiert das Rauschen gratis**, und ein Code, der $\{I, X, Y, Z\}$ auf jedem Qubit korrigiert, korrigiert damit jeden Einzelqubit-Fehler, einschließlich kleiner kontinuierlicher Drehungen.
+
+Das hilft nur unterhalb einer kritischen **Schwellenfehlerrate**; oberhalb davon fügt jedes zusätzliche Qubit mehr Fehler hinzu, als es behebt. Diese Schwelle ist inzwischen unterschritten: Googles Willow-Prozessor betrieb Surface-Code-Speicher, bei denen eine Erhöhung der Codedistanz um 2 die logische Fehlerrate um $\Lambda = 2{,}14 \pm 0{,}02$ senkte und auf einem Code der Distanz 7 aus 101 Qubits $0{,}143\,\%$ Fehler pro Zyklus erreichte, wobei das kodierte Qubit das beste physikalische um das $2{,}4 \pm 0{,}3$-Fache überdauerte [4]. Dieselbe Arbeit fand seltene korrelierte Fehlerereignisse etwa einmal pro Stunde, zurückgeführt auf hochenergetische Einschläge über den ganzen Chip hinweg – und korrelierte Fehler verletzen die Unabhängigkeitsannahme hinter dem Schwellentheorem, lassen sich also nicht durch Vergrößern des Codes beheben.
+
+## Mathematische Anmerkung: Phasendämpfung aus zufälligen Phasenstößen
+
+Die Phasendämpfung lässt sich aus einer einzigen physikalischen Annahme herleiten: dass das Qubit eine Phase ansammelt, die wir nicht vorhersagen können [2].
+
+Angenommen, das Qubit erfährt eine Drehung um die $z$-Achse,
+
+$$
+R_z(\theta) = \begin{pmatrix} 1 & 0 \\ 0 & e^{i\theta} \end{pmatrix}
+$$
+
+wobei der Winkel $\theta$ zufällig ist – etwa durch ein Streufeld unbekannter Stärke bestimmt. Angewandt auf $|\psi\rangle = a|0\rangle + b|1\rangle$ ergibt sich $a|0\rangle + b e^{i\theta}|1\rangle$, sodass die Dichtematrix für einen einzelnen Stoß lautet:
+
+$$
+R_z(\theta)|\psi\rangle\langle\psi|R_z^\dagger(\theta) =
+\begin{pmatrix} |a|^2 & a b^* e^{-i\theta} \\ a^* b\, e^{i\theta} & |b|^2 \end{pmatrix}
+$$
+
+Bisher ist nichts zerfallen – das ist immer noch ein reiner Zustand, nur gedreht. Der Zerfall tritt erst auf, wenn wir über unsere Unkenntnis von $\theta$ mitteln. Sei $\theta$ gaußverteilt mit Mittelwert null und Varianz $2\lambda$:
+
+$$
+\rho = \frac{1}{\sqrt{4\pi\lambda}} \int_{-\infty}^{\infty}
+R_z(\theta)|\psi\rangle\langle\psi|R_z^\dagger(\theta)\, e^{-\theta^2/4\lambda} \, d\theta
+$$
+
+Nur die Nichtdiagonalelemente hängen von $\theta$ ab, sodass sich die gesamte Rechnung auf ein einziges Integral reduziert – die charakteristische Funktion einer Gaußverteilung:
+
+$$
+\langle e^{i\theta} \rangle
+= \frac{1}{\sqrt{4\pi\lambda}} \int_{-\infty}^{\infty} e^{i\theta} e^{-\theta^2/4\lambda} \, d\theta
+= e^{-\lambda}
+$$
+
+Eingesetzt ergibt sich
+
+$$
+\rho =
+\begin{pmatrix} |a|^2 & a b^* e^{-\lambda} \\ a^* b\, e^{-\lambda} & |b|^2 \end{pmatrix}
+$$
+
+Die Besetzungen bleiben unangetastet und die Kohärenzen werden um $e^{-\lambda}$ gedämpft. Wächst die Varianz linear in der Zeit, also $\lambda = t/T_2$, so ist dies genau der zuvor angegebene exponentielle Zerfall. Der Abgleich mit der Kraus-Form des vorigen Abschnitts verlangt $\sqrt{1-p} = e^{-\lambda}$, sodass beide Beschreibungen denselben Kanal mit unterschiedlicher Parametrisierung darstellen.
+
+Zwei Punkte verdienen Hervorhebung. Erstens verliert kein einzelner Durchlauf des Experiments irgendetwas – jeder Phasenstoß ist unitär und umkehrbar. Dekohärenz erscheint erst im *Mittel* über viele Durchläufe, und genau deshalb handelt es sich um einen Verlust an Information und nicht an Energie. Zweitens ist dies die formale Fassung des „Quantenlecks" aus dem ersten Abschnitt: Ausgetreten ist unser Wissen über $\theta$, und könnten wir die Umgebung genau genug vermessen, um es zu erfahren, ließe sich das Ganze rückgängig machen.
+
+## Quellen
+
+[1] W. H. Zurek, "Decoherence, einselection, and the quantum origins of the classical," *Rev. Mod. Phys.*, vol. 75, no. 3, pp. 715–775, Jul. 2003.
+
+[2] M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary ed. Cambridge, U.K.: Cambridge Univ. Press, 2010, ch. 8 and 10.
+
+[3] J. Preskill, "Quantum computing in the NISQ era and beyond," *Quantum*, vol. 2, art. 79, Aug. 2018.
+
+[4] Google Quantum AI and Collaborators, "Quantum error correction below the surface code threshold," *Nature*, vol. 638, no. 8052, pp. 920–926, Feb. 2025.
+
+[5] M. P. Bland et al., "Millisecond lifetimes and coherence times in 2D transmon qubits," *Nature*, vol. 647, pp. 343–348, Nov. 2025.
+
+[6] H.-P. Breuer and F. Petruccione, *The Theory of Open Quantum Systems*. Oxford, U.K.: Oxford Univ. Press, 2002.
