@@ -1,0 +1,44 @@
+---
+title: "Variational Quantum Eigensolver(VQE) Algorithm"
+subtitle: "Variational Quantum Eigensolver(VQE) Algorithm (high school)"
+author: "Melin Kayapınar"
+date: "2026-08-11"
+---
+# Variational Quantum Eigensolver (VQE) Algorithmus
+
+Derzeit verfügbare Quantencomputer sind anfällig für Rauschen – ein Zustand, der als rauschbehaftetes Quantencomputing mittlerer Skalierung (NISQ, Noisy Intermediate-Scale Quantum) bekannt ist. Dies führt dazu, dass Algorithmen, die eine fehlerfreie Ausführung von Operationen erfordern, ungültige Ergebnisse liefern. Obwohl derzeit verschiedene Techniken eingesetzt werden, um die Auswirkungen von Rauschen auf Operationen zu reduzieren, reichen diese noch nicht aus.
+
+## Allgemeine Struktur des Algorithmus
+
+Hier kommen hybride Algorithmen ins Spiel. Diese Algorithmen sind eine Kombination aus Anwendungen auf klassischen Computern und Quantencomputern. Wie in der folgenden Abbildung zu sehen ist, sieht die Struktur wie folgt aus: Zuerst werden die notwendigen Teile auf dem Quantencomputer implementiert, und anschließend werden die Messergebnisse an einen klassischen Computer übertragen. Klassische Computer optimieren diese Daten, die dann an die Quantencomputer zurückgesendet werden.
+
+ *Bildunterschrift: Variationeller Quantenalgorithmus. Quelle: https://www.mdpi.com/2724658*
+
+## Den Algorithmus verstehen
+
+Stellen Sie sich ein Mehrspielerspiel vor. Um zu gewinnen, müssen Sie den tiefsten Punkt in einer Landschaft mit mehreren Bergen und Tälern finden. Dieses Spiel ermöglicht es den Spielern jedoch, ihren Startpunkt selbst zu wählen. In der Quantenmechanik wird diese erste Vermutung als Testwellenfunktion oder Ansatz bezeichnet.
+
+Spielere können ihren Startpunkt erstellen, indem sie zunächst alle Qubit-Register auf einen bekannten Punkt setzen und dann durch die Anwendung bestimmter Operationen die Verschränkungseigenschaft der Quantenmechanik nutzen, um alle möglichen Ergebnisse gleichzeitig zu scannen. Nach der Durchführung einiger Operationen erhält man die Testwellenfunktion.
+
+Ein Gerät, das in der Quantenmechanik als Messung bezeichnet wird, steht allen Spielern zur Verfügung. Damit können sie erfahren, wie nahe sie dem tiefsten Punkt sind. Das Gerät erzeugt eine Ausgabe und überträgt diese dann an den klassischen Computer, um die nächstgelegenen Koordinaten des tiefsten Punkts zu berechnen. Diese Koordinaten sind die Parameter, die der klassische Computer verwendet, um die nächste Vermutung zu steuern. Indem man sich zu dieser spezifischen Koordinate bewegt, erhält man eine neue Testfunktion, und der Zyklus setzt sich fort, bis der Spieler den tiefsten Punkt finden kann.
+
+Da die Landschaft jedoch manchmal chaotisch und schwer zu navigieren ist, nehmen klassische Computer unter Umständen an, dass sich der Spieler bereits am tiefsten Punkt befindet. Wenn der Spieler nicht durch die Berge sehen kann, nimmt er möglicherweise dasselbe an.
+
+Stellen Sie sich vor, ein Spieler ist in einem kleinen Krater zwischen zwei großen Bergen gelandet. Wenn man sich umsieht, geht es in jede Richtung nach oben, daher ist es natürlich zu denken, dass man sich am tiefsten Punkt befindet. Aber der eigentliche Meeresboden (das globale Minimum) liegt Tausende von Metern tiefer als der kleine Krater. Daher können klassische Computer in diesen „falschen Böden“ (lokalen Minima) gefangen werden, was eine der Hauptherausforderungen beim VQE darstellt.
+
+Die detailliertere Schaltkreisstruktur, die für diesen Algorithmus erforderlich ist, ist unten dargestellt.
+
+ *Bildunterschrift: Der klassische Computer fungiert als Optimierer (der Fahrer), der die Parameterwinkel ($\theta$) anpasst, während der Quantencomputer als Rechner fungiert, der die Energie misst. Quelle: [https://arxiv.org/pdf/2405.11687*](https://arxiv.org/pdf/2405.11687)
+
+## Anwendungsbereiche
+
+VQE wird für Simulations- und Optimierungsprobleme eingesetzt. Zum Beispiel das Finden des richtigen Verhältnisses von Chemikalien in einer Arzneimittelzusammensetzung oder der größte finanzielle Gewinn aus einer Investition auf dem Aktienmarkt sind alternative Anwendungsbereiche für die Algorithmen.
+
+## Warum der tiefste Punkt?
+
+Der tiefste Punkt zeigt das System mit der niedrigsten Energie an, das gefunden werden kann. In der Natur ist der Grundzustand (niedrigste Energie) der stabilste Punkt, an dem sich das System befindet. Das Finden des tiefsten Punkts in der Landschaft entspricht dem Finden des stabilen Zustands eines Moleküls oder der optimalen Lösung für ein Problem. Beim VQE geht es daher darum, die optimale Lösung für das System zu finden, indem seine Natur genutzt wird.
+
+Zusammenfassend lässt sich sagen, dass dieser Algorithmus ein praktischer Ansatz ist, um in der NISQ-Ära Ergebnisse zu erzielen.
+
+
+

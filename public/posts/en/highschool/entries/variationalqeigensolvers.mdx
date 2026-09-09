@@ -1,0 +1,46 @@
+---
+title: "Variational Quantum Eigensolver(VQE) Algorithm"
+subtitle: "Variational Quantum Eigensolver(VQE) Algorithm (high school)"
+author: "Melin Kayapınar"
+date: "2026-08-11"
+---
+# Variational Quantum Eigensolver(VQE) Algorithm
+
+At the moment, available quantum computers are prone to noise, a state known as noisy intermediate-scale quantum (NISQ) computing. This causes algorithms that require perfect execution of operations to produce invalid outcomes. Although several techniques are currently used to reduce the effects of noise on operations, they are still insufficient.
+
+## General structure of the algorithm
+
+This is where hybrid algorithms come into play. These algorithms are a combination of applications on both classical and quantum computers. Looking at the figure below, the structure is as follows: first, the necessary parts are implemented on the quantum computer, and then the measurement outcomes are transferred to a classical computer. Classical computers optimize this data, which will be sent back to the quantum computers.
+
+![Structure of a hybrid algorithm.](/posts/assets/entries/variationalqeigensolver/information-15-00175-g001.png) _Caption: Variational Quantum Algorithm. Source: https://www.mdpi.com/2724658_
+
+## Understanding the algorithm
+
+Assume that there is a multiplayer game. To be the winner, you need to find the lowest point in the landscape with several mountains and valleys. However, this game allows players to choose their spawn point. In quantum mechanics, this starting guess is known as the trial wave function or ansatz.
+
+Players can create their spawn point by first setting all qubit registers to a known point, and then, by applying certain operations, use the entanglement feature of quantum mechanics to scan all possible outputs simultaneously. After some operations are performed, the trial wavefunction is obtained.
+
+A gadget, called a measurement in quantum mechanics, is available to all players. With this, they can learn how close they are to reaching the lowest point. The gadget produces an output and then transfers it to the classical computer to compute the closest coordinates of the lowest point. These coordinates are the parameters that the classical computer uses to guide the next guess. Therefore, by moving to that specific coordinate, a new trial function is obtained, and the cycle continues until the player can find the lowest point.
+
+![Getting closer to the lowest point by updating parameters.](/posts/assets/entries/variationalqeigensolver/Capture.PNG) 
+
+However, sometimes, because the landscape is chaotic and difficult to navigate, classical computers might assume that the player is already at the deepest point. When the player can not see through the mountains, they may also assume the same. 
+
+Imagine a player landed in a small crater between two big mountains. Looking around, every direction goes up, so thinking of being at the lowest points is natural. But the actual ocean floor (the global minimum point) is thousands of feet lower than the small crater. Hence, classical computers can get trapped in these 'false bottoms' (local minima), which is one of the main challenges in VQE.
+
+The more detailed circuit structure required for this algorithm is shown below.
+
+![Circuit in details.](/posts/assets/entries/variationalqeigensolver/2-Figure1-1.png) _Caption: The classical computer acts as an optimizer (the driver), tweaking parameter angles ($\theta$), while the quantum computer acts as the calculator, measuring the energy. Source:https://arxiv.org/pdf/2405.11687_
+
+## Application Areas 
+
+VQE is used for simulation and optimization problems. For example, finding the correct ratio of chemicals in a drug composition or the greatest financial gain from an investment in the stock market are alternative application areas for the algorithms.
+
+## Why the lowest point?
+
+The lowest point indicates the lowest energy system that can be found. In nature, the ground state(lowest energy) is the most stable point at which the system is. Finding the lowest point in the landscape translates to finding the stable state of a molecule or the optimal solution to a problem. Therefore, VQE is about finding the optimal solution to the system by leveraging its nature. 
+
+In conclusion, this algorithm is a practical approach to obtaining outcomes in the NISQ era.
+
+
+

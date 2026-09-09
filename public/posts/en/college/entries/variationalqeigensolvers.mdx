@@ -1,0 +1,51 @@
+---
+title: "Variational Quantum Eigensolver(VQE) Algorithm"
+subtitle: "Variational Quantum Eigensolver(VQE) Algorithm (collage)"
+author: "Melin Kayapınar"
+date: "2026-08-11"
+---
+# Variational Quantum Eigensolver(VQE) Algorithm
+
+At the moment, available quantum computers are prone to noise, a state known as noisy intermediate-scale quantum (NISQ) computing. This causes algorithms that require perfect execution of operations to produce noisy outcomes. Although several techniques are currently used to reduce the effects of noise on operations, they are still insufficient.
+
+## General structure of the algorithm
+
+This is where hybrid algorithms come into play. These algorithms are a combination of applications on both classical and quantum computers. Looking at the figure below, the structure is as follows: first, the necessary parts are implemented on the quantum computer, and then the measurement outcomes are transferred to a classical computer. Classical computers optimize this data, which will be sent back to the quantum computers.
+
+![Structure of a hybrid algorithm.](/posts/assets/entries/variationalqeigensolver/information-15-00175-g001.png) _Caption: Variational Quantum Algorithm. Source: https://www.mdpi.com/2724658_
+
+## Understanding the algorithm
+
+The purpose of this algorithm is to find the lowest energy point of the system, since this is when it is most stable. The algorithm starts by initializing qubits at $\ket{0}$. 
+
+Then, the ansatz and trial wavefunction $\vert{}\psi(\theta)\rangle$ are prepared by applying rotation gates, which rotate the qubit's vector on the Bloch sphere depending on the angle and Pauli matrices used, and controlled-not (CNOT) gates, which introduce entanglement to the circuit. Ansatz is the approximation of the ground state that should be reached. The choice ansatz depends on the hardware or the problem.
+
+Standard quantum hardware measures in the computational ($Z$) basis. To measure observable terms in the $X$ or $Y$ basis, single-qubit basis-rotation transformations like Hadamard or $S^\dagger H$ gates are applied immediately prior to measurement.
+
+Then the expectation value of the observable Hamiltonian $H$ is computed, describing the property of the system to be optimized. 
+
+A quantum post-processing unit(QPU) cannot directly read an arbitrary matrix $H$. State that $H$ is expressed as the sum of tensor products of Pauli matrices:
+
+$$H = \sum_i c_i P_i \quad \text{where } P_i \in \{I, X, Y, Z\}^{\otimes n}$$
+
+> The Hamiltonian of the system studied can be measured with respect to this wavefunction to estimate the energy. 
+$$E(\theta) = \langle \psi(\theta) \vert{} H \vert{} \psi(\theta) \rangle \geq E_0$$
+
+Using classical gradient-free optimizers, the ansatz parameters are updated to create a new wavefunction $\vert{}\psi(\theta_1)\rangle$. This is repeated until $E(\theta_n)$ is sufficiently close to the ground state $E_0$.
+
+>For the VQE to be tractable, it is necessary that the number of quantum operations required to model the wavefunction is sufficiently low, imposing a relatively compact ansatz.
+
+However, sometimes, because the system has several dips and peaks, classical computers might assume that this is as close as it can get to the ground energy. When a classical computer gets trapped, it is stuck in a local minimum (a "false bottom"), missing the true global minimum (the lowest-energy state $E_0$), which is one of the main challenges in VQE.
+
+![The full pipeline of the VQE circuit.](/posts/assets/entries/variationalqeigensolver/Schematic-diagram-of-a-Variational-Quantum-Algorithm-VQA-Figure-is-taken-from-the.webp) 
+_ Source: https://www.researchgate.net/publication/364814620_Study_of_Adaptative_Derivative-Assemble_Pseudo-Trotter_Ansatzes_in_VQE_through_qiskit_API?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6Il9kaXJlY3QiLCJwYWdlIjoiX2RpcmVjdCJ9fQ __
+
+## Application Areas 
+
+VQE is used for simulation and optimization problems. For example, finding the correct ratio of chemicals in a drug composition, minimizing financial loss from an investment in the stock market, and determining the optimal route in a transportation system are alternative application areas for the algorithms. Therefore, VQE is about finding the optimal solution to the system by leveraging the system's nature. 
+
+In conclusion, VQE remains a leading algorithm in NISQ-era research, proving how hybrid execution bridges the gap toward fault-tolerant quantum processing.
+
+
+
+

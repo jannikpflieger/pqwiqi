@@ -1,0 +1,47 @@
+---
+title: "Quantum Teleportation"
+subtitle: "Quantum Teleportation (collage)"
+author: "Melin Kayapınar"
+date: "2026-08-14"
+---
+
+# Quantum Teleportation
+
+Teleportation is one of the most popular concepts discussed and represented mostly in science fiction movies. Most people believe that it is simply a just a fiction that is impossible to happen. While this is true in classic physics, quantum mechanics makes this possible. Quantum teleportation is an interesting reality of quantum physics that is used in quantum computers for several purposes. 
+
+## Quantum Information
+For better understanding, imagine two particles that are separate from each other. Let’s refer to these as Alice’s particle is particle A and Bob’s particle is particle B. The fundamental purpose of quantum teleportation is to teleport an unknown quantum state from one place to another that is separated by long distances. The quantum state, which gives a detailed description of the particle, can be an electron or a proton.
+
+## Quantum Entanglement
+The teleportation of a quantum state is possible if and only if Alice and Bob are entangled. This is all about particle A having a correlation with particle B. As a result, if Alice measures her qubits, Bob will be affected regardless of the distance. Since the measurement changes particle A, particle B will inevitably be transformed. It is important to note that since entanglement is a property of quantum mechanics, teleportation is only possible in quantum computers. An example of an entangled state Bob and Alice have can be given as,
+
+$$\ket{\Phi^+}=\frac{1}{\sqrt{2}}(\ket{00}_{AB}+\ket{11}_{AB})$$
+
+This is one of the Bell pairs, and it is the most entangled state. It is important to use Bell pairs because particles are very prone to noise. Hence, 
+ Another essential part of this is also a third particle named Charlie’s particle, particle C, represented as,
+$$\ket{\Psi}_C=\alpha\ket{0}_c+\beta\ket{1}_C$$.
+
+The α and β are complex probability amplitudes. This is the particle that carries an unknown quantum state, which will later be teleported to Bob. Performing Bell measurement is the next step. This is a requirement because there is not enough classical information to reconstruct this particle.
+
+## Bell Measurement
+This is a joint measurement on a pair of particles; in this case, it is particle A and particle C. While this breaks the entanglement between particle A and particle B, particle A and particle C are now entangled. The Bell measurement is performed on the first 2 particles of the given system.
+ $$\ket{\Psi}_{CAB}=(\alpha\ket{0}_c+\beta\ket{1}_C)(\frac{1}{\sqrt{2}}(\ket{00}_{AB}+\ket{11}_{AB}))$$
+
+The result of this measurement doesn’t really reveal any information about the unknown quantum state; rather, it just gives clues about particle C. This measurement outcome is classical information that is obtained from quantum information
+
+![Step 1 of Quantum Teleportation](/posts/assets/entries/qteleportation/qteleportation/Quantum_Teleportation_collagestudent_1.PNG)
+
+## Encoding Information
+Because of this measurement, particle B has changed. Now Alice can share the classical information via classical channels, which indicates that information cannot travel faster than light. This is a crucial point because, although right now particle B carries an unknown quantum state, its current state is just a mixture of other quantum information.
+Hence, without Alice sharing the outcomes classically, Bob is unable to decode his qubit (so that he could get rid of unwanted information) to have the desired state. Much like in classical computers that work with binary codes 1 and 0, Alice's measurement results in one of four specific classical combinations: (00, 01, 10, or 11).
+Depending on the information Bob obtained, he can apply some operations to his particle, which then transforms particle B into particle C that carries an unknown quantum state. Now, all the information particle C carried had been teleported to particle B. It is important to transfer this quantum information without losing any quantum information content.
+
+## Actual Usage of Quantum Teleportation
+The main usage of quantum teleportation is the quantum internet. This allows communication over very long distances. In this process, particles travel through optical fibers. However, since particles are very fragile, when they interact with the environment, they become noisy and lose coherence with the system.
+Hence, it is not feasible to send a state-like particle C to long distances since the actual data will be lost over time. However, we overcome this by starting with the maximally entangled states like Bell pairs. It is possible to think that Bell pairs have the most energy/entanglement, and as the teleportation happens over very long distances, Bell pairs have more energy (less prone to decoherence) to lose.
+Additionally, only the Bell pairs become noisy or impure in this process. The actual data qubit never gets affected. 
+![Step 2 of Quantum Teleportation](/posts/assets/entries/qteleportation/qteleportation/Quantum_Teleportation_collagestudent_2.PNG)
+##  Is there an alternative approach?
+Classically, when optical fibers are used for communication, an amplifier is used to read 0 or 1, boost the voltage, and send it on.
+By this logic, we can learn the complex probability amplitudes α and β and then tell Bob their values so he can create a quantum state with those values. However, there are several problems with this ideology in quantum mechanics. It is not possible to create an exact copy of an unknown quantum state $\ket{\Psi}$.
+If we try to read the qubit to amplify it, since the unknown quantum state is in superposition when it is measured, the wave function collapses into $\ket{0}$ or $\ket{1}$ with probabilities |α|² and |β|² respectively. This action destroys the superposition and prevents us from transmitting the actual data.

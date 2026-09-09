@@ -1,0 +1,38 @@
+---
+title: "Quantum Hyperpolarisation"
+subtitle: "Quantum Hyperpolarisation (collage)"
+author: "Melin Kayapınar"
+date: "2026-08-14"
+---
+
+# Quanten-Hyperpolarisation
+
+Wenn normale Scans wie NMR oder MRT bei Raumtemperatur verwendet werden, zeigen Atomkerne, die sich wie kleine rotierende Magnete verhalten, in zufällige Richtungen. Dies führt dazu, dass Scans ungefähr 1 von 100.000 Spins erfassen. Hier kommt die Quanten-Hyperpolarisation ins Spiel. Sie zwingt den Spin des Kerns, sich in die gewünschte Richtung auszurichten, und verstärkt so ein schwaches, sonst nicht nachweisbares Signal.
+
+## Das Problem: Boltzmann kümmert sich nicht um Ihr Experiment
+
+Ein Spin-1/2-Kern wie $^1H$ oder $^{13}C$ befindet sich in einem Magnetfeld $B_0$. Das Feld spaltet seine zwei Spinzustände um eine Energielücke auf:
+
+$$\Delta E = \gamma \hbar B_0,$$
+
+wobei $\gamma$ das gyromagnetische Verhältnis des Kerns ist. Im thermischen Gleichgewicht folgt die Besetzung jedes Zustands der Boltzmann-Verteilung, was zu einer Netto-Polarisation führt von:
+
+$$P = \tanh\left(\frac{\gamma \hbar B_0}{2k_BT}\right) \approx \frac{\gamma \hbar B_0}{2k_B T}.$$
+
+Setzt man ein klinisches Feld von 3 T und die Körpertemperatur ein, erhält man $P \sim 10^{-6}$. Das ist das gesamte Problem in einer einzigen Zahl: Im Wesentlichen zeigen fast alle Spins in zufällige Richtungen, und nur ein winziger Überschuss richtet sich am Feld aus. Da das nachweisbare Signal proportional zu diesem Überschuss ist, leidet die thermische NMR aufgrund der grundlegenden statistischen Mechanik naturgemäß an Signalmangel.
+
+## Der Trick: Ordnung aus einer anderen Quelle stehlen
+
+Die Hyperpolarisation verhindert, dass die Kernspins mit ihrem lokalen thermischen Bad ins Gleichgewicht geraten. Stattdessen leitet sie Ordnung aus einer externen Quelle ein, die sich viel leichter polarisieren lässt, und überträgt diese Ordnung auf die Kerne, bevor sie wieder entweichen kann. Drei Ansätze dominieren, und einer davon ist das optische Pumpen durch Spin-Austausch (SEOP). Ein zirkular polarisierter Laser pumpt die Elektronenspins eines Alkalidampfs (meist Rubidium) optisch in einen hochgradig polarisierten Zustand. Zusammenstöße zwischen den Alkaliatomen und einem Edelgas wie ¹²⁹Xe oder ³He übertragen diese Polarisation über die Fermi-Kontakt-Hyperfeinwechselwirkung auf die Edelgaskerne. Dies erreicht routinemäßig eine Polarisation von 20–90 % und ist das Standardverfahren für hyperpolarisiertes Xenongas, das bei Lungenscans mittels MRT eingesetzt wird.
+
+## Anwendungsfälle der Quanten-Hyperpolarisation
+
+Normale MRT-Geräte funktionieren durch das Erfassen von Signalen von Wassermolekülen im Körper. Deshalb eignet sich die MRT hervorragend für die Bildgebung von Weichgewebe wie dem Gehirn oder Muskeln. Die Lunge besteht jedoch größtenteils aus leerem Luftraum mit sehr wenig Wasser, weshalb die Lunge auf einem regulären MRT wie ein dunkler, unbrauchbarer Fleck aussieht.
+
+Daher sind Fälle wie die Früherkennung von Lungenerkrankungen mit protonenbasierter Lungen-MRT schwer zu beurteilen, da die Lunge hauptsächlich aus Luft mit wenigen Wasserprotonen besteht. Daher nutzen Techniken wie die MRT mit hyperpolarisiertem Gas das Spin-1/2-Isotop $^3He$.
+
+> Wenn MRT-Studien mit hyperpolarisiertem Gas am Menschen durchgeführt werden, atmet die Versuchsperson das Gas gewöhnlich aus einem kleinen Plastikbeutel ein, während sie sich in der Scanneröffnung befindet, und die Messung beginnt sofort beim Anhalten des Atems. Helium verbleibt nach dem Einatmen fast vollständig in den Lufträumen und verursacht nach einem einzelnen Atemzug keine schwerwiegenden Nebenwirkungen. _Source:Kern AL, Vogel-Claussen J. Hyperpolarized gas MRI in pulmonology. Br J Radiol. 2018 Apr;91(1084):20170647. doi: 10.1259/bjr.20170647. Epub 2018 Jan 22. PMID: 29271239; PMCID: PMC5965996._
+
+Wissenschaftler nutzen die Hyperpolarisationstechnik auch in der Quantensensorik. Physiker nutzten einen einzelnen Defekt in einem Diamantkristall, ein sogenanntes Stickstoff-Fehlstellen-Zentrum (NV-Zentrum), als unglaublich präzise Quantensonde, um nahegelegene Moleküle bei Raumtemperatur zu hyperpolarisieren – ohne extreme Kälte oder sperrige Geräte zu benötigen. Dies macht die Anwendung der Hyperpolarisation vorteilhaft, da sie kostengünstiger ist.
+
+Zusammenfassend lässt sich sagen, dass die Hyperpolarisation eine Einschränkung der statistischen Mechanik in ein Ingenieurproblem verwandelt und sie somit lösbar macht. Anstatt die winzige Gleichgewichtspolarisation zu akzeptieren, die durch $k_BT$ vorgegeben ist, wird zirkular polarisiertes Licht mit geordneten Photonen genutzt, um Ordnung zu stehlen und sie rasch einzusetzen, bevor sie zerfällt. Dieselbe Struktur treibt einen MRT-Scanner an, der die Lunge eines Patienten abbildet, wie auch einen Diamantkristalldefekt, der ein Kernspin-Qubit hyperpolarisiert, was die breite Anwendung der Hyperpolarisation demonstriert.

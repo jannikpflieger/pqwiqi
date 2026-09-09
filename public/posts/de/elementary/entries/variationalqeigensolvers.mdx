@@ -1,0 +1,45 @@
+---
+title: "Variational Quantum Eigensolvers"
+subtitle: "Treading the Hills and Valleys towards the Best Configuration"
+author: "Sudharshan Kannan and Melin Kayapınar"
+date: "09/08/2026"
+---
+
+# Variationelle Quanteneigenlöser (VQE)
+
+Um Variationelle Quanteneigenlöser (VQE) zu verstehen, stellen Sie sich vor, Sie sind ein Wanderer in den Alpen, der sich durch eine schwierige Landschaft bewegt und nach dem tiefsten Tal sucht, das zwischen mehreren Bergen verborgen ist, um dort besser Schutz zu finden. Diese Landschaft wird durch die Quantenzustände erzeugt. Indem wir das tiefste Tal finden, können wir daher die minimale Energie in der Energielandschaft ermitteln.
+VQEs sind eine von vielen modernen Quantenmaschinen, die uns beim Lösen solcher Probleme helfen. Wir werden nun versuchen zu verstehen, wie diese variationellen Löser funktionieren und warum sie gute Algorithmen zum Benchmarking unserer aktuellen Quantenhardware sind.
+
+![Visualisierung der Energielandschaft mit Bergen und Tälern](/posts/assets/entries/variationalqeigensolver/landscape-nature-forest-grass-wilderness-mountain-cloud-sky-meadow-hill-valley-mountain-range-green-blue-highland-national-park-ridge-trees-hills-clouds-mountains-alps-grassland-valleys-plateau-fel.png)
+
+## Energielandschaft von Quantenzuständen
+
+Jeder Quantenzustand ist mit einem Eigenwert, oder in manchen Fällen mit Energie, verbunden.
+Das Ziel von Eigenlösern besteht darin, den Quantenzustand mit dem geringstmöglichen Eigenwert bzw. der geringstmöglichen Energie zu erreichen. Verschiedene Quantensysteme haben unterschiedliche Zustandskonfigurationen; stellen Sie sich eine beliebige Formation von Bergspitzen und Tälern vor. Wir wollen, dass unsere Quantenalgorithmen diese Berge erklimmen und die beste Lösung erreichen.
+![Visualisierung der variationellen Optimierung auf einer Energielandschaft](/posts/assets/entries/variationalqeigensolver/Schematic-illustration-of-the-variational-quantum-eigensolver-algorithm-Given-an-initial.png)
+*Bildunterschrift: Quelle [https://www.researchgate.net/publication/366875822_Comparative_study_of_adaptive_variational_quantum_eigensolvers_for_multi-orbital_impurity_models*](https://www.researchgate.net/publication/366875822_Comparative_study_of_adaptive_variational_quantum_eigensolvers_for_multi-orbital_impurity_models)
+
+## Wie funktioniert der VQE-Algorithmus?
+
+Wir bereiten einen Quantenzustand mit abstimmbaren Parametern vor. Anschließend drehen wir Schritt für Schritt, iterativ, an den Parameterknöpfen, bis wir den minimalen Energiewert finden. Diese Parameterabstimmung wird mittels klassischem Gradientenabstieg oder anderen Verfahren durchgeführt. Nachdem wir zu einer Grundzustandslösung konvergiert sind, erwarten wir eine näherungsweise genaue Darstellung des Grundzustands – insbesondere für den Eigenwert, den wir minimieren wollten.
+Stellen Sie sich eine geschwungene Metallschiene mit Höhen und Tiefen vor sowie einen Ring, der an ihr entlanggleiten kann. Sie führen den Ring von Hand an der Schiene entlang, sodass er stets bergab gleitet, bis er am tiefsten Punkt zur Ruhe kommt.
+![Visualisierung der variationellen Optimierung auf einer Energielandschaft](/posts/assets/entries/variationalqeigensolver/FI5KIP1ITWKNRZI.png)
+
+## Wo sind VQE-Algorithmen nützlich?
+
+Energielandschaften gibt es nicht nur in Quantenszenarien, sondern bei diversen realen Optimierungsproblemen, bei denen wir nach Konfigurationen mit minimalen Kosten suchen müssen. Einige Beispielsituationen könnten sein:
+
+1. Das Finden der perfekten Route durch ein Netz von Städten, die die effektive Reisedistanz minimiert.
+2. Das Optimieren von Investitionen oder Ausgaben in verschiedene Aktien oder Vermögenswerte, um den Gewinn zu maximieren und gleichzeitig das Risiko zu minimieren.
+3. Das Finden des richtigen Mischungsverhältnisses von Metallen zur Herstellung der perfekten Legierung!
+
+Und viele weitere reale Probleme können mit diesem Algorithmus angegangen werden.
+
+## Was macht dies perfekt für Quantencomputer?
+
+Leider sind Quantencomputer noch nicht perfekt. Daher ist jede Operation, die wir mit Qubits und Quantengattern durchführen, von Rauschen und Fehlern geplagt, was uns daran hindert, innerhalb eines angemessenen Zeitrahmens eine perfekte Lösung zu erhalten.
+In der Ära der rauschbehafteten Quantencomputer mittlerer Skalierung (NISQ, Noisy Intermediate-Scale Quantum) benötigen wir Algorithmen, die keine perfekten Qubits erfordern, um Probleme zu lösen. Da der operationelle Teil variationeller Quantenalgorithmen im Wesentlichen klassischer Natur ist, wird er von den Schwachstellen der Quantencomputer nicht so stark beeinträchtigt wie rein quantenbasierte Algorithmen. Diese Klasse von Quantenalgorithmen ist als hybride Quantenalgorithmen bekannt.
+
+## Gibt es eine Zukunft für den VQE-Algorithmus?
+
+Es gibt Probleme, die üblicherweise mit klassischen Algorithmen verbunden sind, und wir können nicht wirklich einen Quantenvorteil (Quantum Advantage) beanspruchen – zumindest nicht mit diesem Algorithmus. Während der Algorithmus bei kleinen Modellproblemen (praktisch unbedeutenden Testproblemen) sehr gut funktioniert, können wir ihn nicht effizient skalieren, um realistischere Probleme zu lösen. Dies ermutigt Wissenschaftler und Ingenieure jedoch dazu, nach geeigneteren Anwendungsfällen und stärker quantenorientierten Algorithmen zu suchen.
