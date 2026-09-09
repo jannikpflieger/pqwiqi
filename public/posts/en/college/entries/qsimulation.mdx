@@ -1,0 +1,23 @@
+---
+title: "Quantum Simulations"
+subtitle: "Quantum Simulations (collage)"
+author: "Jonas Deppner and Melin Kayapınar"
+date: "2026-08-14"
+---
+
+# Quantum Simulation
+To investigate the dynamics of certain physical systems, which will be referred to as target systems in the following, one usually has to prepare the target system in an experiment and repeat the experiment many times. Since this is often very time- and resource-intensive, researchers use simulations in which the target system is represented virtually in a computer program. As long as the dynamics of the target system can be modeled by the laws of classical mechanics, or at least can be approximated by such approaches, simulations can be done by classical computers. 
+
+## Systems that are simulatable via quantum mechanics
+Many systems relevant in research and industry cannot be approximated by classical mechanics but must be treated with the laws of quantum mechanics. Relatively small quantum systems (up to a few tens of particles) can be simulated in the conventional way by classical computers, but since the size of the state space of the quantum mechanical state of the target system in general scales exponentially with the size of the system, i.e., the number of involved particles, the computational complexity of the problem quickly diverges for classical computers. This means the necessary calculations to run such a simulation would take too long. 
+
+To this end, the field of quantum simulations aims to provide efficient methods for simulating specific target systems. For this, one has to engineer so-called quantum simulators, which essentially are well-understood and highly controllable versions or approximations of the target system. 
+
+## Choosing the correct platform depending on the dynamics of the system
+Frontrunner platforms for implementing such quantum simulators include, e.g., trapped ions and ultracold neutral atoms. These platforms are also used for quantum computing. 
+
+The important distinction between quantum computing and quantum simulation is that the former aims to be universal, i.e., to implement any problem, whereas the latter aims to implement only one specific problem, i.e., an algorithm to investigate the dynamics of a specific target system. 
+
+The dynamics of a target system are described by the time evolution of the system’s wave function, which can be derived by solving the Schrödinger equation. The Schrödinger equation thereby contains a problem-specific Hamiltonian, which in general can be a very complex object. In essence, quantum simulation amounts to solving the Schrödinger equation for a specific Hamiltonian, a task that conventional numerical approaches cannot solve. Possible applications of these techniques include, e.g., the simulation of chemical reactions, as they often involve large numbers of atoms and molecules.
+ 
+In conclusion, quantum simulations aim to provide a solution for the problem of the efficient simulation of certain physical systems, which are relevant for scientific and industrial applications. 

@@ -1,0 +1,65 @@
+---
+title: "Quantum Teleportation"
+subtitle: "Quantum Teleportation (collage)"
+author: "Melin Kayapınar"
+date: "2026-08-14"
+---
+
+
+# Quantenteleportation
+
+Teleportation ist eines der populärsten Konzepte, das hauptsächlich in Science-Fiction-Filmen thematisiert und dargestellt wird. Die meisten Menschen glauben, dass es sich dabei schlicht um eine Fiktion handelt, deren Verwirklichung unmöglich ist. Während dies in der klassischen Physik zutrifft, macht die Quantenmechanik dies möglich. Die Quantenteleportation ist eine faszinierende Realität der Quantenphysik, die in Quantencomputern für verschiedene Zwecke eingesetzt wird.
+
+## Quanteninformation
+
+Zum besseren Verständnis stellen Sie sich zwei voneinander getrennte Teilchen vor. Nennen wir Alices Teilchen Teilchen A und Bobs Teilchen Teilchen B. Der grundlegende Zweck der Quantenteleportation besteht darin, einen unbekannten Quantenzustand von einem Ort an einen anderen über große Distanzen zu teleportieren. Der Quantenzustand, der eine detaillierte Beschreibung des Teilchens liefert, kann beispielsweise ein Elektron oder ein Proton sein.
+
+## Quantenverschränkung
+
+Die Teleportation eines Quantenzustands ist genau dann möglich, wenn Alice und Bob verschränkt sind. Hierbei dreht sich alles darum, dass Teilchen A eine Korrelation mit Teilchen B aufweist. Das hat zur Folge: Wenn Alice ihre Qubits misst, wird Bob unabhängig von der Entfernung beeinflusst. Da die Messung Teilchen A verändert, wird Teilchen B unvermeidlich transformiert. Es ist wichtig zu beachten, dass die Teleportation nur in Quantencomputern möglich ist, da die Verschränkung eine Eigenschaft der Quantenmechanik ist. Ein Beispiel für einen verschränkten Zustand, den Bob und Alice teilen, kann wie folgt angegeben werden:
+
+$$\ket{\Phi^+}=\frac{1}{\sqrt{2}}(\ket{00}_{AB}+\ket{11}_{AB})$$
+
+Dies ist eines der Bell-Paare und stellt den am stärksten verschränkten Zustand dar. Die Verwendung von Bell-Paaren ist wichtig, da Teilchen sehr anfällig für Rauschen sind. Daher:
+Ein weiterer wesentlicher Bestandteil ist ein drittes Teilchen namens Charlies Teilchen, Teilchen C, dargestellt als:
+
+
+$$\ket{\Psi}_C=\alpha\ket{0}_c+\beta\ket{1}_C$$
+
+
+.
+
+Die Größen $\alpha$ und $\beta$ sind komplexe Wahrscheinlichkeitsamplituden. Dies ist das Teilchen, das einen unbekannten Quantenzustand trägt, der später zu Bob teleportiert werden soll. Die Durchführung einer Bell-Messung ist der nächste Schritt. Dies ist notwendig, da nicht genügend klassische Informationen vorhanden sind, um dieses Teilchen zu rekonstruieren.
+
+## Bell-Messung
+
+Dies ist eine gemeinsame Messung an einem Teilchenpaar; in diesem Fall an Teilchen A und Teilchen C. Während dadurch die Verschränkung zwischen Teilchen A und Teilchen B aufgehoben wird, sind Teilchen A und Teilchen C nun miteinander verschränkt. Die Bell-Messung wird an den ersten beiden Teilchen des gegebenen Systems durchgeführt:
+
+
+$$\ket{\Psi}_{CAB}=(\alpha\ket{0}_c+\beta\ket{1}_C)(\frac{1}{\sqrt{2}}(\ket{00}_{AB}+\ket{11}_{AB}))$$
+
+Das Ergebnis dieser Messung offenbart nicht wirklich Informationen über den unbekannten Quantenzustand; vielmehr liefert es lediglich Hinweise auf Teilchen C. Dieses Messergebnis ist eine klassische Information, die aus der Quanteninformation gewonnen wird.
+
+![Schritt 1 der Quantenteleportation](/posts/assets/entries/qteleportation/Quantum Teleportation_collagestudent_1.PNG)
+
+## Codierung von Informationen
+
+Aufgrund dieser Messung hat sich Teilchen B verändert. Nun kann Alice die klassische Information über klassische Kanäle teilen, was zeigt, dass sich Informationen nicht schneller als das Licht ausbreiten können. Dies ist ein entscheidender Punkt, denn obwohl Teilchen B im Moment einen unbekannten Quantenzustand trägt, ist sein aktueller Zustand nur eine Mischung aus anderen Quanteninformationen.
+Ohne dass Alice die Ergebnisse klassisch mitteilt, ist Bob daher nicht in der Lage, sein Qubit zu decodieren (um unerwünschte Informationen zu eliminieren), um den gewünschten Zustand zu erhalten. Ähnlich wie bei klassischen Computern, die mit den Binärcodes 1 und 0 arbeiten, führt Alices Messung zu einer von vier spezifischen klassischen Kombinationen: (00, 01, 10 oder 11).
+Abhängig von der Information, die Bob erhalten hat, kann er bestimmte Operationen auf sein Teilchen anwenden, wodurch Teilchen B in Teilchen C umgewandelt wird, das den unbekannten Quantenzustand trägt. Nun wurden alle Informationen, die Teilchen C trug, auf Teilchen B teleportiert. Es ist wichtig, diese Quanteninformation zu übertragen, ohne jeglichen Quanteninformationsgehalt zu verlieren.
+
+## Tatsächliche Anwendung der Quantenteleportation
+
+Anwendung findet die Quantenteleportation vor allem im Quanteninternet. Dies ermöglicht die Kommunikation über sehr große Distanzen. Bei diesem Prozess bewegen sich die Teilchen durch Glasfaserkabel. Da Teilchen jedoch sehr fragil sind, führen Wechselwirkungen mit der Umgebung dazu, dass sie verrauscht werden und die Kohärenz mit dem System verlieren.
+Daher ist es nicht praktikabel, einen Zustand wie Teilchen C über weite Strecken zu senden, da die eigentlichen Daten im Laufe der Zeit verloren ginge. Dieses Problem überwinden wir jedoch, indem wir mit maximal verschränkten Zuständen wie Bell-Paaren beginnen. Man kann sich vorstellen, dass Bell-Paare die höchste Energie/Verschränkung aufweisen; wenn die Teleportation über sehr große Distanzen stattfindet, besitzen Bell-Paare mehr Energie (sie sind weniger anfällig für Dekohärenz), die verloren gehen kann.
+
+Zusätzlich werden bei diesem Prozess nur die Bell-Paare verrauscht oder unrein. Das eigentliche Daten-Qubit wird davon nie beeinträchtigt.
+![Step 2 of Quantum Teleportation](/posts/assets/entries/qteleportation/QuantumTeleportation_collagestudent_2.PNG)
+
+## Gibt es einen alternativen Ansatz?
+
+Wenn in der klassischen Kommunikation Glasfaserkabel verwendet werden, kommt ein Verstärker zum Einsatz, der 0 oder 1 liest, die Spannung anhebt und das Signal weitersendet.
+Nach dieser Logik könnten wir die komplexen Wahrscheinlichkeitsamplituden $\alpha$ und $\beta$ in Erfahrung bringen und Bob deren Werte mitteilen, sodass er mit diesen Werten einen Quantenzustand erzeugen kann. In der Quantenmechanik ergeben sich bei dieser Denkweise jedoch mehrere Probleme.
+Es ist nicht möglich, eine exakte Kopie eines unbekannten Quantenzustands $\ket{\Psi}$ zu erstellen.
+Wenn wir versuchen, das Qubit zu lesen, um es zu verstärken, kollabiert die Wellenfunktion beim Messen – da sich der unbekannte Quantenzustand in einer Superposition befindet – mit den Wahrscheinlichkeiten $|\alpha|^2$ bzw. $|\beta|^2$ in den Zustand $\ket{0}$ oder $\ket{1}$. Dieser Vorgang zerstört die Superposition und verhindert, dass wir die tatsächlichen Daten übertragen können.
+

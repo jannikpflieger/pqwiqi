@@ -1,0 +1,53 @@
+---
+title: "Variational Quantum Eigensolver(VQE) Algorithm"
+subtitle: "Variational Quantum Eigensolver(VQE) Algorithm (collage)"
+author: "Melin Kayapınar"
+date: "2026-08-11"
+---
+# Variational Quantum Eigensolver (VQE) Algorithmus
+
+Derzeit verfügbare Quantencomputer sind anfällig für Rauschen – ein Zustand, der als rauschbehaftetes Quantencomputing mittlerer Skalierung (NISQ, Noisy Intermediate-Scale Quantum) bekannt ist. Dies führt dazu, dass Algorithmen, die eine fehlerfreie Ausführung von Operationen erfordern, rauschbehaftete Ergebnisse liefern. Obwohl derzeit verschiedene Techniken eingesetzt werden, um die Auswirkungen von Rauschen auf Operationen zu reduzieren, reichen diese noch nicht aus.
+
+## Allgemeine Struktur des Algorithmus
+
+Hier kommen hybride Algorithmen ins Spiel. Diese Algorithmen sind eine Kombination aus Anwendungen auf klassischen Computern und Quantencomputern. Wie in der folgenden Abbildung zu sehen ist, sieht die Struktur wie folgt aus: Zuerst werden die notwendigen Teile auf dem Quantencomputer implementiert, und anschließend werden die Messergebnisse an einen klassischen Computer übertragen. Klassische Computer optimieren diese Daten, die dann an die Quantencomputer zurückgesendet werden.
+
+ *Bildunterschrift: Variationeller Quantenalgorithmus. Quelle: [https://www.mdpi.com/2724658*](https://www.mdpi.com/2724658)
+
+## Den Algorithmus verstehen
+
+Der Zweck dieses Algorithmus besteht darin, den Punkt der niedrigsten Energie des Systems zu finden, da das System an diesem Punkt am stabilsten ist. Der Algorithmus beginnt mit der Initialisierung der Qubits bei $\ket{0}$.
+
+Anschließend werden der Ansatz und die Testwellenfunktion $\vert{}\psi(\theta)\rangle$ vorbereitet, indem Rotationsgatter angewendet werden, die den Vektor des Qubits auf der Bloch-Kugel abhängig vom Winkel und den verwendeten Pauli-Matrizen rotieren, sowie Controlled-NOT-Gatter (CNOT-Gatter), die Verschränkung in den Schaltkreis einbringen. Der Ansatz ist die Annäherung an den Grundzustand, der erreicht werden soll. Die Wahl des Ansatzes hängt von der Hardware oder dem Problem ab.
+
+Standardmäßige Quantenhardware misst in der Rechenbasis ($Z$-Basis). Um beobachtbare Terme in der $X$- oder $Y$-Basis zu messen, werden unmittelbar vor der Messung Einzel-Qubit-Basisrotationstransformationen wie Hadamard- oder $S^\dagger H$-Gatter angewendet.
+
+Anschließend wird der Erwartungswert des beobachtbaren Hamilton-Operators $H$ berechnet, der die zu optimierende Eigenschaft des Systems beschreibt.
+
+Eine Quantenprozessoreinheit (QPU) kann eine beliebige Matrix $H$ nicht direkt lesen. $H$ wird als Summe von Tensorprodukten von Pauli-Matrizen ausgedrückt:
+
+$$H = \sum_i c_i P_i \quad \text{wobei } P_i \in \{I, X, Y, Z\}^{\otimes n}$$
+
+> Der Hamilton-Operator des untersuchten Systems kann in Bezug auf diese Wellenfunktion gemessen werden, um die Energie zu schätzen.
+> 
+> $$E(\theta) = \langle \psi(\theta) \vert{} H \vert{} \psi(\theta) \rangle \geq E_0$$
+> 
+> 
+
+Mithilfe klassischer gradientenfreier Optimierer werden die Ansatzparameter aktualisiert, um eine neue Wellenfunktion $\vert{}\psi(\theta_1)\rangle$ zu erzeugen. Dies wird wiederholt, bis $E(\theta_n)$ ausreichend nahe am Grundzustand $E_0$ liegt.
+
+> Damit der VQE handhabbar ist, muss die Anzahl der Quantenoperationen, die zur Modellierung der Wellenfunktion erforderlich sind, ausreichend gering sein, was einen relativ kompakten Ansatz erfordert.
+
+Da das System jedoch manchmal mehrere Senken und Spitzen aufweist, nehmen klassische Computer unter Umständen an, dass dies der günstigste Wert ist, den sie zur Grundenergie erreichen können. Wenn ein klassischer Computer gefangen ist, steckt er in einem lokalen Minimum (einem „falschen Boden“) fest und verfehlt das echte globale Minimum (den Zustand niedrigster Energie $E_0$), was eine der Hauptherausforderungen beim VQE darstellt.
+
+
+_ Quelle: [https://www.researchgate.net/publication/364814620_Study_of_Adaptative_Derivative-Assemble_Pseudo-Trotter_Ansatzes_in_VQE_through_qiskit_API?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6Il9kaXJlY3QiLCJwYWdlIjoiX2RpcmVjdCJ9fQ](https://www.researchgate.net/publication/364814620_Study_of_Adaptative_Derivative-Assemble_Pseudo-Trotter_Ansatzes_in_VQE_through_qiskit_API?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6Il9kaXJlY3QiLCJwYWdlIjoiX2RpcmVjdCJ9fQ) __
+
+## Anwendungsbereiche
+
+VQE wird für Simulations- und Optimierungsprobleme eingesetzt. Zum Beispiel das Finden des richtigen Verhältnisses von Chemikalien in einer Arzneimittelzusammensetzung, das Minimieren von Finanzverlusten bei Investitionen auf dem Aktienmarkt und das Bestimmen der optimalen Route in einem Transportwesen sind alternative Anwendungsbereiche für die Algorithmen. Beim VQE geht es daher darum, die optimale Lösung für das System zu finden, indem die Natur des Systems genutzt wird.
+
+Zusammenfassend lässt sich sagen, dass der VQE ein führender Algorithmus in der Forschung der NISQ-Ära bleibt und beweist, wie die hybride Ausführung die Lücke in Richtung fehlertoleranter Quantenverarbeitung schließt.
+
+
+

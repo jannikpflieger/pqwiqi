@@ -1,0 +1,26 @@
+---
+title: "Quantum Simulations"
+subtitle: "Quantum Simulations (schwer)"
+author: "Jonas Deppner and Melin Kayapınar"
+date: "2026-08-14"
+---
+
+# Quantensimulation
+
+Um die Dynamik bestimmter physikalischer Systeme zu untersuchen, die im Folgenden als Zielsysteme bezeichnet werden, muss man das Zielsystem üblicherweise in einem Experiment präparieren und das Experiment viele Male wiederholen. Da dies oft sehr zeit- und ressourcenintensiv ist, nutzen Forschende Simulationen, in denen das Zielsystem virtuell in einem Computerprogramm dargestellt wird. Solange die Dynamik des Zielsystems durch die Gesetze der klassischen Mechanik modelliert oder zumindest durch solche Ansätze angenähert werden kann, können Simulationen auf klassischen Computern durchgeführt werden.
+
+## Systeme, die mittels Quantenmechanik simulierbar sind
+
+Viele für Forschung und Industrie relevante Systeme können nicht durch die klassische Mechanik angenähert werden, sondern müssen mit den Gesetzen der Quantenmechanik behandelt werden. Relativ kleine Quantensysteme (bis zu einigen Dutzend Teilchen) können auf herkömmliche Weise von klassischen Computern simuliert werden. Da die Größe des Zustandsraums des quantenmechanischen Zustands des Zielsystems im Allgemeinen jedoch exponentiell mit der Größe des Systems – also der Anzahl der beteiligten Teilchen – skaliert, divergiert die Rechenkomplexität des Problems für klassische Computer schnell. Das bedeutet, dass die für die Durchführung einer solchen Simulation erforderlichen Berechnungen zu lange dauern würden.
+
+Zu diesem Zweck zielt das Gebiet der Quantensimulationen darauf ab, effiziente Methoden zur Simulation spezifischer Zielsysteme bereitzustellen. Hierfür müssen sogenannte Quantensimulatoren konstruiert werden, bei denen es sich im Wesentlichen um gut verstandene und hochgradig steuerbare Versionen oder Näherungen des Zielsystems handelt.
+
+## Wahl der richtigen Plattform in Abhängigkeit von der Dynamik des Systems
+
+Führende Plattformen für die Implementierung solcher Quantensimulatoren sind beispielsweise gefangene Ionen und ultrakalte neutrale Atome. Diese Plattformen werden auch für das Quantencomputing genutzt.
+
+Der wichtige Unterschied zwischen Quantencomputing und Quantensimulation besteht darin, dass Ersteres eine Universalität anstrebt – also die Implementierung jedes beliebigen Problems –, während Letztere darauf abzielt, nur ein spezifisches Problem zu implementieren, d. h. einen Algorithmus zur Untersuchung der Dynamik eines bestimmten Zielsystems.
+
+Die Dynamik eines Zielsystems wird durch die Zeitentwicklung der Wellenfunktion des Systems beschrieben, die durch Lösen der Schrödinger-Gleichung abgeleitet werden kann. Die Schrödinger-Gleichung enthält dabei einen problemspezifischen Hamilton-Operator, der im Allgemeinen ein sehr komplexes Objekt sein kann. Im Wesentlichen läuft eine Quantensimulation darauf hinaus, die Schrödinger-Gleichung für einen spezifischen Hamilton-Operator zu lösen – eine Aufgabe, die herkömmliche numerische Ansätze nicht bewältigen können. Mögliche Anwendungen dieser Techniken umfassen beispielsweise die Simulation chemischer Reaktionen, da an diesen häufig eine große Anzahl von Atomen und Molekülen beteiligt ist.
+
+Zusammenfassend lassen sich Quantensimulationen als ein Ansatz verstehen, eine Lösung für das Problem der effizienten Simulation bestimmter physikalischer Systeme zu bieten, die für wissenschaftliche und industrielle Anwendungen von Bedeutung sind.

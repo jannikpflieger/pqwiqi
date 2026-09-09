@@ -1,0 +1,45 @@
+---
+title: "Variational Quantum Eigensolvers"
+subtitle: "Treading the Hills and Valleys towards the Best Configuration"
+author: "Sudharshan Kannan and Melin Kayapınar"
+date: "09/08/2026"
+---
+
+# Variational Quantum Eigensolver
+
+To understand Variational Quantum Eigensolvers(VQE), imagine you are a hiker in the Alps, navigating a difficult landscape, searching for the deepest valley hidden among several mountains for better shelter. This landscape is created by the quantum states. Therefore, by finding the deepest valley, we can obtain the minimum energy in the energy landscape.
+VQEs are one of many contemporary Quantum machines that help us solve such problems. We shall now try to understand how these variational solvers work and why they are good algorithms for benchmarking our current Quantum hardware.
+
+![Visualization of energy landscape showing mountains and valleys](/posts/assets/entries/variationalqeigensolver/landscape-nature-forest-grass-wilderness-mountain-cloud-sky-meadow-hill-valley-mountain-range-green-blue-highland-national-park-ridge-trees-hills-clouds-mountains-alps-grassland-valleys-plateau-fel.png)
+
+
+## Energy Landscape of Quantum States
+Each quantum state is associated with an eigenvalue, or energy, in some cases. 
+The goal of eigen-solvers involve reaching the quantum state with the least eigen-value or energy possible. Different quantum systems have different state configurations; imagine an arbitrary formation of mountain peaks and valleys. We want our quantum algorithms to climb these mountains and reach the best solution.
+![Visualization of variational optimization on an energy landscape](/posts/assets/entries/variationalqeigensolver/Schematic-illustration-of-the-variational-quantum-eigensolver-algorithm-Given-an-initial.png)
+_Caption:Resource https://www.researchgate.net/publication/366875822_Comparative_study_of_adaptive_variational_quantum_eigensolvers_for_multi-orbital_impurity_models_
+
+## How does the VQE algorithm work?
+We prepare a quantum state with tunable parameters. Then we turn the parameter knobs step by step, iteratively, until we find the minimum value of Energy. This parameter tuning is performed using classical gradient descent or other techniques. After we converge on a ground-state solution, we expect to have an approximately accurate representation of the ground state, especially for the eigenvalue we wanted to minimize. 
+Assume that there is a wavy metal track with ups and downs, and a ring that can slide along it. You guide the ring by hand, moving it along the track so that it always goes downhill until it settles at the lowest point.
+![Visualization of variational optimization on an energy landscape](/posts/assets/entries/variationalqeigensolver/FI5KIP1ITWKNRZI.png)
+
+## When is the VQE algorithm useful?
+Energy landscapes are present not just in quantum scenarios, but in various real-life optimization problems, where we need to search for 
+minimum cost configurations. Some example situations may be:
+
+1. Finding the perfect route through a constellation of cities that minimizes the effective traveled distance.
+2. Optimizing investment or expenditure on different stocks or items in order to maximize profit while minimizing risk
+3. Finding the right proportion of mixing metals to make the perfect alloy! 
+
+And many other real-life problems can be approached using this algorithm. 
+
+## What Makes This Perfect For Quantum Computers?
+
+Unfortunately, quantum computers are not yet perfect. Hence, any operation we perform using qubits and quantum gates is plagued by noise and errors, preventing us from obtaining a perfect solution within a reasonable time frame.
+In the Noisy Intermediate-Scale Quantum Computing(NISQ) era, we need algorithms that do not require perfect qubits to solve problems. Since the operational part of Variational Quantum Algorithms is still classical in nature, it is not as affected by the plagues of quantum computers as purely quantum algorithms. This class of quantum algorithms is known as Hybrid Quantum Algorithms. 
+
+
+## Is there a future for VQEs algorithm?
+
+There are problems usually associated with classical algorithms, and we cannot really claim Quantum Advantage, at least not with this algorithm. While the algorithm works really nicely with small toy-sized problems (useless problems), we cannot scale it to solve more realistic problems efficiently. This, however, encourages scientists and engineers to look for more appropriate use cases and more quantum-flavored algorithms.
