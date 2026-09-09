@@ -1,0 +1,101 @@
+---
+
+title: "Quantenmaschinelles Lernen"
+
+subtitle: " Quantenmaschinelles Lernen (einfach)"
+
+author: "Damià"
+
+date: "2026-05-08"
+
+---
+
+**# Quantenmaschinelles Lernen**
+
+Quantenmaschinelles Lernen (**Quantum Machine Learning**, QML) ist ein Forschungsgebiet an der Schnittstelle von Quantencomputing und maschinellem Lernen (ML). Vereinfacht gesagt untersucht QML, wie Quantencomputer für Aufgaben eingesetzt werden können, die traditionell mit maschinellem Lernen verbunden sind. Beim klassischen maschinellen Lernen werden Daten mit klassischer Hardware und klassischen mathematischen Modellen verarbeitet. Beim QML wird dagegen ein Teil der Verarbeitung mithilfe von Quantenressourcen wie Qubits, Quantenschaltkreisen und Messungen durchgeführt. Das grundlegende Ziel bleibt dabei vertraut: Daten klassifizieren, Vorhersagen treffen, Muster erkennen oder komplexe Wahrscheinlichkeitsverteilungen darstellen. Der Unterschied liegt vor allem im verwendeten Rechenrahmen.
+
+Es ist wichtig, QML realistisch zu betrachten. Das Wort **„quantum“ bedeutet nicht automatisch**, dass eine künstliche Intelligenz (KI) schneller oder leistungsfähiger wird. In den meisten praktischen Anwendungen sind klassische Verfahren des maschinellen Lernens derzeit die leistungsfähigste, günstigste und ausgereifteste Option. Die Motivation für QML entsteht jedoch aus der grundsätzlich anderen Art und Weise, wie Quantensysteme Informationen darstellen und verarbeiten. Quanteneffekte wie Superposition, Interferenz und Verschränkung könnten bei bestimmten, sorgfältig ausgewählten Problemen Vorteile bieten. In manchen Fällen geht es dabei um einen möglichen Rechenvorteil, in anderen um wissenschaftliche Anwendungen – und manchmal einfach darum, dass die Daten selbst bereits quantennatur sind.
+
+**## Ein gutes Denkmodell**
+
+Man könnte leicht denken, dass QML völlig losgelöst vom gewöhnlichen maschinellen Lernen funktioniert. In der Praxis sind die meisten heutigen QML-Modelle jedoch **hybrid**. Klassische Daten werden zunächst in einen Quantenschaltkreis codiert. Anschließend wird der Schaltkreis ausgeführt, Messungen werden durchgeführt und ein klassischer Optimierungsalgorithmus aktualisiert die trainierbaren Parameter. Der gesamte Prozess ist also nicht „vollständig quantenmechanisch“. Meist handelt es sich um eine Schleife, in der klassische und quantenmechanische Berechnungen miteinander kombiniert werden.
+
+![Ein kleiner parametrisierter Quantenschaltkreis, der als trainierbares Modell verwendet wird](/posts/assets/entries/qml/qnn_circuit.png)
+
+_Bildquelle: [Qiskit Machine Learning Tutorial zu Quantum Neural Networks]\([https://qiskit-community.github.io/qiskit-machine-learning/tutorials/01\_neural\_networks.html)\_](https://qiskit-community.github.io/qiskit-machine-learning/tutorials/01_neural_networks.html\)_)
+
+Das obige Bild veranschaulicht einen Schaltkreis, wie er häufig bei trainierbaren Quantenmodellen verwendet wird. Man erkennt zwei unterschiedliche Funktionen innerhalb des Schaltkreises. Einige Parameter dienen dazu, die Eingabedaten zu codieren, während andere als trainierbare Gewichte fungieren. Dies ist eine der grundlegenden Ideen hinter **variationalen Quantenschaltkreisen** und **Quantum Neural Networks**: Daten werden eingegeben, ein parametrisierter Schaltkreis verarbeitet sie und die Messungen liefern eine Ausgabe, die anschließend für das Training verwendet wird.
+
+**## Die wichtigsten Techniken des quantenmaschinellen Lernens**
+
+Oft wird über QML gesprochen, als wäre es eine einzige Methode. Tatsächlich handelt es sich jedoch um eine ganze Familie verschiedener Ansätze. Einige ähneln bekannten Verfahren des überwachten Lernens, andere beschäftigen sich mit dem Erlernen von Wahrscheinlichkeitsverteilungen. Wieder andere eignen sich besonders zur Analyse von Quantenzuständen oder Quantenexperimenten. Im Folgenden betrachten wir einige wichtige Ansätze.
+
+**### Variationale Modelle und Quantum Neural Networks**
+
+Ein großer Teil des modernen QML basiert auf **variationalen Quantenschaltkreisen**. Dabei handelt es sich um parametrisierte Schaltkreise, deren Parameter während des Trainings angepasst werden – ähnlich wie die Gewichte in einem klassischen Modell. Umgangssprachlich wird diese allgemeine Klasse von Modellen häufig als **Quantum Neural Networks (QNNs)** bezeichnet. Die Struktur muss dabei nicht exakt einem klassischen neuronalen Netzwerk entsprechen, aber die Analogie ist hilfreich: Es gibt eine Eingabe, ein trainierbares Modell und eine Ausgabe, mit der eine Verlustfunktion berechnet wird.
+
+Diese Modellklasse wird intensiv untersucht, weil sie sich gut für heutige, fehlerbehaftete Quantenhardware eignet. Außerdem bietet sie einen relativ einfachen Einstieg für Menschen, die bereits mit klassischem maschinellem Lernen vertraut sind. Die Trainingslogik fühlt sich ähnlich an, auch wenn die zugrunde liegende Berechnung auf einem Quantensystem stattfindet.
+
+**### Quanten-Kernel-Methoden**
+
+Ein weiterer wichtiger Ansatz ist das **Quantum Kernel Learning**. Hier übernimmt der Quantencomputer nicht unbedingt die gesamte Aufgabe des maschinellen Lernens. Stattdessen wird er verwendet, um eine Ähnlichkeitsmessung zwischen Datenpunkten zu definieren. Diese Ähnlichkeitsmatrix kann anschließend an eine klassische Kernel-Methode, beispielsweise eine Support Vector Machine, übergeben werden. Die grundlegende Idee ist, dass die Quantenberechnung die Daten in einen Merkmalsraum abbilden kann, in dem bestimmte Datenpunkte möglicherweise leichter voneinander getrennt werden können.
+
+![Beispiel für Daten, die mithilfe einer quantenbasierten Kernel-Methode projiziert wurden.](/posts/assets/entries/qml/quantum_kernel_projection.png)
+
+_Bildquelle: [Qiskit Machine Learning Tutorial zu Quantum Kernel Machine Learning]\([https://qiskit-community.github.io/qiskit-machine-learning/tutorials/03\_quantum\_kernel.html)\_](https://qiskit-community.github.io/qiskit-machine-learning/tutorials/03_quantum_kernel.html\)_)
+
+Der Vorteil von Kernel-Methoden besteht darin, dass sie eine klare Verbindung zwischen klassischen und quantenmechanischen Konzepten herstellen. Statt zu behaupten, dass ein gesamtes Lernproblem durch einen Quantenalgorithmus ersetzt werden sollte, stellt sich eine viel konkretere Frage: **Kann ein quantenmechanischer Merkmalsraum eine nützliche Vorstellung von Ähnlichkeit zwischen Daten liefern?** Dadurch gehören Kernel-Methoden zu den konzeptionell klarsten Bereichen des QML.
+
+**### Quantenbasierte generative Modelle**
+
+QML beschäftigt sich nicht nur mit Klassifikation. Ein anderer Bereich konzentriert sich auf **generative Modelle**, die versuchen, Wahrscheinlichkeitsverteilungen zu lernen und anschließend nachzubilden. Das Ziel besteht hier nicht einfach darin, eine Eingabe zu klassifizieren, sondern die Struktur der Daten selbst zu erfassen, sodass neue Datenpunkte aus der gelernten Verteilung erzeugt werden können.
+
+![Beispielausgabe eines Quantum Generative Adversarial Network zum Vergleich der erzeugten und der Zielverteilung.](/posts/assets/entries/qml/qgan_results.png)
+
+_Bildquelle: [Qiskit Machine Learning Tutorial zu PyTorch qGANs]\([https://qiskit-community.github.io/qiskit-machine-learning/tutorials/04\_torch\_qgan.html)\_](https://qiskit-community.github.io/qiskit-machine-learning/tutorials/04_torch_qgan.html\)_)
+
+Ein bekanntes Beispiel ist das **Quantum Generative Adversarial Network (qGAN)**. Bei einem qGAN werden ein quantenmechanischer Generator und ein klassischer Diskriminator gemeinsam trainiert und treten dabei gegeneinander an – ähnlich wie bei einem klassischen GAN. Die obige Abbildung veranschaulicht diese Idee: Das Modell soll nicht nur eine Ja-oder-Nein-Entscheidung treffen, sondern die Form einer gesamten Wahrscheinlichkeitsverteilung lernen. Dadurch können generative QML-Modelle besonders interessant sein, wenn Unsicherheit, Stichproben oder probabilistische Modellierung im Mittelpunkt stehen.
+
+**### Lernen mit Quantendaten und Quantensystemen**
+
+Einer der wissenschaftlich fundiertesten Bereiche des QML beschäftigt sich mit **quanten-nativen Problemen**. Hier geht es nicht darum, gewöhnliche klassische Daten nur deshalb in eine Quantenpipeline zu übertragen, weil dies technologisch interessant klingt. Stattdessen stammen die Daten oder die Aufgabe selbst aus einem quantenmechanischen Kontext. Beispiele sind die Klassifikation von Quantenzuständen, die Analyse experimenteller Messdaten, die Kompression von Quanteninformationen oder das Erlernen von Strukturen innerhalb von Quantenhardware.
+
+![Ein größerer Quantenschaltkreis, der in einem Quantum Convolutional Neural Network verwendet wird.](/posts/assets/entries/qml/qcnn_architecture.png)
+
+_Bildquelle: [Qiskit Machine Learning Tutorial zu QCNNs]\([https://qiskit-community.github.io/qiskit-machine-learning/tutorials/11\_quantum\_convolutional\_neural\_networks.html)\_](https://qiskit-community.github.io/qiskit-machine-learning/tutorials/11_quantum_convolutional_neural_networks.html\)_)
+
+Ein gutes Beispiel ist das **Quantum Convolutional Neural Network (QCNN)**. Der Name ist an klassische Convolutional Neural Networks angelehnt, aber die eigentliche Implementierung besteht aus Quantenschichten und Pooling-ähnlichen Operationen, durch die der aktive Teil des Schaltkreises schrittweise reduziert wird. Diese Modelle sind besonders interessant, weil sie zeigen, dass QML nicht nur versucht, Begriffe aus dem klassischen maschinellen Lernen zu kopieren. Es geht auch darum, Architekturen zu entwickeln, die speziell für Quanteninformationen sinnvoll sind.
+
+Ein weiteres Beispiel ist der **Quantum Autoencoder**. Er versucht, Informationen mit einer kleineren Anzahl von Qubits zu komprimieren und dabei die wichtigsten Strukturen der ursprünglichen Information zu erhalten.
+
+![Ausgabe nach Kompression und Rekonstruktion](/posts/assets/entries/qml/quantum_autoencoder_digits_out.png)
+
+_Bildquelle: [Qiskit Machine Learning Tutorial zum Quantum Autoencoder]\([https://qiskit-community.github.io/qiskit-machine-learning/tutorials/12\_quantum\_autoencoder.html)\_](https://qiskit-community.github.io/qiskit-machine-learning/tutorials/12_quantum_autoencoder.html\)_)
+
+Diese beiden Beispiele zeigen, warum Autoencoder konzeptionell interessant sind. Das Ziel besteht nicht nur darin, ein Label vorherzusagen, sondern eine komprimierte Darstellung zu lernen, die die wesentlichen Informationen weiterhin enthält. Im Quantenbereich kann dies beispielsweise für Entrauschung, eine effizientere Darstellung von Quantenzuständen und für die Nutzung heutiger Hardware mit begrenzter Qubit-Anzahl interessant sein. Allgemeiner betrachtet wirkt dieser Bereich des QML oft überzeugender als stark aufgeladene „Quantum AI“-Versprechen, weil seine Motivation direkt mit Quantendaten und Quantengeräten verbunden ist.
+
+**## Wie sich QML vom klassischen maschinellen Lernen unterscheidet**
+
+Auf den ersten Blick könnte QML wie gewöhnliches maschinelles Lernen auf ungewöhnlicher Hardware wirken. Der Unterschied geht jedoch tiefer. Klassisches maschinelles Lernen arbeitet mit Bits, Vektoren, Matrizen und Funktionen, deren Zwischenwerte normalerweise direkt verarbeitet und untersucht werden können. Quantenmodelle arbeiten dagegen mit Qubits, Amplituden, unitären Operationen und Messungen. Dadurch werden Informationen anders dargestellt, transformiert und ausgelesen.
+
+Bei einem klassischen Modell können Zwischenwerte normalerweise direkt ausgelesen werden. Bei einem Quantenmodell spielt dagegen die **Messung** eine zentrale Rolle. Eine Messung eines Quantenzustands liefert im Allgemeinen nur bestimmte Informationen und kann den Zustand selbst verändern. Dadurch wird die Konstruktion eines Quantenmodells anspruchsvoller. Gleichzeitig bedeutet dies, dass sich klassische Vorgehensweisen nicht ohne Weiteres auf Quantenmodelle übertragen lassen.
+
+Ein weiterer wichtiger Punkt ist, dass Quanteneffekte wie Superposition und Verschränkung nicht automatisch einen Vorteil garantieren. Sie verändern die Struktur der Berechnung, machen sie aber nicht automatisch besser. Daher lautet die zentrale Forschungsfrage im QML nicht: **„Ist Quantencomputing generell leistungsfähiger?“**, sondern vielmehr: **„Bei welchen Lernaufgaben, unter welchen Voraussetzungen und mit welcher Hardware können Quantenressourcen tatsächlich einen Vorteil bieten?“**
+
+**## Warum beschäftigt man sich mit QML?**
+
+Es gibt mehrere ernsthafte Gründe, warum QML intensiv erforscht wird. Erstens könnten Quantencomputer langfristig neue Möglichkeiten bieten, Daten darzustellen oder Merkmalsräume zu untersuchen, die klassisch nur schwer nachgebildet werden können. Zweitens könnten Quantendaten möglicherweise natürlicher mit Quantenmethoden verarbeitet werden als mit rein klassischen Näherungen. Der dritte Grund ist eher wissenschaftlicher Natur: QML zwingt Forschende dazu, neu darüber nachzudenken, was „Lernen aus Daten“ bedeutet, wenn die Daten, das Modell oder die Hardware eine explizit quantenmechanische Struktur besitzen.
+
+Gleichzeitig ist QML interessant, weil es an der Schnittstelle mehrerer Forschungsgebiete liegt, die nicht immer dieselbe Sprache sprechen. Es verbindet Konzepte aus Physik, Optimierung, Informatik und angewandtem maschinellem Lernen. Selbst wenn ein bestimmter Ansatz keine bessere Leistung als eine starke klassische Methode erreicht, kann die Untersuchung dennoch zu neuen wissenschaftlichen Erkenntnissen führen.
+
+**## Eine realistische Sicht auf das Forschungsgebiet**
+
+Eine gute Einführung in QML sollte auch seine Grenzen nicht verschweigen. Die heutige Quantenhardware ist verrauscht, relativ klein und im Vergleich zu klassischer Recheninfrastruktur teuer. Die Codierung klassischer Daten in Quantenzustände kann aufwendig sein, und das Training kann instabil werden. Einige Modelle leiden unter sogenannten **Barren Plateaus**, bei denen Gradienten extrem klein werden und die Optimierung dadurch sehr schwierig wird. Außerdem ist bei vielen veröffentlichten Beispielen noch nicht eindeutig geklärt, ob sie gegenüber leistungsfähigen klassischen Methoden einen praktischen Vorteil bieten.
+
+Deshalb sollte QML als **aktives Forschungsgebiet und nicht als fertige industrielle Lösung** verstanden werden. Obwohl QML teilweise von Hype begleitet wird, gibt es vielversprechende Ansätze – insbesondere bei hybriden Verfahren und Anwendungen mit Quantendaten. Für eine interne Wiki-Seite einer wissenschaftlichen Vereinigung ist diese ausgewogene Perspektive besonders wichtig. Wir sollten QML gut genug verstehen, um seine tatsächlichen Möglichkeiten zu erkennen, ohne dabei übertriebene Versprechen zu wiederholen.
+
+**## Fazit**
+
+Quantenmaschinelles Lernen lässt sich am besten als die Suche danach verstehen, **ob und wo Quantencomputing einen sinnvollen Beitrag zum Lernen aus Daten leisten kann**. Manchmal geschieht dies durch trainierbare Quantenschaltkreise, manchmal durch Quanten-Kernel, manchmal durch generative Modelle. In einigen der überzeugendsten Anwendungen zeigt sich der Nutzen jedoch bei der Analyse oder Kompression von Quantendaten selbst.
+
+Der wichtigste Punkt ist daher, QML nicht einfach als **„KI mit Quantentechnologie“** zu betrachten. Stattdessen handelt es sich um ein sich entwickelndes Forschungsgebiet, das untersucht, wann und wie Quantenressourcen in verschiedenen Teilen des Lernprozesses nützlich sein können. Gerade diese sorgfältige Untersuchung von Möglichkeiten **und** Grenzen macht QML zu einem wichtigen und spannenden Forschungsgebiet.
