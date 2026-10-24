@@ -279,7 +279,7 @@ export default function Page({
               <span className="text-4xl">{categoryInfo.icon}</span>
             </motion.div>
 
-            <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
+            <h1 className="mb-4 font-serif text-4xl font-bold text-white md:text-6xl">
               <span
                 className={`bg-gradient-to-r ${categoryInfo.gradient} bg-clip-text text-transparent`}
               >

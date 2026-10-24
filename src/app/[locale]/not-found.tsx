@@ -22,7 +22,7 @@ export default function NotFound() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8"
           >
-            <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-8xl font-bold text-transparent dark:from-blue-400 dark:to-purple-400">
+            <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text font-serif text-8xl font-bold text-transparent dark:from-blue-400 dark:to-purple-400">
               404
             </h1>
           </motion.div>
