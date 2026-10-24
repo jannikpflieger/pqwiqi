@@ -5,10 +5,9 @@ import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { useAnimation, useScroll, useTransform } from "motion/react";
 import { ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import QuantumMap from "../components/QuantumMap";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import QuantumMap from "../components/QuantumMap";
 import FeaturedCard from "../components/homepage/FeaturedCard";
 import { DarkModeAwareBackground } from "../components/homepage/DarkModeAwareBackground";
 
@@ -92,7 +91,7 @@ export default function Home({ params }: HomeProps) {
       {/* Hero Section - Full Width with Animated Background */}
       <section className="scroll-snap-section relative flex h-screen w-full items-center justify-center overflow-hidden">
         {/* Quantum Background with hover effect */}
-        <div className="absolute inset-0 h-full w-full">
+        <div className="absolute inset-0 h-full w-full opacity-40">
           {/* DarkModeAwareBackground: A dynamic background component that switches between light and dark wave animations based on the user's theme preference. 
               It uses WavyBackgroundDark for dark mode and WavyBackgroundLight for light mode, 
               automatically detecting and responding to theme changes through DOM mutations. */}
@@ -105,78 +104,50 @@ export default function Home({ params }: HomeProps) {
           animate="visible"
           variants={containerVariants}
         >
-          <div className="mx-auto flex flex-col items-center justify-center rounded-xl bg-white/20 p-8 text-center backdrop-blur-md dark:bg-black/20 md:max-w-3xl">
+          <div className="mx-auto flex flex-col items-center justify-center p-8 text-center md:max-w-3xl">
             <motion.div
-              className="w-full max-w-2xl space-y-8"
+              className="w-full max-w-2xl space-y-6"
               style={{ opacity, scale }}
             >
               <motion.div variants={itemVariants}>
                 <motion.h1
-                  className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl"
+                  className="bg-gradient-to-r from-slate-900 via-purple-800 to-blue-800 bg-clip-text px-2 pb-3 pt-1 font-serif text-4xl font-bold leading-[1.15] tracking-tight text-transparent dark:from-white dark:via-purple-200 dark:to-blue-200 sm:text-5xl lg:text-6xl"
                   variants={itemVariants}
                 >
                   {t("hello")}{" "}
-                  <motion.span className="mt-2 block text-gray-900 dark:text-white">
+                  <motion.span className="mt-2 block">
                     PushQuantum WiQi
                   </motion.span>
                 </motion.h1>
                 <motion.p
-                  className="mt-6 max-w-2xl text-xl text-gray-600 dark:text-gray-300"
+                  className="mx-auto mt-4 max-w-xl text-xl text-gray-600 dark:text-gray-300"
                   variants={itemVariants}
                 >
                   {t("sub hello")}
                 </motion.p>
               </motion.div>
 
-              {/* CTA Buttons */}
+              {/* Primary action */}
               <motion.div
-                className="flex flex-col justify-center gap-4 sm:flex-row"
+                className="flex justify-center"
                 variants={itemVariants}
               >
-                <Link
-                  href={`/${params.locale}/quantum-map`}
-                  className="w-full sm:w-auto"
-                >
+                <Link href={`/${params.locale}/quantum-map`}>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Button
                       size="lg"
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
                     >
-                      {t("explore courses")}
-                      <motion.div
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{
-                          duration: 1,
-                          repeat: Number.POSITIVE_INFINITY,
-                        }}
-                      >
-                        <ChevronRight className="ml-2 h-4 w-4" />
-                      </motion.div>
-                    </Button>
-                  </motion.div>
-                </Link>
-
-                <Link
-                  href={`/${params.locale}/about`}
-                  className="w-full sm:w-auto"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:border-gray-600 dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white"
-                    >
-                      {t("About Us")}
+                      {t("explore")}
+                      <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>
                   </motion.div>
                 </Link>
               </motion.div>
+
             </motion.div>
           </div>
         </motion.div>
@@ -200,21 +171,6 @@ export default function Home({ params }: HomeProps) {
         </div>
       </section>
 
-      {/* Features Section */}
-      <div className="hidden md:block">
-        <section className="scroll-snap-section h-screen bg-gray-50/50 py-16 dark:bg-slate-900/50">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="h-full w-full"
-          >
-            <QuantumMap />
-          </motion.div>
-        </section>
-      </div>
-
       {/* Difficulty Levels Section */}
       <section className="scroll-snap-section py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -225,11 +181,8 @@ export default function Home({ params }: HomeProps) {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
-              <Badge className="mb-4 bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/30">
-                {t("for everyone")}
-              </Badge>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                {t("difficulty levels")}
+                {t("for everyone")}
               </h2>
               <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
                 {t("difficulty description")}
@@ -279,6 +232,21 @@ export default function Home({ params }: HomeProps) {
           </div>
         </div>
       </section>
+
+      {/* Features Section */}
+      <div className="hidden md:block">
+        <section className="scroll-snap-section h-screen bg-gray-50/50 py-16 dark:bg-slate-900/50">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-full w-full"
+          >
+            <QuantumMap />
+          </motion.div>
+        </section>
+      </div>
 
       {/* 
         IMPORTANT: This empty scroll-snap-section is required for Edge browser compatibility.
