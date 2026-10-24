@@ -177,7 +177,7 @@ const Header = (props: HeaderProps) => {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/80 backdrop-blur-lg transition-colors duration-300 dark:border-slate-800/80 dark:bg-slate-900/80">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-5">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -185,12 +185,12 @@ const Header = (props: HeaderProps) => {
               href={`/${props.locale}`}
               className="flex items-center space-x-2 transition-transform duration-200 hover:scale-105"
             >
-              <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gradient-to-br from-purple-600 to-pink-500 p-0.5 shadow-lg">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gradient-to-br from-purple-600 to-pink-500 p-0.5">
                 <Image
                   src="/static/logos/wiqi/wq.png"
                   alt="WiQi Logo"
-                  width={30}
-                  height={30}
+                  width={38}
+                  height={38}
                   className="h-full w-full rounded-full bg-white object-contain p-0.5 dark:bg-slate-900"
                 />
               </div>
@@ -205,14 +205,14 @@ const Header = (props: HeaderProps) => {
           {/* Search Bar - Desktop */}
           <div
             ref={searchContainerRef}
-            className="relative hidden w-full max-w-md lg:block"
+            className="relative hidden w-full max-w-sm lg:block"
           >
             <div
               className={`relative flex items-center rounded-full border ${
                 isSearchFocused
                   ? "border-purple-500 ring-2 ring-purple-200 dark:ring-purple-900/30"
                   : "border-slate-200 dark:border-slate-700"
-              } bg-white px-3 py-1.5 transition-all duration-200 dark:bg-slate-800`}
+              } bg-white px-3 py-0.5 transition-all duration-200 dark:bg-slate-800`}
             >
               <Search
                 className="mr-2 h-4 w-4 text-slate-400 dark:text-slate-500"
@@ -223,7 +223,7 @@ const Header = (props: HeaderProps) => {
                 type="search"
                 value={searchQuery}
                 placeholder={t("Search")}
-                className="h-8 flex-1 border-0 bg-transparent p-0 text-sm text-slate-900 placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white"
+                className="h-7 flex-1 border-0 bg-transparent p-0 text-sm text-slate-900 shadow-none placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white"
                 onChange={handleSearch}
                 onFocus={() => {
                   setIsSearchFocused(true);
@@ -317,37 +317,77 @@ const Header = (props: HeaderProps) => {
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
             {/* Theme Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-full text-slate-700 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
-              onClick={toggleTheme}
-              aria-label={
-                theme === "dark"
-                  ? "Switch to light mode"
-                  : "Switch to dark mode"
-              }
-            >
-              {theme === "dark" ? (
-                <Moon className="h-5 w-5 text-purple-400" />
-              ) : (
-                <Sun className="h-5 w-5 text-amber-500" />
-              )}
-            </Button>
-            {/* Language Switcher */}
-            <Link
-              href={replaceLocale(props.locale, pathName)}
-              className="overflow-hidden rounded-full ring-2 ring-white transition-transform duration-200 hover:scale-105 dark:ring-slate-800"
-            >
-              <Image
-                src={`/static/flags/${props.locale}.svg`}
-                alt={`${props.locale === "en" ? "English" : "Deutsch"}`}
-                width={24}
-                height={24}
-                className="h-6 w-6"
-                priority
+            <div role="group" aria-label="Theme" className="relative flex items-center rounded-full border border-slate-300/60 bg-slate-200/70 p-[2px] shadow-[inset_0_1px_1px_rgba(15,23,42,0.10)] dark:border-slate-700/60 dark:bg-slate-950/60 dark:shadow-[inset_0_1px_1px_rgba(0,0,0,0.35)]">
+              <motion.span
+                aria-hidden="true"
+                className="absolute left-[2px] top-[2px] h-5 w-7 rounded-full bg-white shadow-[0_1px_1px_rgba(15,23,42,0.12)] dark:bg-slate-700 dark:shadow-[0_1px_1px_rgba(0,0,0,0.3)]"
+                animate={{ x: theme === "dark" ? 28 : 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 34 }}
               />
-            </Link>
+              <button
+                type="button"
+                onClick={() => theme === "dark" && toggleTheme()}
+                aria-pressed={theme === "light"}
+                aria-label="Light mode"
+                className={`relative z-10 flex h-5 w-7 items-center justify-center rounded-full transition-colors ${
+                  theme === "light" ? "text-amber-500" : "text-slate-400"
+                }`}
+              >
+                <Sun className="h-3 w-3" />
+              </button>
+              <button
+                type="button"
+                onClick={() => theme === "light" && toggleTheme()}
+                aria-pressed={theme === "dark"}
+                aria-label="Dark mode"
+                className={`relative z-10 flex h-5 w-7 items-center justify-center rounded-full transition-colors ${
+                  theme === "dark" ? "text-indigo-300" : "text-slate-400"
+                }`}
+              >
+                <Moon className="h-3 w-3" />
+              </button>
+            </div>
+            {/* Language Switcher — segmented EN/DE toggle */}
+            <div
+              role="group"
+              aria-label="Language"
+              className="relative flex items-center rounded-full border border-slate-300/60 bg-slate-200/70 p-[2px] shadow-[inset_0_1px_1px_rgba(15,23,42,0.10)] dark:border-slate-700/60 dark:bg-slate-950/60 dark:shadow-[inset_0_1px_1px_rgba(0,0,0,0.35)]"
+            >
+              {/*
+                Sliding highlight behind the active language. Its travel
+                distance must equal the width of one option (w-7 = 28px);
+                change the two together.
+              */}
+              <motion.span
+                aria-hidden="true"
+                className="absolute left-[2px] top-[2px] h-5 w-7 rounded-full bg-white shadow-[0_1px_1px_rgba(15,23,42,0.12)] dark:bg-slate-700 dark:shadow-[0_1px_1px_rgba(0,0,0,0.3)]"
+                animate={{ x: props.locale === "de" ? 28 : 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 34 }}
+              />
+              {(["en", "de"] as const).map((code) => {
+                const isActive = props.locale === code;
+                return (
+                  <Link
+                    key={code}
+                    href={
+                      isActive
+                        ? pathName
+                        : replaceLocale(props.locale, pathName)
+                    }
+                    hrefLang={code}
+                    aria-current={isActive ? "true" : undefined}
+                    aria-label={code === "en" ? "English" : "Deutsch"}
+                    className={`relative z-10 flex h-5 w-7 items-center justify-center rounded-full transition-colors text-[10px] font-semibold uppercase tracking-wide ${
+                      isActive
+                        ? "text-slate-900 dark:text-white"
+                        : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    }`}
+                  >
+                    {code}
+                  </Link>
+                );
+              })}
+            </div>
 
             {/* Mobile Menu Button */}
             <Button
@@ -381,7 +421,7 @@ const Header = (props: HeaderProps) => {
                   type="search"
                   value={searchQuery}
                   placeholder={t("Search")}
-                  className="h-8 flex-1 border-0 bg-transparent p-0 text-sm text-slate-900 placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white"
+                  className="h-7 flex-1 border-0 bg-transparent p-0 text-sm text-slate-900 shadow-none placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white"
                   onChange={handleSearch}
                   onFocus={() => {
                     if (searchQuery) setShowDropdown(true);

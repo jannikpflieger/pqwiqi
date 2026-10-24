@@ -21,9 +21,9 @@
   "Navbar": {
     "About": "About",
     "Quantum Tuesdays": "Quantum Tuesdays",
-    "Entries": "Entries",
+    "Entries": "Quantum Entries",
     "Quantum Alphabet": "Quantum Alphabet",
-    "Search": "Search..."
+    "Search": "Search"
   },
   "QuantumMap": {
     "Title": "Project: Quantum Map",
@@ -102,12 +102,12 @@
   },
   "Footer": {
     "Slogan": "Exploring quantum computing concepts through interactive education and visualization. Making quantum accessible for everyone.",
-    "Resources": "Resources",
+    "Navigation": "Navigation",
     "Quantum Tuesdays": "Quantum Tuesdays",
-    "Entries": "Entries",
+    "Entries": "Quantum Entries",
     "Quantum Alphabet": "Quantum Alphabet",
-    "About Us": "Abous Us",
-    "Connect": "Connect"
+    "About Us": "About",
+    "Contact": "Contact"
   },
   "NotFoundPage": {
     "title": "Quantum superposition error",

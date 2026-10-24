@@ -21,9 +21,9 @@
   "Navbar": {
     "About": "Über Uns",
     "Quantum Tuesdays": "Quantendienstage",
-    "Entries": "Einträge",
+    "Entries": "Quanteneinträge",
     "Quantum Alphabet": "Quantenalphabet",
-    "Search": "Suchen..."
+    "Search": "Suchen"
   },
   "QuantumMap": {
     "Title": "Projekt: die Quantenkarte",
@@ -102,12 +102,12 @@
   },
   "Footer": {
     "Slogan": "Erforschung von Quantencomputerkonzepten durch interaktive Bildung und Visualisierung mit dem Ziel Quantencomputing für alle zugänglich machen.",
-    "Resources": "Resourcen",
+    "Navigation": "Navigation",
     "Quantum Tuesdays": "Quantendienstage",
-    "Entries": "Generelle Einträge",
+    "Entries": "Quanteneinträge",
     "Quantum Alphabet": "Quantenalphabet",
     "About Us": "Über Uns",
-    "Connect": "Kontakte"
+    "Contact": "Kontakt"
   },
   "NotFoundPage": {
     "title": "Quanten-Superpositionsfehler",

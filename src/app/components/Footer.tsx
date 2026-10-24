@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { Heart, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Heart } from "lucide-react";
 
 interface FooterProps {
   params: {
@@ -27,9 +27,9 @@ export default function Footer({ params }: FooterProps) {
   return (
     <footer className="border-t border-slate-200 bg-gradient-to-r from-slate-50 to-white pt-4 dark:border-slate-800 dark:from-slate-900 dark:to-slate-950">
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div className="mx-auto flex max-w-4xl flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           {/* Logo and Tagline */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="max-w-sm">
             <div
               className="flex cursor-pointer items-center"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -51,21 +51,21 @@ export default function Footer({ params }: FooterProps) {
                 </span>
               </div>
             </div>
-            <p className="mt-3 max-w-md text-sm text-slate-600 dark:text-slate-400">
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               {t("Slogan")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
-              {t("Resources")}
+            <h3 className="text-[13px] font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
+              {t("Navigation")}
             </h3>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-2 space-y-0 leading-tight">
               <li>
                 <Link
                   href={`/${locale}/posts/quantum_tuesdays`}
-                  className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
                   {t("Quantum Tuesdays")}
                 </Link>
@@ -73,7 +73,7 @@ export default function Footer({ params }: FooterProps) {
               <li>
                 <Link
                   href={`/${locale}/posts/entries`}
-                  className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
                   {t("Entries")}
                 </Link>
@@ -81,7 +81,7 @@ export default function Footer({ params }: FooterProps) {
               <li>
                 <Link
                   href={`/${locale}/posts/alphabet`}
-                  className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
                   {t("Quantum Alphabet")}
                 </Link>
@@ -89,64 +89,29 @@ export default function Footer({ params }: FooterProps) {
               <li>
                 <Link
                   href={`/${locale}/about`}
-                  className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
                   {t("About Us")}
                 </Link>
               </li>
+              <li>
+                <a
+                  href="mailto:hello@pushquantum.tech"
+                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                >
+                  {t("Contact")}
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Social Links */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
-              {t("Connect")}
-            </h3>
-            <div className="mt-4 flex space-x-4">
-              <a
-                href="https://github.com/leart-zuka/wiqi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="mailto:leart.zuka@web.de"
-                className="text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                aria-label="Email"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-              {/*
-                            <a
-                                href="https://twitter.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                                aria-label="Twitter"
-                            >
-                                <Twitter className="h-5 w-5" />
-                            </a>
-                            <a
-                                href="https://linkedin.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                                aria-label="LinkedIn"
-                            >
-                                <Linkedin className="h-5 w-5" />
-                            </a>*/}
-            </div>
-          </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 border-t border-slate-200 pt-6 dark:border-slate-800">
-          <p className="text-center text-sm text-slate-600 dark:text-slate-400">
+        <div className="mx-auto mt-8 max-w-4xl border-t border-slate-200 pt-6 dark:border-slate-800">
+          <p className="text-center text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
             <a href="https://wiqi.info">WiQi</a> © {year} by{" "}
-            <a href="https://github.com/leart-zuka/">Leart Zuka</a>{" "}
+            Leart Zuka{" "}
             <span>
               is licensed under{" "}
               <Link
