@@ -26,19 +26,9 @@ const testCases = [
     description: "Valid entries subfolder",
   },
   {
-    url: "/en/posts/quantum_tuesdays",
-    expected: "valid",
-    description: "Valid quantum_tuesdays subfolder",
-  },
-  {
     url: "/de/posts/entries",
     expected: "valid",
     description: "Valid entries subfolder (German)",
-  },
-  {
-    url: "/de/posts/quantum_tuesdays",
-    expected: "valid",
-    description: "Valid quantum_tuesdays subfolder (German)",
   },
 
   // Invalid subfolder URLs (should redirect to 404)
@@ -68,9 +58,9 @@ const testCases = [
     description: "Invalid subfolder (German) - should redirect to 404",
   },
   {
-    url: "/en/posts/quantum_tuesday",
+    url: "/en/posts/quantum_tuesdays",
     expected: "redirect-404",
-    description: "Missing 's' in quantum_tuesdays - should redirect to 404",
+    description: "Removed quantum_tuesdays subfolder - should redirect to 404",
   },
 
   // Completely unknown URLs (should use catch-all route)
@@ -187,13 +177,12 @@ function analyzeResponse(response, expected) {
   // Check for valid content indicators (more specific)
   const hasValidContent =
     body.includes("Quantum Entries") ||
-    body.includes("Quantum Tuesdays") ||
     (body.includes("grid") && body.includes("list"));
   const hasLoadingState = body.includes("Redirecting...");
   const hasValidPageStructure =
     body.includes("min-h-screen") && body.includes("container");
   const hasValidSubfolderTitle =
-    body.includes("Quantum Entries") || body.includes("Quantum Tuesdays");
+    body.includes("Quantum Entries");
 
   let result = {
     status: "unknown",

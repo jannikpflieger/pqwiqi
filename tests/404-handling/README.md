@@ -12,10 +12,10 @@ This test suite validates the comprehensive 404 error handling system implemente
 
 ## What We Test
 
-### 1. Valid Pages (4 tests)
+### 1. Valid Pages (2 tests)
 
-- **English valid subfolders**: `/en/posts/entries`, `/en/posts/quantum_tuesdays`
-- **German valid subfolders**: `/de/posts/entries`, `/de/posts/quantum_tuesdays`
+- **English valid subfolders**: `/en/posts/entries`
+- **German valid subfolders**: `/de/posts/entries`
 - **Expected behavior**: Return 200 status with proper content
 
 ### 2. Invalid Subfolders (6 tests)
@@ -54,7 +54,7 @@ Before implementing this system, the application had several critical issues:
 A multi-layered 404 handling approach:
 
 1. **Client-side Validation** (`src/app/[locale]/posts/[subfolder]/page.tsx`)
-   - Validates subfolder names against allowed values: `["entries", "quantum_tuesdays"]`
+   - Validates subfolder names against allowed values: `["entries"]`
    - Prevents unnecessary API calls for invalid subfolders
    - Provides immediate user feedback with loading states
 

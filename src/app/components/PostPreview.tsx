@@ -73,13 +73,7 @@ const PostPreview = (props: PostPreviewProps) => {
 
   // Get category info
   const getCategoryInfo = () => {
-    if (props.folder === "quantum_tuesdays") {
-      return {
-        label: t("quantum tuesday"),
-        color:
-          "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
-      };
-    } else if (props.folder === "entries") {
+    if (props.folder === "entries") {
       return {
         label: t("entry"),
         color:

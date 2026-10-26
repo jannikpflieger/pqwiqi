@@ -82,9 +82,7 @@ export default function PostClient({
     
     // Get category label for banner
     const getCategoryLabel = () => {
-        if (params.subfolder === "quantum_tuesdays") {
-            return t("quantum tuesday");
-        } else if (params.subfolder === "entries") {
+        if (params.subfolder === "entries") {
             return "Quantum";
         }
         return params.subfolder;
