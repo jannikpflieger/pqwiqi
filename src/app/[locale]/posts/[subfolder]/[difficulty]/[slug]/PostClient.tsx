@@ -467,7 +467,7 @@ export default function PostClient({
                         {/* Article */}
                         <div className="py-6">
                             <Card className="p-6 md:p-8">
-                            <article className="prose prose-lg mx-auto max-w-full text-justify text-slate-900 dark:prose-invert dark:text-white">
+                            <article className="prose prose-lg mx-auto max-w-full text-justify prose-headings:text-left text-slate-900 dark:prose-invert dark:text-white">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkMath, remarkGfm]}
                                     rehypePlugins={[
