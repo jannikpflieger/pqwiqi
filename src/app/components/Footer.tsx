@@ -64,14 +64,6 @@ export default function Footer({ params }: FooterProps) {
             <ul className="mt-4 space-y-2">
               <li>
                 <Link
-                  href={`/${locale}/posts/quantum_tuesdays`}
-                  className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
-                >
-                  {t("Quantum Tuesdays")}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href={`/${locale}/posts/entries`}
                   className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
@@ -104,7 +96,7 @@ export default function Footer({ params }: FooterProps) {
             </h3>
             <div className="mt-4 flex space-x-4">
               <a
-                href="https://github.com/leart-zuka/wiqi"
+                href="https://github.com/jannikpflieger/pqwiqi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
@@ -113,7 +105,7 @@ export default function Footer({ params }: FooterProps) {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="mailto:leart.zuka@web.de"
+                href="mailto:quantentraeume@pushquantum.tech"
                 className="text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 aria-label="Email"
               >
