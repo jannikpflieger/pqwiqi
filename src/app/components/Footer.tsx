@@ -80,6 +80,14 @@ export default function Footer({ params }: FooterProps) {
               </li>
               <li>
                 <Link
+                  href={`/${locale}/applications`}
+                  className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                >
+                  {t("Applications")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={`/${locale}/about`}
                   className="text-sm text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >

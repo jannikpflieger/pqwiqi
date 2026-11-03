@@ -40,6 +40,10 @@ export const routing = defineRouting({
       en: "/quantum-map",
       de: "/quantum-map",
     },
+    "/applications": {
+      en: "/applications",
+      de: "/applications",
+    },
   },
 });
 
