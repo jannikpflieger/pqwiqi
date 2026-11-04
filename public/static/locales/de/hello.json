@@ -147,6 +147,9 @@
     "categoriesLabel": "Kategorien",
     "source": "Quelle: Deutsches Museum, Technologiesteckbriefe",
     "readTime": "5 Min. Lesezeit",
+    "related": "Verwandte Wiqi-Artikel",
+    "moreDetails": "Klicke hier für mehr Details",
+    "back": "Zurück zu Anwendungen",
     "categories": {
       "health": "Gesundheit und Medizin",
       "communication": "Kommunikation und Sicherheit",

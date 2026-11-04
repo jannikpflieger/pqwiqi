@@ -44,6 +44,10 @@ export const routing = defineRouting({
       en: "/applications",
       de: "/applications",
     },
+    "/applications/[slug]": {
+      en: "/applications/[slug]",
+      de: "/applications/[slug]",
+    },
   },
 });
 

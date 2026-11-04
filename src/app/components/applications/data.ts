@@ -8,6 +8,13 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+// `related` lists slugs of Wiqi entries (public/posts/<locale>/<difficulty>/entries).
+export interface ApplicationItem {
+  key: string;
+  url: string;
+  related: string[];
+}
+
 // Display text lives in hello.json under "Applications.categories" / "Applications.items".
 // Tailwind classes are written out in full so the JIT compiler picks them up.
 export interface ApplicationCategory {
@@ -17,7 +24,7 @@ export interface ApplicationCategory {
   iconWrap: string;
   number: string;
   hover: string;
-  items: { key: string; url: string }[];
+  items: ApplicationItem[];
 }
 
 const DM_BASE =
@@ -35,16 +42,23 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "prosthesis",
         url: `${DM_BASE}/quantentraeume/prothesensteuerung-durch-quantensensoren`,
+        related: ["qsensors", "qmedicine", "spin"],
       },
       {
         key: "cancer",
         url: `${DM_BASE}/quantentraeume/quantenbasierte-krebsfrueherkennung`,
+        related: ["qmedicine", "qhyperpolarisation"],
       },
       {
         key: "drugs",
         url: `${DM_BASE}/quantentechnologien-in-der-medikamentenentwicklung`,
+        related: ["qmedicine", "qchemistry", "qml", "variationalqeigensolvers"],
       },
-      { key: "imaging", url: `${DM_BASE}/quantenbildgebung` },
+      {
+        key: "imaging",
+        url: `${DM_BASE}/quantenbildgebung`,
+        related: ["entanglement", "interference"],
+      },
     ],
   },
   {
@@ -58,8 +72,18 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "cryptography",
         url: `${DM_BASE}/quantentraeume/quantenkryptographie`,
+        related: ["noncloning", "measurement", "qkd", "qcommunication"],
       },
-      { key: "internet", url: `${DM_BASE}/quanteninternet` },
+      {
+        key: "internet",
+        url: `${DM_BASE}/quanteninternet`,
+        related: [
+          "entanglement",
+          "noncloning",
+          "qteleportation",
+          "qcommunication",
+        ],
+      },
     ],
   },
   {
@@ -73,8 +97,13 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "logistics",
         url: `${DM_BASE}/quantenoptimierung-in-der-logistik`,
+        related: ["scv", "qoptimization", "qtunnelling"],
       },
-      { key: "finance", url: `${DM_BASE}/quantum-finance` },
+      {
+        key: "finance",
+        url: `${DM_BASE}/quantum-finance`,
+        related: ["qoptimization", "variationalqeigensolvers"],
+      },
     ],
   },
   {
@@ -88,11 +117,17 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "weather",
         url: `${DM_BASE}/quantentraeume/quantentechnologien-in-der-wettervorhersage`,
+        related: ["qsensors", "nisq"],
       },
-      { key: "navigation", url: `${DM_BASE}/quantentraeume/quantennavigation` },
+      {
+        key: "navigation",
+        url: `${DM_BASE}/quantentraeume/quantennavigation`,
+        related: ["qsensors", "scv"],
+      },
       {
         key: "gravimeters",
         url: `${DM_BASE}/untergrundanalyse-mit-quanten-gravimetern`,
+        related: ["scv", "interference"],
       },
     ],
   },
@@ -104,9 +139,17 @@ export const applicationCategories: ApplicationCategory[] = [
     number: "from-cyan-500 to-sky-500",
     hover: "hover:border-cyan-300 dark:hover:border-cyan-500/50",
     items: [
-      { key: "batteries", url: `${DM_BASE}/quantenakkus` },
-      { key: "catalysis", url: `${DM_BASE}/quantenkatalyse` },
-      { key: "dots", url: `${DM_BASE}/quantendots` },
+      {
+        key: "batteries",
+        url: `${DM_BASE}/quantenakkus`,
+        related: ["qsuperabsorption", "entanglement"],
+      },
+      {
+        key: "catalysis",
+        url: `${DM_BASE}/quantenkatalyse`,
+        related: ["qchemistry", "scv", "variationalqeigensolvers"],
+      },
+      { key: "dots", url: `${DM_BASE}/quantendots`, related: ["spin"] },
     ],
   },
   {
@@ -117,11 +160,21 @@ export const applicationCategories: ApplicationCategory[] = [
     number: "from-purple-600 to-pink-500",
     hover: "hover:border-purple-300 dark:hover:border-purple-500/50",
     items: [
-      { key: "ai", url: `${DM_BASE}/quanten-und-kuenstliche-intelligenz` },
+      {
+        key: "ai",
+        url: `${DM_BASE}/quanten-und-kuenstliche-intelligenz`,
+        related: ["scv", "algorithms", "qml", "nisq"],
+      },
       {
         key: "transistors",
         url: `${DM_BASE}/quantentraeume/ein-atom-transistoren`,
+        related: [],
       },
     ],
   },
 ];
+
+// Items numbered 1..n continuously across categories, as shown on the overview
+export const applicationItems = applicationCategories
+  .flatMap((category) => category.items.map((item) => ({ ...item, category })))
+  .map((item, index) => ({ ...item, number: index + 1 }));

@@ -147,6 +147,9 @@
     "categoriesLabel": "Categories",
     "source": "Source: Deutsches Museum, Technology profiles",
     "readTime": "5 min read",
+    "related": "Related Wiqi articles",
+    "moreDetails": "Click here for more details",
+    "back": "Back to Applications",
     "categories": {
       "health": "Health and medicine",
       "communication": "Communication and security",
