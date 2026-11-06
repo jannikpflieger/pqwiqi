@@ -67,7 +67,7 @@ export default function FeaturedCard({ locale }: FeaturedCardProps) {
             {card.additionalInfo}
           </p>
           <Link
-            href={`/${locale}/posts/quantum_tuesdays/elementary/${card.endpoint}`}
+            href={`/${locale}/posts/entries/elementary/${card.endpoint}`}
             className="mt-3 flex items-center text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
           >
             <span>{card.ctaText}</span>
@@ -76,7 +76,7 @@ export default function FeaturedCard({ locale }: FeaturedCardProps) {
 
           <div className="flex justify-center p-2">
             <Link
-              href={`/${locale}/posts/quantum_tuesdays/elementary/${card.endpoint}`}
+              href={`/${locale}/posts/entries/elementary/${card.endpoint}`}
               className="relative h-48 w-full overflow-hidden rounded-lg"
             >
               <Image

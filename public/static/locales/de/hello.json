@@ -23,7 +23,8 @@
     "Quantum Tuesdays": "Quantendienstage",
     "Entries": "Einträge",
     "Quantum Alphabet": "Quantenalphabet",
-    "Search": "Suchen..."
+    "Search": "Suchen...",
+    "Applications": "Anwendungen"
   },
   "QuantumMap": {
     "Title": "Projekt: die Quantenkarte",
@@ -127,6 +128,7 @@
     "Quantum Tuesdays": "Quantendienstage",
     "Entries": "Generelle Einträge",
     "Quantum Alphabet": "Quantenalphabet",
+    "Applications": "Anwendungen",
     "About Us": "Über Uns",
     "Connect": "Kontakte"
   },
@@ -137,5 +139,42 @@
     "helpText": "Wenn Sie glauben, dass dies ein Fehler ist, überprüfen Sie bitte die URL oder versuchen Sie, von unserer Startseite aus zu navigieren.",
     "errorCode": "QUANTENZUSTAND_NICHT_GEFUNDEN",
     "quantumEquation": "|ψ⟩ = α|gefunden⟩ + β|nicht_gefunden⟩"
+  },
+  "Applications": {
+    "title": "Quantenanwendungen",
+    "subtitle": "Wo Quantentechnologien unsere Welt schon heute verändern",
+    "count": "Anwendungen",
+    "categoriesLabel": "Kategorien",
+    "source": "Quelle: Deutsches Museum, Technologiesteckbriefe",
+    "readTime": "5 Min. Lesezeit",
+    "related": "Verwandte Wiqi-Artikel",
+    "moreDetails": "Klicke hier für mehr Details",
+    "back": "Zurück zu Anwendungen",
+    "categories": {
+      "health": "Gesundheit und Medizin",
+      "communication": "Kommunikation und Sicherheit",
+      "business": "Wirtschaft und Ökonomie",
+      "earth": "Erde, Umwelt und Mobilität",
+      "energy": "Energie und Materialien",
+      "computing": "Computing und KI"
+    },
+    "items": {
+      "prosthesis": "Prothesensteuerung durch Quantensensoren",
+      "cancer": "Quantenbasierte Krebsfrüherkennung",
+      "drugs": "Quantentechnologien in der Medikamentenentwicklung",
+      "imaging": "Quantenbildgebung",
+      "cryptography": "Quantenkryptographie",
+      "internet": "Quanteninternet",
+      "logistics": "Quantenoptimierung in der Logistik",
+      "finance": "Quantum Finance",
+      "weather": "Quantentechnologien der Wettervorhersage",
+      "navigation": "Quantennavigation",
+      "gravimeters": "Untergrundanalyse mit Quanten-Gravimetern",
+      "batteries": "Quantenakkus",
+      "catalysis": "Quantenkatalyse",
+      "dots": "Quantendots",
+      "ai": "Quanten und Künstliche Intelligenz",
+      "transistors": "Ein-Atom-Transistoren"
+    }
   }
 }

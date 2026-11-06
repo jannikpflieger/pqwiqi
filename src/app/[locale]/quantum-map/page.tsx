@@ -225,10 +225,6 @@ export default function Home({ params }: HomeProps) {
                       <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-600 to-pink-500"></span>
                     </span>
                     <span className="group relative text-sm font-medium text-slate-700 dark:text-slate-300">
-                      Quantum Tuesdays
-                      <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-600 to-pink-500"></span>
-                    </span>
-                    <span className="group relative text-sm font-medium text-slate-700 dark:text-slate-300">
                       Entries
                       <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-600 to-pink-500"></span>
                     </span>
