@@ -131,7 +131,7 @@ function curatedSlide(lang: "en" | "de", locale: string): Slide | null {
     description: card.description,
     additionalInfo: card.additionalInfo,
     ctaText: card.ctaText,
-    href: `/${locale}/posts/quantum_tuesdays/elementary/${card.endpoint}`,
+    href: `/${locale}/posts/entries/elementary/${card.endpoint}`,
     image: card.imageSrc,
     imageAlt: card.imageAlt,
     imageCaption: card.imageCaption,

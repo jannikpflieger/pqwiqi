@@ -64,14 +64,6 @@ export default function Footer({ params }: FooterProps) {
             <ul className="mt-2 space-y-0 leading-tight">
               <li>
                 <Link
-                  href={`/${locale}/posts/quantum_tuesdays`}
-                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
-                >
-                  {t("Quantum Tuesdays")}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href={`/${locale}/posts/entries`}
                   className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
@@ -84,6 +76,14 @@ export default function Footer({ params }: FooterProps) {
                   className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
                 >
                   {t("Quantum Alphabet")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/applications`}
+                  className="text-[13px] text-slate-600 transition-colors hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400"
+                >
+                  {t("Applications")}
                 </Link>
               </li>
               <li>

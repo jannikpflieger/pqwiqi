@@ -22,7 +22,8 @@
     "Quantum Tuesdays": "Quantum Tuesdays",
     "Entries": "Quantum Entries",
     "Quantum Alphabet": "Quantum Alphabet",
-    "Search": "Search"
+    "Search": "Search",
+    "Applications": "Applications"
   },
   "QuantumMap": {
     "Title": "Quantum Map",
@@ -105,6 +106,7 @@
     "Quantum Tuesdays": "Quantum Tuesdays",
     "Entries": "Quantum Entries",
     "Quantum Alphabet": "Quantum Alphabet",
+    "Applications": "Applications",
     "About Us": "About",
     "Contact": "Contact"
   },
@@ -115,5 +117,42 @@
     "helpText": "If you believe this is an error, please check the URL or try navigating from our homepage.",
     "errorCode": "QUANTUM_STATE_NOT_FOUND",
     "quantumEquation": "|ψ⟩ = α|found⟩ + β|not_found⟩"
+  },
+  "Applications": {
+    "title": "Quantum Applications",
+    "subtitle": "Where quantum technologies are already changing our world",
+    "count": "Applications",
+    "categoriesLabel": "Categories",
+    "source": "Source: Deutsches Museum, Technology profiles",
+    "readTime": "5 min read",
+    "related": "Related Wiqi articles",
+    "moreDetails": "Click here for more details",
+    "back": "Back to Applications",
+    "categories": {
+      "health": "Health and medicine",
+      "communication": "Communication and security",
+      "business": "Business and economy",
+      "earth": "Earth, environment and mobility",
+      "energy": "Energy and materials",
+      "computing": "Computing and AI"
+    },
+    "items": {
+      "prosthesis": "Prosthesis control via quantum sensors",
+      "cancer": "Quantum-based early cancer detection",
+      "drugs": "Quantum technologies in drug development",
+      "imaging": "Quantum imaging",
+      "cryptography": "Quantum cryptography",
+      "internet": "Quantum internet",
+      "logistics": "Quantum optimization in logistics",
+      "finance": "Quantum finance",
+      "weather": "Weather forecasting",
+      "navigation": "Quantum navigation",
+      "gravimeters": "Underground analysis with quantum gravimeters",
+      "batteries": "Quantum batteries",
+      "catalysis": "Quantum catalysis",
+      "dots": "Quantum dots",
+      "ai": "Quantum and artificial intelligence",
+      "transistors": "Single-atom transistors"
+    }
   }
 }

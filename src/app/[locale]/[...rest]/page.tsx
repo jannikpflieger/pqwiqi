@@ -33,7 +33,7 @@ import { notFound } from "next/navigation";
  *
  * How it was fixed:
  * - Added `isValidSubfolder()` function in `[locale]/posts/[subfolder]/page.tsx` to validate
- *   subfolder names against allowed values: ["entries", "quantum_tuesdays"]
+ *   subfolder names against allowed values: ["entries"]
  * - Enhanced `getFiles()` function to check validity and set `shouldRedirect` state
  * - Added `useEffect` hook to redirect to `/${locale}/not-found` when invalid
  * - Added loading state during redirect to prevent content flash
