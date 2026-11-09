@@ -67,6 +67,7 @@
     "s3 partner3": "TECHNOSEUM, Mannheim",
     "s3 partner4": "PushQuantum e.V.",
     "s3 p2": "<mcqst>MCQST</mcqst>, <iqm>IQM</iqm> und das <mqv>Munich Quantum Valley</mqv> sind assoziierte Partner.",
+    "s3 learn more": "Mehr über unsere Partner",
     "s4 heading": "Über PushQuantum",
     "s4 p1": "PushQuantum e.V. ist eine Studierendeninitiative aus München, getragen von Studierenden der Technischen Universität München und der Ludwig-Maximilians-Universität.",
     "s4 p2": "Diese Initiative ist von ihrer Gemeinschaft getragen: Unsere Mitglieder leiten die Projekte, die ihnen am Herzen liegen, unterstützt vom Netzwerk um sie herum. Unsere Arbeit ruht auf drei Säulen: Community, berufliche Weiterentwicklung und Outreach. WiQi gehört zur dritten, im Rahmen des Projekts Quanten(t)räume.",
@@ -154,5 +155,28 @@
       "ai": "Quanten und Künstliche Intelligenz",
       "transistors": "Ein-Atom-Transistoren"
     }
+  },
+  "Partners": {
+    "back": "Zurück zu Über Uns",
+    "title": "Die Menschen und Partner hinter der Quantenvermittlung",
+    "subtitle": "Lernen Sie die Organisationen kennen, die Quantenforschung, Technologie und Menschen miteinander verbinden",
+    "intro": "Quantentechnologien beginnen mit wissenschaftlichen Entdeckungen. Damit Menschen verstehen können, was sie für den Alltag bedeuten könnten, lohnt es sich, Forschende, Technologieexpertinnen und -experten, Museen und Lehrende zusammenzubringen. Lernen Sie die Organisationen kennen, deren Arbeit diese unterschiedlichen Perspektiven verbindet.",
+    "mpq name": "Max-Planck-Institut für Quantenoptik (MPQ)",
+    "mpq text": "Das <link>Max-Planck-Institut für Quantenoptik</link> in Garching bei München erforscht, wie sich Licht und Materie verhalten. Diese Forschung hilft der Wissenschaft, die grundlegenden Ideen hinter Quantentechnologien zu verstehen.",
+    "mpq alt": "Logo des Max-Planck-Instituts für Quantenoptik",
+    "isi name": "Fraunhofer-Institut für System- und Innovationsforschung (Fraunhofer ISI)",
+    "isi text": "Das <link>Fraunhofer-Institut für System- und Innovationsforschung</link> untersucht, wie neue Ideen und Technologien entstehen und wie sie Menschen, Unternehmen und die Umwelt beeinflussen. Seine Arbeit hilft uns, darüber nachzudenken, was neue Technologien leisten können und wie sie unser Leben verändern könnten.",
+    "isi alt": "Logo des Fraunhofer-Instituts für System- und Innovationsforschung",
+    "dm name": "Deutsches Museum",
+    "dm text": "Das <link>Deutsche Museum</link> lädt Besucherinnen und Besucher ein, Wissenschaft und Technik in Ausstellungen und Bildungsangeboten zu entdecken. Seine <profiles>Technologiesteckbriefe zu Quantentechnologien</profiles> zeigen, wie Quantenideen genutzt werden könnten, zum Beispiel in der Navigation und der sicheren Kommunikation.",
+    "dm alt": "Logo des Deutschen Museums",
+    "technoseum name": "TECHNOSEUM",
+    "technoseum text": "Das <link>TECHNOSEUM in Mannheim</link> zeigt, wie sich Technik und Gesellschaft im Laufe der Zeit verändert haben. Seine Ausstellungen und Mitmachangebote laden dazu ein, zu entdecken, wie Technik mit unserem Alltag verbunden ist.",
+    "technoseum alt": "Logo des TECHNOSEUM Mannheim",
+    "pq name": "PushQuantum",
+    "pq text": "<link>PushQuantum</link> ist eine studentische Initiative, die Quantentechnologien verständlicher macht. Sie entwickelt Lernmaterialien und Angebote für Menschen mit unterschiedlichem Hintergrund und hilft so mehr Menschen, die Quantenwissenschaft zu entdecken.",
+    "pq alt": "Logo von PushQuantum",
+    "closing heading": "Unterschiedliche Perspektiven, gemeinsame Neugier",
+    "closing text": "Gemeinsam bringen diese Organisationen Forschung, neue Ideen, Museen und Bildung miteinander ins Gespräch. Ihre Arbeit hilft Menschen, Quantentechnologien sowohl als wissenschaftliche Entdeckungen als auch als mögliche Werkzeuge für die Zukunft kennenzulernen."
   }
 }
