@@ -38,7 +38,18 @@
     "Partner Map Description": "Betätigen Sie diesen Knopf, gelangen Sie zur **\"Partnerkarte\"**, auf der alle Projektpartner verzeichnet sind. Diese Karte ist in die geografischen Ebenen: München, Garching und Deutschland unterteilt. Die Logos der Partner sind anklickbar und leiten Sie zu weiterführenden Informationen, Events und Websites der Partner weiter.",
     "Switch Maps": "Möchten Sie von der Partnerkarte auf die Quantenkarte wechseln, klicken Sie einfach auf das **Atomsymbol** in der oberen Ecke der Karte:",
     "Closing": "Viel Freude beim Erkunden!",
-    "Team Signature": "Ihr"
+    "Team Signature": "Ihr",
+    "Nodes": {
+      "Quantum Center": "Quantenzentrum",
+      "Entries": "Einträge",
+      "Quantum Alphabet": "Quantenalphabet",
+      "Applications": "Anwendungen",
+      "How To WiQi": "So funktioniert WiQi",
+      "Partners": "Partner",
+      "About": "Über Uns",
+      "Switch to Partner Map": "Zur Partnerkarte wechseln",
+      "Switch to Quantum Map": "Zur Quantenkarte wechseln"
+    }
   },
   "About Us": {
     "main 1": "Wir sind eine Gruppe motivierter Studenten von PushQuantum e.V., einer Studenteninitiative aus München. Unser Team setzt sich aus einer vielfältigen Mischung von Physik- und Ingenieurstudenten der Technischen Universität München und der Ludwig-Maximillians-Universität zusammen, die eine geteilte Leidenschaft für Quantumwissenschaft und -technologie verbindet.",
