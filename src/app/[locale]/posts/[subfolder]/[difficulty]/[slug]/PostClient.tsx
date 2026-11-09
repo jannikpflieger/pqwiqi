@@ -82,7 +82,9 @@ export default function PostClient({
     
     // Get category label for banner
     const getCategoryLabel = () => {
-        if (params.subfolder === "entries") {
+        if (params.subfolder === "quantum_tuesdays") {
+            return t("quantum tuesday");
+        } else if (params.subfolder === "entries") {
             return "Quantum";
         }
         return params.subfolder;
@@ -467,7 +469,7 @@ export default function PostClient({
                         {/* Article */}
                         <div className="py-6">
                             <Card className="p-6 md:p-8">
-                            <article className="prose prose-lg mx-auto max-w-full text-justify prose-headings:text-left text-slate-900 dark:prose-invert dark:text-white">
+                            <article className="prose prose-lg mx-auto max-w-full text-justify text-slate-900 dark:prose-invert dark:text-white">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkMath, remarkGfm]}
                                     rehypePlugins={[
