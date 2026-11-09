@@ -11,15 +11,17 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   Atom,
   Cpu,
   FlowArrow,
   Monitor,
   Ruler,
-  Warning,
+  Handshake,
   MagnifyingGlass,
 } from "phosphor-react";
+import type { Icon } from "phosphor-react";
 import { motion, useInView } from "framer-motion";
 
 type MapView = "quantum" | "partner" | "deutschland" | "garching";
@@ -37,6 +39,7 @@ interface Rectangle {
 
 export default function QuantumMap() {
   const params = useParams();
+  const t = useTranslations("QuantumMap.Nodes");
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [currentMapView, setCurrentMapView] = useState<MapView>("quantum");
   const [isMobile, setIsMobile] = useState(false);
@@ -152,71 +155,80 @@ export default function QuantumMap() {
     },
   };
 
-  // Quantum nodes data with navigation URLs
-  const nodes = [
+  // Quantum nodes data. A node either navigates (url), scrolls to a section
+  // on the home page (scrollTo), or is display-only (neither).
+  const nodes: {
+    id: string;
+    label: string;
+    icon: Icon;
+    x: number;
+    y: number;
+    url?: string;
+    scrollTo?: string;
+  }[] = [
     {
       id: "center",
-      label: "Quantum Center",
+      label: t("Quantum Center"),
       icon: Atom,
       x: 45,
       y: 45,
       url: `/${params.locale}/posts/entries`,
     },
     {
-      id: "computing",
-      label: "Quantum Computing",
+      id: "entries",
+      label: t("Entries"),
       icon: Cpu,
       x: 40,
       y: 25,
       url: `/${params.locale}/posts/entries`,
     },
     {
-      id: "algorithms",
-      label: "Algorithms",
+      id: "alphabet",
+      label: t("Quantum Alphabet"),
       icon: FlowArrow,
       x: 62,
       y: 24,
-      url: `/${params.locale}/posts/entries`,
+      url: `/${params.locale}/posts/alphabet`,
     },
     {
       id: "applications",
-      label: "Applications",
+      label: t("Applications"),
       icon: Monitor,
       x: 13,
       y: 42,
-      url: `/${params.locale}/posts/entries`,
+      url: `/${params.locale}/applications`,
     },
+    // {
+    //   id: "current",
+    //   label: "Current state",
+    //   icon: Cpu,
+    //   x: 21,
+    //   y: 68,
+    //   url: `/${params.locale}/posts/entries`,
+    // },
     {
-      id: "current",
-      label: "Current state",
-      icon: Cpu,
-      x: 21,
-      y: 68,
-      url: `/${params.locale}/posts/entries`,
-    },
-    {
-      id: "physical",
-      label: "Physical realisations",
+      id: "howto",
+      label: t("How To WiQi"),
       icon: Ruler,
       x: 39.5,
       y: 86,
-      url: `/${params.locale}/posts/entries`,
+      scrollTo: "how-to",
     },
     {
-      id: "obstacles",
-      label: "Obstacles",
-      icon: Warning,
+      id: "partners",
+      label: t("Partners"),
+      icon: Handshake,
       x: 79,
       y: 83,
-      url: `/${params.locale}/posts/entries`,
+      // TODO: add url: `/${params.locale}/partners` once the Partners page exists
     },
     {
-      id: "error",
-      label: "Error correction",
+      id: "about",
+      label: t("About"),
       icon: MagnifyingGlass,
       x: 70,
       y: 51,
-      url: `/${params.locale}/posts/entries`,
+      url: `/${params.locale}/about`,
     },
   ];
 
@@ -511,7 +523,9 @@ export default function QuantumMap() {
           }}
         >
           <Image
-            src="/static/map/munich_map_bg_bare.png"
+            // Original background incl. purple "Current state" line:
+            // src="/static/map/munich_map_bg_bare.png"
+            src="/static/map/munich_map_bg_no_current_state.png"
             alt="Munich Map"
             fill
             className="object-cover"
@@ -834,13 +848,9 @@ export default function QuantumMap() {
           <div
             className={`absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-black/80 px-3 py-2 font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 ${showMapHint ? "opacity-100" : "opacity-0"} ${isMobile ? "text-xs" : "text-sm"} `}
           >
-            {currentMapView === "partner"
-              ? "Switch to Quantum Map"
-              : currentMapView === "deutschland"
-                ? "Switch to Quantum Map"
-                : currentMapView === "garching"
-                  ? "Switch to Quantum Map"
-                  : "Switch to Partner Map"}
+            {currentMapView === "quantum"
+              ? t("Switch to Partner Map")
+              : t("Switch to Quantum Map")}
             {/* Arrow pointing to the button */}
             <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-black/80" />
           </div>
@@ -854,27 +864,12 @@ export default function QuantumMap() {
         animate={{ opacity: isInView && currentMapView === "quantum" ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       >
-        {nodes.map((node, index) => (
-          <motion.div
-            key={node.id}
-            className="group absolute -translate-x-1/2 -translate-y-1/2"
-            style={{
-              left: `${node.x}%`,
-              top: `${node.y}%`,
-              zIndex: node.id === hoveredNode ? 10 : 1,
-            }}
-            variants={nodeVariants}
-            custom={index}
-            initial="hidden"
-            animate={
-              isInView && currentMapView === "quantum" ? "visible" : "hidden"
-            }
-            onMouseEnter={() => setHoveredNode(node.id)}
-            onMouseLeave={() => setHoveredNode(null)}
-          >
-            <Link href={node.url} className="block">
+        {nodes.map((node, index) => {
+          const isClickable = Boolean(node.url || node.scrollTo);
+          const nodeContent = (
+            <>
               <div
-                className={`flex cursor-pointer items-center justify-center rounded-full border-2 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 ${
+                className={`flex ${isClickable ? "cursor-pointer" : "cursor-default"} items-center justify-center rounded-full border-2 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 ${
                   node.id === "center"
                     ? "h-24 w-24 border-white bg-black/80 text-white shadow-[0_0_20px_rgba(0,0,0,0.5)] lg:h-36 lg:w-36"
                     : "h-10 w-10 border-gray-800 bg-white/80 shadow-lg lg:h-16 lg:w-16"
@@ -889,9 +884,47 @@ export default function QuantumMap() {
               <div className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/70 px-3 py-1.5 text-[0.6rem] font-medium text-white shadow-md transition-all duration-300 group-hover:scale-110 lg:text-sm">
                 {node.label}
               </div>
-            </Link>
-          </motion.div>
-        ))}
+            </>
+          );
+          return (
+            <motion.div
+              key={node.id}
+              className="group absolute -translate-x-1/2 -translate-y-1/2"
+              style={{
+                left: `${node.x}%`,
+                top: `${node.y}%`,
+                zIndex: node.id === hoveredNode ? 10 : 1,
+              }}
+              variants={nodeVariants}
+              custom={index}
+              initial="hidden"
+              animate={
+                isInView && currentMapView === "quantum" ? "visible" : "hidden"
+              }
+              onMouseEnter={() => setHoveredNode(node.id)}
+              onMouseLeave={() => setHoveredNode(null)}
+            >
+              {node.url ? (
+                <Link href={node.url} className="block">
+                  {nodeContent}
+                </Link>
+              ) : node.scrollTo ? (
+                <button
+                  type="button"
+                  className="block"
+                  onClick={() => {
+                    const element = document.getElementById(node.scrollTo!);
+                    element?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  {nodeContent}
+                </button>
+              ) : (
+                <div className="block">{nodeContent}</div>
+              )}
+            </motion.div>
+          );
+        })}
       </motion.div>
 
       {/* Map overlay for better readability */}

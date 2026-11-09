@@ -172,7 +172,7 @@ export default function Home({ params }: HomeProps) {
       </section>
 
       {/* Difficulty Levels Section */}
-      <section className="scroll-snap-section py-16">
+      <section id="how-to" className="scroll-snap-section py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <motion.div

@@ -37,7 +37,18 @@
     "Partner Map Description": "By clicking this button, you will access the **\"Partner Map\"**, which lists all project partners. This map is divided into geographical levels: Munich, Garching and Germany. The partner logos are clickable and will direct you to further information, events and websites of the partners.",
     "Switch Maps": "If you want to switch from the partner map to the quantum map, simply click on the **atom symbol** in the upper corner of the map:",
     "Closing": "Have fun exploring!",
-    "Team Signature": "Your"
+    "Team Signature": "Your",
+    "Nodes": {
+      "Quantum Center": "Quantum Center",
+      "Entries": "Entries",
+      "Quantum Alphabet": "Quantum Alphabet",
+      "Applications": "Applications",
+      "How To WiQi": "How To WiQi",
+      "Partners": "Partners",
+      "About": "About",
+      "Switch to Partner Map": "Switch to Partner Map",
+      "Switch to Quantum Map": "Switch to Quantum Map"
+    }
   },
   "About Us": {
     "motivation title": "Shaping the Quantum Future",
