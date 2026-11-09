@@ -216,11 +216,11 @@ export default function QuantumMap() {
     },
     {
       id: "partners",
-      label: t("Partners"),
+      label: t("Our Partners"),
       icon: Handshake,
       x: 79,
       y: 83,
-      // TODO: add url: `/${params.locale}/partners` once the Partners page exists
+      url: `/${params.locale}/about/partners`,
     },
     {
       id: "about",
