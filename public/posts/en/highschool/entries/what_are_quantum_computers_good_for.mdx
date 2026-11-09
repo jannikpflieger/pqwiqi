@@ -51,7 +51,7 @@ $$
 y = x^2
 $$
 
-![quadratic equation graph](/posts/assets/quantum_tuesdays/what_are_qc_good_for/quadratic_en.png)
+![quadratic equation graph](/posts/assets/entries/what_are_qc_good_for/quadratic_en.png)
 
 Computer scientists rank the "quality" of an algorithm for finding a solution for a given problem, via something called a `time complexity`. All this means is that for the size of a given dataset (that can be the length of a number, or the amount of boxes you're trying to pack into the trunk of your car) it would take you a certain amount of time to find the solution. And how how long it takes you exactly is explained by the time complexity of your solution, which is often represented as a quadratic function or an exponential one.
 
@@ -108,13 +108,13 @@ Examples include:
 As we've just seen, only the P-Problems are really efficienly solvable by classical computers.
 Quantum computers on the other hand, are able to do so aswell and go a bit further, which can be seen here:
 
-![BQP complexity diagram](/posts/assets/quantum_tuesdays/what_are_qc_good_for/BQP.png)
+![BQP complexity diagram](/posts/assets/entries/what_are_qc_good_for/BQP.png)
 _Source: [Wikipedia BQP](https://en.wikipedia.org/wiki/BQP)_
 
 But what actually allows quantum computers to outperform classical computers when it comes to solving these complicated problems?
 At the end it all boils down to two things:
 
-1. Quantum computers use qubits instead of bits in classical computers which can be in a [superposition](https://wiqi.info/en/posts/entries/highschool/superposition) between the classical 1 and 0, allowing for a wider range of possibilities and manipulation when it comes to computing (read more [here](https://wiqi.info/en/posts/quantum_tuesdays/highschool/Bits%20To%20Qubits)). One caviat however is that after performing a [measurement](https://wiqi.info/en/posts/entries/highschool/measurement) on the qubit it can only take up either 1 or 0 as its value, leading one to believe that it's the same as a classical bit. However that's where the second property comes in.
+1. Quantum computers use qubits instead of bits in classical computers which can be in a [superposition](https://wiqi.info/en/posts/entries/highschool/superposition) between the classical 1 and 0, allowing for a wider range of possibilities and manipulation when it comes to computing (read more [here](https://wiqi.info/en/posts/entries/highschool/Bits%20To%20Qubits)). One caviat however is that after performing a [measurement](https://wiqi.info/en/posts/entries/highschool/measurement) on the qubit it can only take up either 1 or 0 as its value, leading one to believe that it's the same as a classical bit. However that's where the second property comes in.
 
 2. The state of one qubit can interfere with another qubit, leading to what's called destructive/constructive interference, where the two states overlap and can lead to the two states cancelling or amplifying each other. Good quantum algorithms make use of this property two reduce all the possibilities of solutions that are not correct and bring forth the ones which are, thus getting the edge on classical computers.
 
