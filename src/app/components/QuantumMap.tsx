@@ -40,6 +40,7 @@ export default function QuantumMap() {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [currentMapView, setCurrentMapView] = useState<MapView>("quantum");
   const [isMobile, setIsMobile] = useState(false);
+  const [showMapHint, setShowMapHint] = useState(false);
   const [containerDimensions, setContainerDimensions] = useState({
     width: 0,
     height: 0,
@@ -72,7 +73,20 @@ export default function QuantumMap() {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
+  /**
+   * Show the map-switch hint by itself the first time the map scrolls into
+   * view, then retire it. isInView is declared with { once: true }, so this
+   * fires exactly once per page load and never comes back on re-scroll.
+   */
+  useEffect(() => {
+    if (!isInView) return;
+    setShowMapHint(true);
+    const timer = setTimeout(() => setShowMapHint(false), 5000);
+    return () => clearTimeout(timer);
+  }, [isInView]);
+
   const handleLogoClick = () => {
+    setShowMapHint(false);
     if (currentMapView === "quantum") {
       setCurrentMapView("partner");
     } else {
@@ -818,7 +832,7 @@ export default function QuantumMap() {
           />
           {/* Tooltip */}
           <div
-            className={`absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-black/80 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 ${isMobile ? "text-xs" : "text-sm"} `}
+            className={`absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-black/80 px-3 py-2 font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 ${showMapHint ? "opacity-100" : "opacity-0"} ${isMobile ? "text-xs" : "text-sm"} `}
           >
             {currentMapView === "partner"
               ? "Switch to Quantum Map"

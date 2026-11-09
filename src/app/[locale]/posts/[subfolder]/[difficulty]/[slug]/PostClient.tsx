@@ -82,7 +82,9 @@ export default function PostClient({
     
     // Get category label for banner
     const getCategoryLabel = () => {
-        if (params.subfolder === "entries") {
+        if (params.subfolder === "quantum_tuesdays") {
+            return t("quantum tuesday");
+        } else if (params.subfolder === "entries") {
             return "Quantum";
         }
         return params.subfolder;
@@ -331,7 +333,7 @@ export default function PostClient({
                             
                             {/* Title and Subtitle with Quantum Glow Effect */}
                             <div className="mb-6">
-                                <h1 className="mb-3 text-3xl font-bold leading-tight text-white transition-all duration-300 group-hover:text-pink-100 md:text-4xl lg:text-5xl">
+                                <h1 className="mb-3 font-serif text-3xl font-bold leading-tight text-white transition-all duration-300 group-hover:text-pink-100 md:text-4xl lg:text-5xl">
                                     <span className="relative inline-block">
                                 {post.data.title}
                                         <span className="absolute inset-0 -z-10 bg-gradient-to-r from-pink-500/0 via-pink-500/20 to-pink-500/0 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
@@ -467,7 +469,7 @@ export default function PostClient({
                         {/* Article */}
                         <div className="py-6">
                             <Card className="p-6 md:p-8">
-                            <article className="prose prose-lg mx-auto max-w-full text-justify prose-headings:text-left text-slate-900 dark:prose-invert dark:text-white">
+                            <article className="prose prose-lg mx-auto max-w-full text-justify text-slate-900 dark:prose-invert dark:text-white">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkMath, remarkGfm]}
                                     rehypePlugins={[

@@ -46,7 +46,7 @@ export default function Page({
   // Without this validation, users could access URLs like /posts/invalid-folder
   // which would cause errors or show empty pages instead of properly redirecting to 404.
   const isValidSubfolder = (subfolder: string) => {
-    const validSubfolders = ["entries", "alphabet", "qalphabet"];
+    const validSubfolders = ["entries", "quantum_tuesdays", "alphabet", "qalphabet"];
     return validSubfolders.includes(subfolder);
   };
 
@@ -114,7 +114,16 @@ export default function Page({
 
   // Get category info
   const getCategoryInfo = () => {
-    if (canonicalSubfolder === "entries") {
+    if (canonicalSubfolder === "quantum_tuesdays") {
+      return {
+        title: "Quantum Tuesdays",
+        description: "Weekly quantum physics explorations and discoveries",
+        icon: "🌌",
+        gradient: "from-purple-600 to-pink-600",
+        bgGradient:
+          "from-slate-50 to-white dark:from-slate-900 dark:to-slate-800",
+      };
+    } else if (canonicalSubfolder === "entries") {
       return {
         title: "Quantum Entries",
         description: "Deep dives into quantum concepts and applications",
@@ -270,7 +279,7 @@ export default function Page({
               <span className="text-4xl">{categoryInfo.icon}</span>
             </motion.div>
 
-            <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
+            <h1 className="mb-4 font-serif text-4xl font-bold text-white md:text-6xl">
               <span
                 className={`bg-gradient-to-r ${categoryInfo.gradient} bg-clip-text text-transparent`}
               >
