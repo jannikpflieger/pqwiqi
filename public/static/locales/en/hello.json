@@ -78,6 +78,7 @@
     "s3 partner3": "TECHNOSEUM, Mannheim",
     "s3 partner4": "PushQuantum e.V.",
     "s3 p2": "<mcqst>MCQST</mcqst>, <iqm>IQM</iqm> and the <mqv>Munich Quantum Valley</mqv> are associated partners.",
+    "s3 learn more": "Learn more about our partners",
     "s4 heading": "About PushQuantum",
     "s4 p1": "PushQuantum e.V. is a student initiative based in Munich, formed by students from the Technical University of Munich and Ludwig-Maximilians-Universität.",
     "s4 p2": "This initiative is community-driven: our members lead the projects they care about, supported by the network around them. Our work rests on three pillars: community, professional development, and outreach. WiQi belongs to the third, under the Quanten(t)räume project.",
@@ -165,5 +166,28 @@
       "ai": "Quantum and artificial intelligence",
       "transistors": "Single-atom transistors"
     }
+  },
+  "Partners": {
+    "back": "Back to About",
+    "title": "The People and Partners Behind Quantum Outreach",
+    "subtitle": "Meet the organizations connecting quantum research, technology, and people",
+    "intro": "Quantum technologies start with scientific discoveries. To help people understand what they could mean in everyday life, it is useful to bring together researchers, technology experts, museums, and educators. Meet the organizations whose work connects these different perspectives.",
+    "mpq name": "Max Planck Institute of Quantum Optics (MPQ)",
+    "mpq text": "Based in Garching near Munich, the <link>Max Planck Institute of Quantum Optics</link> studies how light and matter behave. This research helps scientists understand the basic ideas behind quantum technologies.",
+    "mpq alt": "Max Planck Institute of Quantum Optics logo",
+    "isi name": "Fraunhofer Institute for Systems and Innovation Research (Fraunhofer ISI)",
+    "isi text": "The <link>Fraunhofer Institute for Systems and Innovation Research</link> looks at how new ideas and technologies develop, and how they affect people, businesses, and the environment. Its work helps us think about both what new technologies can do and how they might change our lives.",
+    "isi alt": "Fraunhofer Institute for Systems and Innovation Research logo",
+    "dm name": "Deutsches Museum",
+    "dm text": "The <link>Deutsches Museum</link> helps visitors explore science and technology through exhibitions and learning activities. Its <profiles>quantum technology profiles</profiles> show how quantum ideas could be used, for example, in navigation and secure communication.",
+    "dm alt": "Deutsches Museum logo",
+    "technoseum name": "TECHNOSEUM",
+    "technoseum text": "The <link>TECHNOSEUM in Mannheim</link> explores how technology and society have changed over time. Its exhibitions and hands-on activities invite visitors to discover how technology connects with everyday life.",
+    "technoseum alt": "TECHNOSEUM Mannheim logo",
+    "pq name": "PushQuantum",
+    "pq text": "<link>PushQuantum</link> is a student-led initiative that makes quantum technologies easier to understand. It creates learning materials and activities for people with different backgrounds, helping more people explore quantum science.",
+    "pq alt": "PushQuantum logo",
+    "closing heading": "Different perspectives, shared curiosity",
+    "closing text": "Together, these organizations bring research, new ideas, museums, and education into the same conversation. Their work helps people explore quantum technologies as both scientific discoveries and possible tools for the future."
   }
 }
