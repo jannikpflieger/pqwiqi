@@ -214,7 +214,7 @@ export default function AboutPage() {
               <p className={PARAGRAPH_CLASS}>
                 {t.rich("s1 p4", {
                   entries: inLink(`/${locale}/posts/entries`),
-                  tuesdays: inLink(`/${locale}/posts/quantum_tuesdays`),
+                  tuesdays: inLink(`/${locale}/posts/entries`),
                   alphabet: inLink(`/${locale}/posts/alphabet`),
                   i: (chunks) => <em>{chunks}</em>,
                 })}
