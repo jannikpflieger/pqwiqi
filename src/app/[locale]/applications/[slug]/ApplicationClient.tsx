@@ -7,8 +7,10 @@ import {
   BookOpen,
   ChevronLeft,
   ChevronRight,
+  Clock,
   ExternalLink,
 } from "lucide-react";
+import wordsCounter from "word-counting";
 import { applicationCategories } from "@/app/components/applications/data";
 import ApplicationsHero from "@/app/components/applications/ApplicationsHero";
 import { PARAGRAPH_CLASS } from "@/app/components/about/shared";
@@ -33,8 +35,12 @@ export default function ApplicationClient({
   related,
 }: ApplicationClientProps) {
   const t = useTranslations("Applications");
+  const tPosts = useTranslations("Posts");
   const category = applicationCategories.find((c) => c.key === categoryKey)!;
   const Icon = category.icon;
+  const summary = t(`summaries.${itemKey}`);
+  // Same rate as Wiqi posts: 200 words per minute, rounded up
+  const readingTime = Math.ceil(wordsCounter(summary).wordsCount / 200);
 
   const cardClass = `group flex items-center gap-4 rounded-xl border border-gray-200 bg-white/80 p-4 backdrop-blur-sm transition-colors hover:shadow-lg dark:border-gray-700 dark:bg-slate-800/80 ${category.hover}`;
   const hoverSpring = { type: "spring", stiffness: 300, damping: 30 };
@@ -44,10 +50,16 @@ export default function ApplicationClient({
       <ApplicationsHero
         icon={<Icon className="h-10 w-10" />}
         title={t(`items.${itemKey}`)}
+        subtitle={t(`categories.${categoryKey}`)}
       >
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-400 dark:text-gray-200">
           <span>#{String(number).padStart(2, "0")}</span>
-          <span>{t(`categories.${categoryKey}`)}</span>
+          <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4" />
+            <span>
+              {readingTime} {tPosts("min read")}
+            </span>
+          </div>
         </div>
       </ApplicationsHero>
 
@@ -69,7 +81,7 @@ export default function ApplicationClient({
           transition={{ type: "spring", stiffness: 100, damping: 12 }}
           className={`space-y-8 rounded-2xl border p-5 backdrop-blur-sm sm:p-6 ${category.box}`}
         >
-          <p className={PARAGRAPH_CLASS}>{t(`summaries.${itemKey}`)}</p>
+          <p className={PARAGRAPH_CLASS}>{summary}</p>
 
           {related.length > 0 && (
             <div>
