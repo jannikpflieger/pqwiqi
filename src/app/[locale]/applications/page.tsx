@@ -11,7 +11,11 @@ import {
   DM_PROFILES_URL,
 } from "@/app/components/applications/data";
 import ApplicationsHero from "@/app/components/applications/ApplicationsHero";
-import { PARAGRAPH_CLASS, extLink } from "@/app/components/about/shared";
+import {
+  Heading,
+  PARAGRAPH_CLASS,
+  extLink,
+} from "@/app/components/about/shared";
 
 // "Search applications" mark: app grid with a magnifying glass on top
 const ApplicationsIcon = () => (
@@ -85,6 +89,7 @@ export default function Page({ params }: { params: { locale: string } }) {
 
       {/* Categories */}
       <section className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <Heading>{t("overviewHeading")}</Heading>
         <p className={`mb-10 ${PARAGRAPH_CLASS}`}>{t("intro")}</p>
 
         <motion.div

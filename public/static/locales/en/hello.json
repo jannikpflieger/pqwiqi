@@ -133,14 +133,16 @@
   "Applications": {
     "title": "Quantum Applications",
     "subtitle": "Where quantum technologies are already changing our world",
+    "overviewHeading": "Overview",
     "intro": "Quantum technologies are being explored in medicine, communication, industry, and other fields. Some applications already exist in limited forms, while others are research concepts or laboratory demonstrations. This overview summarizes 16 technology profiles from the Deutsches Museum. The descriptions are paraphrased from those profiles; they are not claims that every technology is ready for everyday use.",
     "count": "Applications",
     "categoriesLabel": "Categories",
     "source": "Source: Deutsches Museum, Technology profiles",
     "sourceNote": "The summaries are based on the Deutsches Museum's <link>Technology Profiles</link>, developed with Fraunhofer ISI. Each application page links to its individual profile.",
     "readTime": "5 min read",
+    "summaryHeading": "Short summary",
     "related": "Related Wiqi articles",
-    "moreDetails": "Click here for more details",
+    "moreDetails": "Click here for the full Deutsches Museum article",
     "back": "Back to Applications",
     "categories": {
       "health": "Health and medicine",

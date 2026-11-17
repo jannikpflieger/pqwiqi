@@ -7,12 +7,12 @@ import {
   BookOpen,
   ChevronLeft,
   ChevronRight,
-  Clock,
   ExternalLink,
+  FileText,
 } from "lucide-react";
 import wordsCounter from "word-counting";
 import { applicationCategories } from "@/app/components/applications/data";
-import ApplicationsHero from "@/app/components/applications/ApplicationsHero";
+import { EntryBanner, ReadingTimePill } from "@/components/EntryBanner";
 import { PARAGRAPH_CLASS } from "@/app/components/about/shared";
 
 interface ApplicationClientProps {
@@ -47,21 +47,18 @@ export default function ApplicationClient({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
-      <ApplicationsHero
-        icon={<Icon className="h-10 w-10" />}
+      <EntryBanner
+        badge={t(`categories.${categoryKey}`)}
         title={t(`items.${itemKey}`)}
-        subtitle={t(`categories.${categoryKey}`)}
       >
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-400 dark:text-gray-200">
-          <span>#{String(number).padStart(2, "0")}</span>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span>
-              {readingTime} {tPosts("min read")}
-            </span>
-          </div>
-        </div>
-      </ApplicationsHero>
+        <span className="flex items-center gap-1.5">
+          <Icon className="h-4 w-4" />#{String(number).padStart(2, "0")}
+        </span>
+        <span className="text-white/50">•</span>
+        <ReadingTimePill>
+          {readingTime} {tPosts("min read")}
+        </ReadingTimePill>
+      </EntryBanner>
 
       <section className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         {/* Back to Applications Button */}
@@ -81,7 +78,19 @@ export default function ApplicationClient({
           transition={{ type: "spring", stiffness: 100, damping: 12 }}
           className={`space-y-8 rounded-2xl border p-5 backdrop-blur-sm sm:p-6 ${category.box}`}
         >
-          <p className={PARAGRAPH_CLASS}>{summary}</p>
+          <div>
+            <div className="mb-5 flex items-center gap-3">
+              <div
+                className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br shadow-sm ${category.iconWrap}`}
+              >
+                <FileText className="h-5 w-5 text-white" />
+              </div>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                {t("summaryHeading")}
+              </h2>
+            </div>
+            <p className={PARAGRAPH_CLASS}>{summary}</p>
+          </div>
 
           {related.length > 0 && (
             <div>

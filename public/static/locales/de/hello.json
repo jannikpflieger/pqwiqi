@@ -133,14 +133,16 @@
   "Applications": {
     "title": "Quantenanwendungen",
     "subtitle": "Wo Quantentechnologien unsere Welt schon heute verändern",
+    "overviewHeading": "Überblick",
     "intro": "Quantentechnologien werden in der Medizin, der Kommunikation, der Industrie und weiteren Bereichen erforscht. Manche Anwendungen gibt es bereits in begrenzter Form, andere sind Forschungskonzepte oder Labordemonstrationen. Diese Übersicht fasst 16 Technologiesteckbriefe des Deutschen Museums zusammen. Die Beschreibungen geben die Steckbriefe sinngemäß wieder; sie behaupten nicht, dass jede Technologie bereits alltagstauglich ist.",
     "count": "Anwendungen",
     "categoriesLabel": "Kategorien",
     "source": "Quelle: Deutsches Museum, Technologiesteckbriefe",
     "sourceNote": "Die Zusammenfassungen beruhen auf den <link>Technologiesteckbriefen</link> des Deutschen Museums, die gemeinsam mit dem Fraunhofer ISI entwickelt wurden. Jede Anwendungsseite verlinkt auf ihren jeweiligen Steckbrief.",
     "readTime": "5 Min. Lesezeit",
+    "summaryHeading": "Kurzzusammenfassung",
     "related": "Verwandte Wiqi-Artikel",
-    "moreDetails": "Klicke hier für mehr Details",
+    "moreDetails": "Klicke hier für den vollständigen Artikel des Deutschen Museums",
     "back": "Zurück zu Anwendungen",
     "categories": {
       "health": "Gesundheit und Medizin",
