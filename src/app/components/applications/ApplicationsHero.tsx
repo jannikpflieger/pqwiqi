@@ -76,7 +76,7 @@ export default function ApplicationsHero({
             <span className="text-white">{icon}</span>
           </motion.div>
 
-          <h1 className="mb-4 font-serif text-4xl font-bold text-white md:text-6xl">
+          <h1 className="mb-4 hyphens-auto font-serif [overflow-wrap:anywhere] text-4xl font-bold text-white md:text-6xl">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {title}
             </span>

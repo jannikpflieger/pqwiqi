@@ -137,7 +137,7 @@ export default function Page({ params }: { params: { locale: string } }) {
                         >
                           {item.number}
                         </span>
-                        <span className="flex-1 font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
+                        <span className="min-w-0 flex-1 hyphens-auto break-words font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
                           {t(`items.${item.key}`)}
                         </span>
                         <ChevronRight className="h-4 w-4 flex-shrink-0 text-gray-400 transition-colors group-hover:text-purple-600 dark:group-hover:text-purple-400" />

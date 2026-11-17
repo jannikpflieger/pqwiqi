@@ -116,7 +116,7 @@ export default function ApplicationClient({
                       href={`/${locale}/posts/entries/${difficulty}/${post.slug}`}
                       className={`h-full ${cardClass}`}
                     >
-                      <span className="flex-1">
+                      <span className="min-w-0 flex-1 hyphens-auto break-words">
                         <span className="block font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
                           {post.title}
                         </span>
@@ -147,7 +147,7 @@ export default function ApplicationClient({
             >
               <ExternalLink className="h-5 w-5" />
             </span>
-            <span className="flex-1 font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
+            <span className="min-w-0 flex-1 hyphens-auto break-words font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
               {t("moreDetails")}
             </span>
           </motion.a>

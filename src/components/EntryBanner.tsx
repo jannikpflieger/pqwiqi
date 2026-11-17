@@ -171,7 +171,7 @@ export function EntryBanner({
 
                     {/* Title and Subtitle with Quantum Glow Effect */}
                     <div className="mb-6">
-                        <h1 className="mb-3 font-serif text-3xl font-bold leading-tight text-white transition-all duration-300 group-hover:text-pink-100 md:text-4xl lg:text-5xl">
+                        <h1 className="mb-3 hyphens-auto font-serif [overflow-wrap:anywhere] text-3xl font-bold leading-tight text-white transition-all duration-300 group-hover:text-pink-100 md:text-4xl lg:text-5xl">
                             <span className="relative inline-block">
                         {title}
                                 <span className="absolute inset-0 -z-10 bg-gradient-to-r from-pink-500/0 via-pink-500/20 to-pink-500/0 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
