@@ -6,8 +6,12 @@ import { motion } from "framer-motion";
 import { ChevronRight, Clock, Layers } from "lucide-react";
 // Font Awesome Free icons, licensed CC BY 4.0 (https://fontawesome.com/license/free)
 import { FaMagnifyingGlass, FaTableCellsLarge } from "react-icons/fa6";
-import { applicationCategories } from "@/app/components/applications/data";
+import {
+  applicationCategories,
+  DM_PROFILES_URL,
+} from "@/app/components/applications/data";
 import ApplicationsHero from "@/app/components/applications/ApplicationsHero";
+import { PARAGRAPH_CLASS, extLink } from "@/app/components/about/shared";
 
 // "Search applications" mark: app grid with a magnifying glass on top
 const ApplicationsIcon = () => (
@@ -81,6 +85,8 @@ export default function Page({ params }: { params: { locale: string } }) {
 
       {/* Categories */}
       <section className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <p className={`mb-10 ${PARAGRAPH_CLASS}`}>{t("intro")}</p>
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -140,7 +146,7 @@ export default function Page({ params }: { params: { locale: string } }) {
         </motion.div>
 
         <p className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
-          {t("source")}
+          {t.rich("sourceNote", { link: extLink(DM_PROFILES_URL) })}
         </p>
       </section>
     </div>

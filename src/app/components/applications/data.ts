@@ -30,6 +30,9 @@ export interface ApplicationCategory {
 const DM_BASE =
   "https://www.deutsches-museum.de/forschung/forschungsinstitut/projekte";
 
+// Index of all Deutsches Museum technology profiles, cited as the source
+export const DM_PROFILES_URL = `${DM_BASE}/quantentraeume-modul-3/technologiesteckbriefe`;
+
 export const applicationCategories: ApplicationCategory[] = [
   {
     key: "health",
