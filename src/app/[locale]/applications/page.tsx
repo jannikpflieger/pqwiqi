@@ -67,14 +67,14 @@ export default function Page({ params }: { params: { locale: string } }) {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span>{t("readTime")}</span>
-          </div>
-          <div className="flex items-center gap-2">
             <Layers className="h-4 w-4" />
             <span>
               {categories.length} {t("categoriesLabel")}
             </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4" />
+            <span>{t("readTime")}</span>
           </div>
         </div>
       </ApplicationsHero>
