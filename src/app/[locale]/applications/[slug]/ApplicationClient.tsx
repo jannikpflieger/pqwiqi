@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { applicationCategories } from "@/app/components/applications/data";
 import ApplicationsHero from "@/app/components/applications/ApplicationsHero";
+import { PARAGRAPH_CLASS } from "@/app/components/about/shared";
 
 interface ApplicationClientProps {
   locale: string;
@@ -68,6 +69,8 @@ export default function ApplicationClient({
           transition={{ type: "spring", stiffness: 100, damping: 12 }}
           className={`space-y-8 rounded-2xl border p-5 backdrop-blur-sm sm:p-6 ${category.box}`}
         >
+          <p className={PARAGRAPH_CLASS}>{t(`summaries.${itemKey}`)}</p>
+
           {related.length > 0 && (
             <div>
               <div className="mb-5 flex items-center gap-3">
