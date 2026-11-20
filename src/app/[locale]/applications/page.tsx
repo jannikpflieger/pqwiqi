@@ -6,8 +6,16 @@ import { motion } from "framer-motion";
 import { ChevronRight, Clock, Layers } from "lucide-react";
 // Font Awesome Free icons, licensed CC BY 4.0 (https://fontawesome.com/license/free)
 import { FaMagnifyingGlass, FaTableCellsLarge } from "react-icons/fa6";
-import { applicationCategories } from "@/app/components/applications/data";
+import {
+  applicationCategories,
+  DM_PROFILES_URL,
+} from "@/app/components/applications/data";
 import ApplicationsHero from "@/app/components/applications/ApplicationsHero";
+import {
+  Heading,
+  PARAGRAPH_CLASS,
+  extLink,
+} from "@/app/components/about/shared";
 
 // "Search applications" mark: app grid with a magnifying glass on top
 const ApplicationsIcon = () => (
@@ -67,20 +75,23 @@ export default function Page({ params }: { params: { locale: string } }) {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span>{t("readTime")}</span>
-          </div>
-          <div className="flex items-center gap-2">
             <Layers className="h-4 w-4" />
             <span>
               {categories.length} {t("categoriesLabel")}
             </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4" />
+            <span>{t("readTime")}</span>
           </div>
         </div>
       </ApplicationsHero>
 
       {/* Categories */}
       <section className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <Heading>{t("overviewHeading")}</Heading>
+        <p className={`mb-10 ${PARAGRAPH_CLASS}`}>{t("intro")}</p>
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -126,7 +137,7 @@ export default function Page({ params }: { params: { locale: string } }) {
                         >
                           {item.number}
                         </span>
-                        <span className="flex-1 font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
+                        <span className="min-w-0 flex-1 hyphens-auto break-words font-medium text-gray-900 transition-colors group-hover:text-purple-600 dark:text-white dark:group-hover:text-purple-400">
                           {t(`items.${item.key}`)}
                         </span>
                         <ChevronRight className="h-4 w-4 flex-shrink-0 text-gray-400 transition-colors group-hover:text-purple-600 dark:group-hover:text-purple-400" />
@@ -140,7 +151,7 @@ export default function Page({ params }: { params: { locale: string } }) {
         </motion.div>
 
         <p className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
-          {t("source")}
+          {t.rich("sourceNote", { link: extLink(DM_PROFILES_URL) })}
         </p>
       </section>
     </div>
