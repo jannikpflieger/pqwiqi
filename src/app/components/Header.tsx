@@ -317,11 +317,7 @@ const Header = (props: HeaderProps) => {
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
             {/* Theme Toggle */}
-            <div
-              role="group"
-              aria-label="Theme"
-              className="relative flex items-center rounded-full border border-slate-300/60 bg-slate-200/70 p-[2px] shadow-[inset_0_1px_1px_rgba(15,23,42,0.10)] dark:border-slate-700/60 dark:bg-slate-950/60 dark:shadow-[inset_0_1px_1px_rgba(0,0,0,0.35)]"
-            >
+            <div role="group" aria-label="Theme" className="relative flex items-center rounded-full border border-slate-300/60 bg-slate-200/70 p-[2px] shadow-[inset_0_1px_1px_rgba(15,23,42,0.10)] dark:border-slate-700/60 dark:bg-slate-950/60 dark:shadow-[inset_0_1px_1px_rgba(0,0,0,0.35)]">
               <motion.span
                 aria-hidden="true"
                 className="absolute left-[2px] top-[2px] h-5 w-7 rounded-full bg-white shadow-[0_1px_1px_rgba(15,23,42,0.12)] dark:bg-slate-700 dark:shadow-[0_1px_1px_rgba(0,0,0,0.3)]"
@@ -381,7 +377,7 @@ const Header = (props: HeaderProps) => {
                     hrefLang={code}
                     aria-current={isActive ? "true" : undefined}
                     aria-label={code === "en" ? "English" : "Deutsch"}
-                    className={`relative z-10 flex h-5 w-7 items-center justify-center rounded-full text-[10px] font-semibold uppercase tracking-wide transition-colors ${
+                    className={`relative z-10 flex h-5 w-7 items-center justify-center rounded-full transition-colors text-[10px] font-semibold uppercase tracking-wide ${
                       isActive
                         ? "text-slate-900 dark:text-white"
                         : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"

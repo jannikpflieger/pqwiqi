@@ -87,6 +87,7 @@ export default function Home({ params }: HomeProps) {
             </motion.div>
           </div>
         </motion.div>
+
       </section>
 
       {/* Description Section */}
@@ -412,6 +413,7 @@ export default function Home({ params }: HomeProps) {
           </motion.div>
         </div>
       </section>
+
     </div>
   );
 }

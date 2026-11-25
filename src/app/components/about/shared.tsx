@@ -99,13 +99,7 @@ export const inLink = (href: string) =>
  * A section whose children reveal one after another the first time it
  * scrolls into view. Wrap each chunk in <Item> to put it in the sequence.
  */
-export function Section({
-  id,
-  children,
-}: {
-  id?: string;
-  children: ReactNode;
-}) {
+export function Section({ id, children }: { id?: string; children: ReactNode }) {
   return (
     <motion.section
       id={id}
