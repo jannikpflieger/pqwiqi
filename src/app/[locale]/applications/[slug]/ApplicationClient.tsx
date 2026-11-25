@@ -150,7 +150,7 @@ export default function ApplicationClient({
                 >
                   <FileText className="h-5 w-5 text-white" />
                 </div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                <h2 className="min-w-0 hyphens-auto break-words text-xl font-semibold text-slate-900 dark:text-white">
                   {t("summaryHeading")}
                 </h2>
               </div>
@@ -177,7 +177,9 @@ export default function ApplicationClient({
           </motion.main>
 
           {/* Right Sidebar: exhibition image and sharing */}
-          <aside className="order-1 lg:order-none lg:w-64 lg:shrink-0">
+          <aside
+            className={`order-1 lg:order-none lg:block lg:w-64 lg:shrink-0 ${image ? "" : "hidden"}`}
+          >
             <div className="space-y-4 lg:sticky lg:top-1">
               {image && (
                 <Card className={`p-4 ${sidebarDark}`}>
