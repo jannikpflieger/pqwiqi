@@ -13,6 +13,8 @@ export interface ApplicationItem {
   key: string;
   url: string;
   related: string[];
+  // Exhibition standee from the Deutsches Museum profile page (public/static/applications)
+  image?: { src: string; credit: "dm" | "dmMeissner" };
 }
 
 // Display text lives in hello.json under "Applications.categories" / "Applications.items".
@@ -26,6 +28,11 @@ export interface ApplicationCategory {
   hover: string;
   items: ApplicationItem[];
 }
+
+const img = (key: string, credit: "dm" | "dmMeissner" = "dm") => ({
+  src: `/static/applications/${key}.png`,
+  credit,
+});
 
 const DM_BASE =
   "https://www.deutsches-museum.de/forschung/forschungsinstitut/projekte";
@@ -45,21 +52,25 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "prosthesis",
         url: `${DM_BASE}/quantentraeume/prothesensteuerung-durch-quantensensoren`,
+        image: img("prosthesis", "dmMeissner"),
         related: ["qsensors", "qmedicine", "spin"],
       },
       {
         key: "cancer",
         url: `${DM_BASE}/quantentraeume/quantenbasierte-krebsfrueherkennung`,
+        image: img("cancer", "dmMeissner"),
         related: ["qmedicine", "qhyperpolarisation"],
       },
       {
         key: "drugs",
         url: `${DM_BASE}/quantentechnologien-in-der-medikamentenentwicklung`,
+        image: img("drugs"),
         related: ["qmedicine", "qchemistry", "qml", "variationalqeigensolvers"],
       },
       {
         key: "imaging",
         url: `${DM_BASE}/quantenbildgebung`,
+        image: img("imaging"),
         related: ["entanglement", "interference"],
       },
     ],
@@ -75,11 +86,13 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "cryptography",
         url: `${DM_BASE}/quantentraeume/quantenkryptographie`,
+        image: img("cryptography"),
         related: ["noncloning", "measurement", "qkd", "qcommunication"],
       },
       {
         key: "internet",
         url: `${DM_BASE}/quanteninternet`,
+        image: img("internet"),
         related: [
           "entanglement",
           "noncloning",
@@ -100,6 +113,7 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "logistics",
         url: `${DM_BASE}/quantenoptimierung-in-der-logistik`,
+        image: img("logistics"),
         related: ["scv", "qoptimization", "qtunnelling"],
       },
       {
@@ -120,16 +134,19 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "weather",
         url: `${DM_BASE}/quantentraeume/quantentechnologien-in-der-wettervorhersage`,
+        image: img("weather", "dmMeissner"),
         related: ["qsensors", "nisq"],
       },
       {
         key: "navigation",
         url: `${DM_BASE}/quantentraeume/quantennavigation`,
+        image: img("navigation", "dmMeissner"),
         related: ["qsensors", "scv"],
       },
       {
         key: "gravimeters",
         url: `${DM_BASE}/untergrundanalyse-mit-quanten-gravimetern`,
+        image: img("gravimeters"),
         related: ["scv", "interference"],
       },
     ],
@@ -145,14 +162,21 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "batteries",
         url: `${DM_BASE}/quantenakkus`,
+        image: img("batteries"),
         related: ["qsuperabsorption", "entanglement"],
       },
       {
         key: "catalysis",
         url: `${DM_BASE}/quantenkatalyse`,
+        image: img("catalysis"),
         related: ["qchemistry", "scv", "variationalqeigensolvers"],
       },
-      { key: "dots", url: `${DM_BASE}/quantendots`, related: ["spin"] },
+      {
+        key: "dots",
+        url: `${DM_BASE}/quantendots`,
+        related: ["spin"],
+        image: img("dots"),
+      },
     ],
   },
   {
@@ -166,11 +190,13 @@ export const applicationCategories: ApplicationCategory[] = [
       {
         key: "ai",
         url: `${DM_BASE}/quanten-und-kuenstliche-intelligenz`,
+        image: img("ai"),
         related: ["scv", "algorithms", "qml", "nisq"],
       },
       {
         key: "transistors",
         url: `${DM_BASE}/quantentraeume/ein-atom-transistoren`,
+        image: img("transistors", "dmMeissner"),
         related: [],
       },
     ],

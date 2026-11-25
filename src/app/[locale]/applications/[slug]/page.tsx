@@ -39,6 +39,7 @@ export default function Application({
       categoryKey={item.category.key}
       number={item.number}
       url={item.url}
+      image={item.image}
       difficulty={difficulty}
       related={related}
     />

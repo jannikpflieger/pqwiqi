@@ -104,14 +104,12 @@ export default function Footer({ params }: FooterProps) {
               </li>
             </ul>
           </div>
-
         </div>
 
         {/* Copyright */}
         <div className="mx-auto mt-8 max-w-4xl border-t border-slate-200 pt-6 dark:border-slate-800">
           <p className="text-center text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">
-            <a href="https://wiqi.info">WiQi</a> © {year} by{" "}
-            Leart Zuka{" "}
+            <a href="https://wiqi.info">WiQi</a> © {year} by Leart Zuka{" "}
             <span>
               is licensed under{" "}
               <Link

@@ -142,6 +142,11 @@
     "readTime": "5 Min. Lesezeit",
     "summaryHeading": "Kurzzusammenfassung",
     "related": "Verwandte Wiqi-Artikel",
+    "imageAlt": "Aufsteller der Ausstellung Quantenträume: {title}",
+    "imageCredit": {
+      "dm": "Bild: Deutsches Museum",
+      "dmMeissner": "Bild: Deutsches Museum | Celia Meissner"
+    },
     "moreDetails": "Klicke hier für den vollständigen Artikel des Deutschen Museums",
     "back": "Zurück zu Anwendungen",
     "categories": {

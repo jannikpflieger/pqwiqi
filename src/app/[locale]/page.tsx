@@ -147,7 +147,6 @@ export default function Home({ params }: HomeProps) {
                   </motion.div>
                 </Link>
               </motion.div>
-
             </motion.div>
           </div>
         </motion.div>

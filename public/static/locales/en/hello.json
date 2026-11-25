@@ -142,6 +142,11 @@
     "readTime": "5 min read",
     "summaryHeading": "Short summary",
     "related": "Related Wiqi articles",
+    "imageAlt": "Quantenträume exhibition standee: {title}",
+    "imageCredit": {
+      "dm": "Image: Deutsches Museum",
+      "dmMeissner": "Image: Deutsches Museum | Celia Meissner"
+    },
     "moreDetails": "Click here for the full Deutsches Museum article",
     "back": "Back to Applications",
     "categories": {

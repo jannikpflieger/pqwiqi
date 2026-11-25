@@ -37,8 +37,22 @@ const KIND_STYLE: Record<Kind, string> = {
 };
 
 const COPY = {
-  en: { difficulty: "Difficulty", cta: "Read this one", prev: "Previous", next: "Next", beginner: "Beginner", read: "min read" },
-  de: { difficulty: "Niveau", cta: "Weiterlesen", prev: "Zurück", next: "Weiter", beginner: "Einsteiger", read: "Min. Lesezeit" },
+  en: {
+    difficulty: "Difficulty",
+    cta: "Read this one",
+    prev: "Previous",
+    next: "Next",
+    beginner: "Beginner",
+    read: "min read",
+  },
+  de: {
+    difficulty: "Niveau",
+    cta: "Weiterlesen",
+    prev: "Zurück",
+    next: "Weiter",
+    beginner: "Einsteiger",
+    read: "Min. Lesezeit",
+  },
 };
 
 interface CuratedCard {
@@ -176,39 +190,41 @@ function apiSlide(
  * its first term.
  */
 async function fetchRest(locale: string, lang: "en" | "de"): Promise<Slide[]> {
-  const requests = KINDS.filter((k) => k !== "quantum_tuesdays").map(async (kind) => {
-    const body =
-      kind === "alphabet"
-        ? { folder: ["alphabet"], language: locale }
-        : { folder: [kind], language: locale, difficulty: "elementary" };
+  const requests = KINDS.filter((k) => k !== "quantum_tuesdays").map(
+    async (kind) => {
+      const body =
+        kind === "alphabet"
+          ? { folder: ["alphabet"], language: locale }
+          : { folder: [kind], language: locale, difficulty: "elementary" };
 
-    try {
-      const res = await fetch("/api/getBlogPosts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) return null;
+      try {
+        const res = await fetch("/api/getBlogPosts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        if (!res.ok) return null;
 
-      const data = await res.json();
-      const files: ApiFile[] = (data.files ?? [])
-        .slice()
-        .sort((a: ApiFile, b: ApiFile) => a.slug.localeCompare(b.slug));
-      if (files.length === 0) return null;
+        const data = await res.json();
+        const files: ApiFile[] = (data.files ?? [])
+          .slice()
+          .sort((a: ApiFile, b: ApiFile) => a.slug.localeCompare(b.slug));
+        if (files.length === 0) return null;
 
-      if (kind === "entries") {
-        const pinned = files.find(
-          (f) => f.slug === PINNED_ENTRY && firstImage(f.content) !== null,
-        );
-        const chosen =
-          pinned ?? files.find((f) => firstImage(f.content) !== null);
-        return chosen ? apiSlide(kind, chosen, lang, locale) : null;
+        if (kind === "entries") {
+          const pinned = files.find(
+            (f) => f.slug === PINNED_ENTRY && firstImage(f.content) !== null,
+          );
+          const chosen =
+            pinned ?? files.find((f) => firstImage(f.content) !== null);
+          return chosen ? apiSlide(kind, chosen, lang, locale) : null;
+        }
+        return apiSlide(kind, files[0], lang, locale);
+      } catch {
+        return null;
       }
-      return apiSlide(kind, files[0], lang, locale);
-    } catch {
-      return null;
-    }
-  });
+    },
+  );
 
   const results = await Promise.all(requests);
   return results.filter((s): s is Slide => s !== null);
@@ -346,7 +362,8 @@ export default function FeaturedCard({ locale }: { locale: string }) {
               {(slide.difficulty || slide.readTime) && (
                 <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3 dark:border-gray-700">
                   <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {slide.difficulty && `${COPY[lang].difficulty}: ${slide.difficulty}`}
+                    {slide.difficulty &&
+                      `${COPY[lang].difficulty}: ${slide.difficulty}`}
                   </div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">
                     {slide.readTime}

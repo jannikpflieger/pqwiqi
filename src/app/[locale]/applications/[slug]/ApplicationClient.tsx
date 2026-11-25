@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
@@ -11,7 +12,10 @@ import {
   FileText,
 } from "lucide-react";
 import wordsCounter from "word-counting";
-import { applicationCategories } from "@/app/components/applications/data";
+import {
+  applicationCategories,
+  type ApplicationItem,
+} from "@/app/components/applications/data";
 import { EntryBanner, ReadingTimePill } from "@/components/EntryBanner";
 import { PARAGRAPH_CLASS } from "@/app/components/about/shared";
 
@@ -21,6 +25,7 @@ interface ApplicationClientProps {
   categoryKey: string;
   number: number;
   url: string;
+  image?: ApplicationItem["image"];
   difficulty: string;
   related: { slug: string; title: string; subtitle: string }[];
 }
@@ -31,6 +36,7 @@ export default function ApplicationClient({
   categoryKey,
   number,
   url,
+  image,
   difficulty,
   related,
 }: ApplicationClientProps) {
@@ -89,7 +95,26 @@ export default function ApplicationClient({
                 {t("summaryHeading")}
               </h2>
             </div>
-            <p className={PARAGRAPH_CLASS}>{summary}</p>
+            {image ? (
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+                <figure className="mx-auto w-full max-w-xs shrink-0 lg:order-last lg:w-64">
+                  <Image
+                    src={image.src}
+                    alt={t("imageAlt", { title: t(`items.${itemKey}`) })}
+                    width={824}
+                    height={824}
+                    sizes="(min-width: 1024px) 256px, 320px"
+                    className="h-auto w-full"
+                  />
+                  <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
+                    {t(`imageCredit.${image.credit}`)}
+                  </figcaption>
+                </figure>
+                <p className={`${PARAGRAPH_CLASS} lg:flex-1`}>{summary}</p>
+              </div>
+            ) : (
+              <p className={PARAGRAPH_CLASS}>{summary}</p>
+            )}
           </div>
 
           {related.length > 0 && (

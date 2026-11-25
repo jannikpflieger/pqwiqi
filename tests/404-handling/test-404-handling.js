@@ -181,8 +181,7 @@ function analyzeResponse(response, expected) {
   const hasLoadingState = body.includes("Redirecting...");
   const hasValidPageStructure =
     body.includes("min-h-screen") && body.includes("container");
-  const hasValidSubfolderTitle =
-    body.includes("Quantum Entries");
+  const hasValidSubfolderTitle = body.includes("Quantum Entries");
 
   let result = {
     status: "unknown",
