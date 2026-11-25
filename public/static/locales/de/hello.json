@@ -140,6 +140,7 @@
     "source": "Quelle: Deutsches Museum, Technologiesteckbriefe",
     "sourceNote": "Die Zusammenfassungen beruhen auf den <link>Technologiesteckbriefen</link> des Deutschen Museums, die gemeinsam mit dem Fraunhofer ISI entwickelt wurden. Jede Anwendungsseite verlinkt auf ihren jeweiligen Steckbrief.",
     "readTime": "5 Min. Lesezeit",
+    "badge": "Anwendung: {category}",
     "summaryHeading": "Kurzzusammenfassung",
     "related": "Verwandte Wiqi-Artikel",
     "imageAlt": "Aufsteller der Ausstellung Quantenträume: {title}",

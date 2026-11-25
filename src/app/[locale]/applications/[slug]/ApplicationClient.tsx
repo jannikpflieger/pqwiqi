@@ -54,7 +54,7 @@ export default function ApplicationClient({
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
       <EntryBanner
-        badge={t(`categories.${categoryKey}`)}
+        badge={t("badge", { category: t(`categories.${categoryKey}`) })}
         title={t(`items.${itemKey}`)}
       >
         <span className="flex items-center gap-1.5">
