@@ -97,13 +97,13 @@ export default function ApplicationClient({
             </div>
             {image ? (
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-                <figure className="mx-auto w-full max-w-xs shrink-0 lg:order-last lg:w-64">
+                <figure className="mx-auto w-48 shrink-0 lg:order-last">
                   <Image
                     src={image.src}
                     alt={t("imageAlt", { title: t(`items.${itemKey}`) })}
-                    width={824}
+                    width={450}
                     height={824}
-                    sizes="(min-width: 1024px) 256px, 320px"
+                    sizes="192px"
                     className="h-auto w-full"
                   />
                   <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
