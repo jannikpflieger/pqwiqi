@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +12,7 @@ import { Search, Moon, Sun, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { File } from "@/types";
+import { applicationItems } from "./applications/data";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface HeaderProps {
@@ -19,12 +20,19 @@ interface HeaderProps {
 }
 
 const fuseOptions = {
-  keys: ["slug", "metadata.subtitle", "metadata.date", "folder"],
+  keys: [
+    "slug",
+    "metadata.title",
+    "metadata.subtitle",
+    "metadata.date",
+    "folder",
+  ],
 };
 
 const Header = (props: HeaderProps) => {
   const pathName = usePathname();
   const t = useTranslations("Navbar");
+  const tApps = useTranslations("Applications");
   const inputRef = useRef<HTMLInputElement>(null);
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -80,6 +88,30 @@ const Header = (props: HeaderProps) => {
     window.localStorage.setItem("theme", theme);
   }, [theme, hasMounted]);
 
+  // Application articles are searchable alongside Wiqi entries
+  const applicationFiles = useMemo<File[]>(
+    () =>
+      applicationItems.map((item) => ({
+        key: item.key,
+        slug: item.key,
+        metadata: {
+          title: tApps(`items.${item.key}`),
+          subtitle: tApps(`categories.${item.category.key}`),
+          author: "",
+          date: "",
+        },
+        locale: props.locale,
+        folder: "applications",
+        content: "",
+      })),
+    [tApps, props.locale],
+  );
+
+  const resultHref = (result: File) =>
+    result.folder === "applications"
+      ? `/${props.locale}/applications/${result.slug}`
+      : `/${props.locale}/posts/${result.folder}/${initialDifficulty}/${result.slug}`;
+
   const clearInput = () => {
     setSearchQuery("");
     setSearchResults([]);
@@ -131,7 +163,7 @@ const Header = (props: HeaderProps) => {
 
     if (query) {
       setShowDropdown(true);
-      const fuse = new Fuse(files, fuseOptions);
+      const fuse = new Fuse([...files, ...applicationFiles], fuseOptions);
       const results = fuse.search(query);
       setSearchResults(results.map((result) => result.item));
     } else {
@@ -256,7 +288,7 @@ const Header = (props: HeaderProps) => {
                       animate="visible"
                     >
                       <Link
-                        href={`/${props.locale}/posts/${result.folder}/${initialDifficulty}/${result.slug}`}
+                        href={resultHref(result)}
                         className="block px-4 py-3 transition-all duration-200 hover:bg-slate-50 hover:shadow-sm dark:hover:bg-slate-700/70"
                         onClick={() => {
                           clearInput();
@@ -463,7 +495,7 @@ const Header = (props: HeaderProps) => {
                         animate="visible"
                       >
                         <Link
-                          href={`/${props.locale}/posts/${result.folder}/${initialDifficulty}/${result.slug}`}
+                          href={resultHref(result)}
                           className="block px-4 py-3 transition-all duration-200 hover:bg-slate-50 hover:shadow-sm dark:hover:bg-slate-700/70"
                           onClick={() => {
                             clearInput();
